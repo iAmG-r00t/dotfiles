@@ -15,7 +15,7 @@ red='\033[1;31m'
 #======================================================================================#
 
 echo -e "${no_color}${bold}[+] ${brown}Good we need to do something before we proceed ...${reset}"
-echo -e "${no_color}${bold}[+] ${brown}Starting Keepass... kindly save the gpg file and use the below commands to add it to your keyring ...${reset}"
+echo -e "${no_color}${bold}[+] ${brown}Starting Keepass... kindly save the .asc file and use the below commands to add it to your keyring ...${reset}"
 echo ""
 echo -e "- ${brown}gpg --import key.asc${reset}"
 echo -e "- ${brown}git secret reveal${reset}"
