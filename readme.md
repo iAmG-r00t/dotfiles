@@ -6,7 +6,7 @@ Blogpost comming up later ...
 
 **_The project folders;_**
 
-+ **dotfiles**, just look around inside there; Beware stealing won't help :smirk:
++ **dotfiles**, just look around inside there; Beware hot area here :smirk:
 + **images** (Background and Screen saver) :grin:
 + **wg** folder :unamused:
 
