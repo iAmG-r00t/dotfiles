@@ -4,11 +4,11 @@ This script basically setups everything I would do in a new installation, automa
 
 Blogpost comming up later ...
 
-The project folders;
+**_The project folders;_**
 
-+ dotfiles, just look around inside there; Beware stealing won't help :smirk:
-+ images (Background and Screen saver) :grin:
-+ wg folder :unamused:
++ **dotfiles**, just look around inside there; Beware stealing won't help :smirk:
++ **images** (Background and Screen saver) :grin:
++ **wg** folder :unamused:
 
 ## Included `scripts/`
 * `dotfiles.sh` sets up all my dotfiles, for `vim`, `tmux`, `bash`, `OMZ` and `etc`
