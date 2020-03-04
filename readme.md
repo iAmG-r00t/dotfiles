@@ -19,7 +19,8 @@ The project folders;
 * `sync.sh` sync's my dotfiles to my git repo folder, to commit any changes.
 
 
-#### 2 Look at;
+#### 2 Look at:
+
 	:blush:	- [Eddie](https://github.com/victoriadrake/eddie-terminal) by [Victoria Drake](https://victoria.dev/)
 		- Awesome tool to write messages when you start a new shell, really awesome!!
 	:raised_hand: - [Git-Secret](https://git-secret.io/)
