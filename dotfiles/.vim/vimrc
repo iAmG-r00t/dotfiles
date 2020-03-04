@@ -1,0 +1,130 @@
+" ---------------------
+" VI Config
+" ---------------------
+" Don't use vi-compatibility mode
+set nocompatible
+filetype off
+"
+"
+" Vim-plug automatic installation
+" that's if the source-file is in a new server
+if empty(glob('~/.dotfiles/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.dotfiles/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+"
+"
+" To set vim-plug config
+set rtp +=~/.dotfiles/.vim
+"
+" Call Plugin-manager
+call plug#begin('~/.dotfiles/.vim/plugged')
+"
+"
+" My Plugins
+"
+Plug 'junegunn/vim-plug'             "vim-plug help plugin
+Plug 'preservim/nerdtree'            "Nerd-Tree Plugin
+Plug 'tmux-plugins/vim-tmux'         "Vim-tmux plugin
+Plug 'ekalinin/Dockerfile.vim'       "Dockerfile linter plugin
+Plug 'skanehira/docker-compose.vim'  "Docker-compose plugin
+Plug 'lervag/vimtex'                 "Vim-text plugin
+Plug 'scrooloose/syntastic'          "Syntastic plugin (syntax checker)
+Plug 'SirVer/ultisnips'              "Ultisnips plugin
+Plug 'ycm-core/YouCompleteMe'        "YouCompleteMe plugin
+Plug 'tmsvg/pear-tree'               "Pear Tree Plugin
+"
+
+call plug#end()
+"
+"
+"
+" Make vim to stop running the default config
+let skip_defaults_vim=1
+set viminfo="~/.dotfiles/.vim"
+"
+"
+" Make Vim to handle long lines nicely.
+set wrap
+set textwidth=79
+set formatoptions=qrn1
+"
+"
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
+"
+"
+" Show an error when trying to use any arrow keys in vim on both modes
+noremap <up>    :echom 'USE K TO GO UP'<CR>
+noremap <down>  :echom 'USE J TO GO DOWN'<CR>
+noremap <left>  :echom 'USE H TO GO LEFT'<CR>
+noremap <right> :echom 'USE L TO GO RIGHT'<CR>
+inoremap <up>    <ESC>:echom 'USE K TO GO UP'<CR>
+inoremap <down>  <ESC>:echom 'USE J TO GO DOWN'<CR>
+inoremap <right> <ESC>:echom 'USE L TO GO RIGHT'<CR>
+inoremap <left>  <ESC>:echom 'USE H TO GO LEFT'<CR>   
+
+" Reload vim config
+nnoremap <F2> :so $MYVIMRC<CR>
+"
+" --------
+" Settings
+" --------
+"
+set number			" Show line numbers
+"
+set noerrorbells		" No beeps
+"
+set showcmd			" Show me what I am typing
+"
+set ruler			" Show the cursor position all the time
+"
+set ignorecase			" Search case insensitive ........
+"
+set smartcase			" ..... but not when search pattern contains upper case characters
+"
+set hlsearch			" Highlight found searches
+"
+set nobackup			" Don't create backup files
+"
+set showmode			" Show current mode
+"
+set encoding=utf-8		" Use UTF-8 as the default text encoding
+"
+set backspace=indent,eol,start	" Allow backspacing over everything in insert mode
+"
+syntax on                       " Syntax colorinf
+"
+"
+"
+" show vim status line always
+set laststatus=2
+" Vi Powerline Statusline
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
+"
+"
+"
+" Plugins settings
+" close NERDTree after a file is opened
+let NERDTreeQuitOnOpen=1
+" show hidden files in NERDTree
+let NERDTreeShowHidden=1
+" Toggle NERDTree
+nmap <F1> :NERDTreeToggle<CR>
+" Docker-compose config
+" open terminal way
+let g:docker_compose_open_terminal_way = 'top'
+"
+" Vim-latex-preview remove cursor hold autorecompile
+let g:livepreview_cursorhold_recompile = 0
+"
+" Syntastic change of error and warning signs
+let g:syntastic_error_symbol = "✗ "
+let g:syntastic_warning_symbol = "⚠ "
+" Set a global config for YoucompleteMe plugin
+let g:ycm_global_ycm_extra_conf='~/.dotfiles/.vim/.ycm_extra_conf.py'

@@ -1,0 +1,6 @@
+.gitsecret/keys/random_seed
+!*.secret
+dotfiles/.bash/.bash_aliases.d/.bash_aliases
+dotfiles/.ngrok/ngrok.yml
+dotfiles/.omz/custom/servers.zsh
+dotfiles/.pass/contrasenas.kdbx
