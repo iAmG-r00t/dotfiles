@@ -134,7 +134,7 @@ echo -e "${no_color}${bold}[+] ${green}Done setting up dotfiles${reset}"
 echo ""
 
 # Edit zshrc local config file and make it to stop calling compinit
-echo "${no_color}${bold}[+] ${blue}Editing ${brown}some${reset} ${blue}files ..."
+echo "${no_color}${bold}[+] ${blue}Editing ${brown}some${reset} ${blue}files ...${reset}"
 sleep 1
 sudo sed -i.bak -e '107 s/^#//' /etc/zsh/zshrc
 sudo sed -i.bak /TEMPLATES/s/^/#/ /etc/xdg/user-dirs.defaults
@@ -219,21 +219,21 @@ function linkDotfile {
 
   if [ -h ~/${1} ]; then
     # Existing symlink 
-    echo "${no_color}${bold}[+] ${blue}Removing existing symlink: ${brown}${dest}"
+    echo "${no_color}${bold}[+] ${blue}Removing existing symlink: ${brown}${dest}${reset}"
     rm ${dest} 
 
   elif [ -f "${dest}" ]; then
     # Existing file
-    echo "${no_color}${bold}[+] ${blue}Backing up existing file: ${brown}${dest}"
+    echo "${no_color}${bold}[+] ${blue}Backing up existing file: ${brown}${dest}${reset}"
     mv ${dest}{,.${dateStr}}
 
   elif [ -d "${dest}" ]; then
     # Existing dir
-    echo "${no_color}${bold}[+] ${blue}Backing up existing dir: ${brown}${dest}"
+    echo "${no_color}${bold}[+] ${blue}Backing up existing dir: ${brown}${dest}${reset}"
     mv ${dest}{,.${dateStr}}
   fi
 
-  echo "${no_color}${bold}[+] ${blue}Creating new symlink: ${brown}${dest}"
+  echo "${no_color}${bold}[+] ${blue}Creating new symlink: ${brown}${dest}${reset}"
   ln -sf ${dest} ${dest}
 }
 
@@ -255,5 +255,5 @@ dotfiles
 vim-stuff
 Other
 echo ""
-echo -e "${blue}${bold}We are almost done!!"
+echo -e "${blue}${bold}We are almost done!!${reset}"
 sleep 2

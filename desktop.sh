@@ -85,5 +85,5 @@ gsettings set org.gnome.shell.extensions.dash-to-dock intellihide true
 
 echo -e "${no_color}${bold}[+] ${blink}${blue}Setting up icon ...${reset}"
 sudo sed -i "/^SystemAccount=.*/i Icon=/var/lib/AccountsService/icons/"$user"" /var/lib/AccountsService/users/$USER
-echo -e "${green}Done setting up desktop enviroment feel!!"
+echo -e "${green}Done setting up desktop enviroment feel!!${reset}"
 sleep 2

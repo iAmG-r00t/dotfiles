@@ -20,12 +20,12 @@ function softwares(){
     which $1 &> /dev/null
 
     if [ $? -ne 0 ]; then
-      echo -e "${no_color}${bold}[+] ${blink}${blue}Installing: ${1}...."
+      echo -e "${no_color}${bold}[+] ${blink}${blue}Installing: ${1}....${reset}"
 
           sudo apt install -y $1
     else
     
-      echo -e "${green}Already installed: ${1}"
+      echo -e "${green}Already installed: ${1}${reset}"
 
     fi
    }
@@ -60,7 +60,7 @@ function softwares(){
    install gnupg
    install ufw
 
-  echo -e "${green}Done Installing all required packages!!"
+  echo -e "${green}Done Installing all required packages!!${reset}"
 sleep 2
 }
 
@@ -76,7 +76,7 @@ function wireguard(){
         resolvconf
 
    sudo cp wg/*.conf /etc/wireguard/
-echo -e "${green}Done installing Wireguard!!"
+echo -e "${green}Done installing Wireguard!!${reset}"
 sleep 2
 }
 
@@ -90,7 +90,7 @@ function sublime(){
    sudo apt update ;\
    sudo apt install -y \
         sublime-text
-echo -e "${green}Done installing sublime-text!!"
+echo -e "${green}Done installing sublime-text!!${reset}"
 sleep 2
 }
 
@@ -112,7 +112,7 @@ function docker(){
    sudo chmod +x /usr/local/bin/docker-compose
    sudo ln -sf /usr/local/bin/docker-compose /usr/bin/docker-compose
 
-echo -e "${green}Done installing docker and docker-compose!!"
+echo -e "${green}Done installing docker and docker-compose!!${reset}"
 sleep 2
 }
 
@@ -121,14 +121,14 @@ function mullvad-vpn(){
   echo -e "${no_color}${bold}[+] ${blink}${blue}Installing Mullvad VPN!!${reset}"
   sleep 2
 
-  echo -e "${brown}Please check Mullvad version from Download page and enter it here, example: 2020.3 and press [ENTER]"
+  echo -e "${brown}Please check Mullvad version from Download page and enter it here, example: 2020.3 and press [ENTER]${reset}"
 
   read VERSION
 
   wget https://mullvad.net/media/app/MullvadVPN-$VERSION_amd64.deb
   sudo dpkg -i MullvadVPN-$VERSION_amd64.deb
   rm MullvadVPN-$VERSION_amd64.deb
-echo -e "${green}Done installing Mullvad VPN!!"
+echo -e "${green}Done installing Mullvad VPN!!${reset}"
 sleep 2
 }
 
@@ -139,7 +139,7 @@ function OMZ(){
 
    #Installing Oh-My-ZSH in the background
    0>/dev/null sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-echo -e "${green}Done installing Oh-My-ZSH shell!!"
+echo -e "${green}Done installing Oh-My-ZSH shell!!${reset}"
 sleep 2
 }
 
@@ -153,7 +153,7 @@ function signal(){
    sudo apt update ;\
    sudo apt install -y \
         signal-desktop
-echo -e "${green}Done installing signal-desktop!!"
+echo -e "${green}Done installing signal-desktop!!${reset}"
 sleep 2
 }
 
@@ -173,7 +173,7 @@ function keepass2-plugins(){
    sudo mv KeeCloud.1.2.1.11.plgx /usr/lib/keepass2/Plugins/
    sudo chown root:root /usr/lib/keepass2/Plugins/KeeCloud.1.2.1.11.plgx
 
-echo -e "${green}Done installing Keepass2 and its Plugins!!"
+echo -e "${green}Done installing Keepass2 and its Plugins!!${reset}"
 sleep 2
 }
 
@@ -188,7 +188,7 @@ function brave(){
    sudo apt install -y \
         brave-browser
 
-echo -e "${green}Done installing Brave browser!!"
+echo -e "${green}Done installing Brave browser!!${reset}"
 sleep 2
 }
 
@@ -200,7 +200,7 @@ function Go(){
    # Dirty dirty dirty
    # Stolen from tomnomnom too
 
-  echo -e "${brown}What version of Go do you want to install, example: 1.13.5 and press [ENTER]"
+  echo -e "${brown}What version of Go do you want to install, example: 1.13.5 and press [ENTER]${reset}"
 
   read VERSION
 
@@ -221,7 +221,7 @@ function Go(){
 
   rm go$VERSION.linux-amd64.tar.gz
 
-echo -e "${green}Done setting up Go !!"
+echo -e "${green}Done setting up Go !!${reset}"
 sleep 2
 }
 
@@ -238,7 +238,7 @@ echo -e "${no_color}${bold}[+] ${blink}${blue}Installing Git Secret!!${reset}"
    sudo apt install -y \
         git-secret
 
-echo -e "${green}Done Installing Git Secret !!"
+echo -e "${green}Done Installing Git Secret !!${reset}"
 sleep 2
 }
 
@@ -272,7 +272,7 @@ echo -e "${no_color}${bold}[+] ${blink}${blue}Installing Weechat!!${reset}"
         weechat-python \
         weechat-perl
 
-echo -e "${green}Done Installing Weechat!!"
+echo -e "${green}Done Installing Weechat!!${reset}"
 sleep 2
 }
 
@@ -285,14 +285,14 @@ function clean(){
    sudo apt upgrade -y ;\
    sudo apt autoremove -y
 
-echo -e "${green}Done cleaning up!!"
+echo -e "${green}Done cleaning up!!${reset}"
 sleep 2
 
 }
 
 
 #Bringing all of them together!!
-echo -e "${brown}${bold}Lighten up! No matter what happens, remember, there'll always be mead"
+echo -e "${brown}${bold}Lighten up! No matter what happens, remember, there'll always be mead${reset}"
 sleep 2
 
 softwares
@@ -308,5 +308,5 @@ git-secret
 weechat
 clean
 
-echo -e "${blue}${bold}Right here, I got you where I want"
+echo -e "${blue}${bold}Right here, I got you where I want${reset}"
 sleep 2

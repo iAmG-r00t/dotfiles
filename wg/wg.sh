@@ -16,7 +16,7 @@ sleep 2
 
 sudo cp *.conf /etc/wireguard
 
-echo -e "${green}${bold}Done copying Wireguard configs!!. "
+echo -e "${green}${bold}Done copying Wireguard configs!!.${reset}"
 
 sleep 2
 
