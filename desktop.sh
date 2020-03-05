@@ -22,10 +22,10 @@ function remove(){
 
 	if test -d ${this}; then
        sudo rm -rf ${this}
-       echo "${no_color}${bold}[+] ${green}Deleted directory: ${blue}${this}${reset}"
+       echo -e "${no_color}${bold}[+] ${green}Deleted directory: ${blue}${this}${reset}"
        echo ""
     else
-       echo "${red}Directory at path: ${blue}${this} is not present${reset}"
+       echo -e "${red}Directory at path: ${blue}${this} is not present${reset}"
        echo ""
     fi
 }
@@ -41,7 +41,7 @@ function make(){
 	here="${HOME}/${1}"
 
 	mkdir -p ${here}
-	echo "${no_color}${bold}[+] ${green}Created directory: ${blue}${here}${reset}"
+	echo -e "${no_color}${bold}[+] ${green}Created directory: ${blue}${here}${reset}"
 	echo ""
 }
 
@@ -57,7 +57,7 @@ function copy(){
 	dest="${HOME}/${2}"
 
 	cp ${1} ${dest}
-	echo "${no_color}${bold}[+] ${green}Copied file: ${brown}${1} at location ${blue}${dest}${reset}"
+	echo -e "${no_color}${bold}[+] ${green}Copied file: ${brown}${1} at location ${blue}${dest}${reset}"
 	echo ""
 }
 
