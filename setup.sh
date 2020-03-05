@@ -9,7 +9,7 @@ no_color='\e[0m'
 blink='\e[5m'
 brown='\e[0;33m'
 
-./software.sh
+#./software.sh
 ./dotfiles/dotfiles.sh
 ./wg/wg.sh
 ./desktop.sh

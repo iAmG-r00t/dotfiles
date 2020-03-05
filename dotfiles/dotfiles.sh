@@ -30,11 +30,11 @@ rm nohup.out
 function dotfiles(){
 
 sleep 2
-echo -e "${no_color}${bold}[+] ${brown}Well... Let's go then, you great beast${no_color} ${blink}${blue}Setting up dotfiles!!${reset}"
+echo -e "${no_color}${bold}[+] ${brown}Well... Let's go then, you great beast${no_color} ${blink}${blue}Setting up dotfiles!!${no_color}"
 sleep 2
 echo ""
 
-echo -e "${no_color}${bold}[+] ${blink}${blue}Creating directories!!${reset}"
+echo -e "${no_color}${bold}[+] ${blink}${blue}Creating directories!!${no_color}"
 sleep 1
 echo ""
 
@@ -43,7 +43,7 @@ function make(){
 	here="${HOME}/${1}"
 
 	sudo mkdir -p ${here}
-	echo "${no_color}${bold}[+] ${green}Created directory: ${blue}${here}${reset}"
+	echo -e "${no_color}${bold}[+] ${green}Created directory: ${blue}${here}${no_color}"
 	echo ""
 }
 
@@ -56,7 +56,7 @@ make .dotfiles/.vim
 make .dotfiles/eddie
 make .dotfiles/.pass
 
-echo -e "${no_color}${bold}[+] ${blink}${blue}Original files being backed up!!${reset}"
+echo -e "${no_color}${bold}[+] ${blink}${blue}Original files being backed up!!${no_color}"
 sleep 2
 echo ""
 
@@ -68,10 +68,10 @@ function move(){
 
 	if test -f ${src}; then
        sudo mv ${src} ${dst}
-       echo "${no_color}${bold}[+] ${green}backed up file: ${brown}${1} to file path: ${blue}${dst}${reset}"
+       echo -e "${no_color}${bold}[+] ${green}backed up file: ${brown}${1} to file path: ${blue}${dst}${no_color}"
        echo ""
     else
-       echo "${red}File at path: ${blue}${src} is not present${reset}"
+       echo -e "${red}File at path: ${blue}${src} is not present${no_color}"
        echo ""
     fi
 }
@@ -89,10 +89,10 @@ function remove(){
 
 	if test -f ${this}; then
        sudo rm ${this}
-       echo "${no_color}${bold}[+] ${green}Deleted file: ${blue}${this}${reset}"
+       echo -e "${no_color}${bold}[+] ${green}Deleted file: ${blue}${this}${reset}"
        echo ""
     else
-       echo "${red}File at path: ${blue}${this} is not present${reset}"
+       echo -e "${red}File at path: ${blue}${this} is not present${reset}"
        echo ""
     fi
 }
@@ -107,10 +107,11 @@ echo ""
 
 # Copying my dotfiles
 function copy(){
-	dest="${HOME}/${1}"
+  dotfilesDir="$(pwd)/${1}"
+	dest="${HOME}/${2}"
 
-	cp -r ${1} ${dest}
-	echo "${no_color}${bold}[+] ${green}Copied file: ${brown}${1} at location ${blue}${dest}${reset}"
+	sudo cp -r ${dotfilesDir} ${dest}
+	echo -e "${no_color}${bold}[+] ${green}Copied file: ${brown}${1} at location ${blue}${dest}${reset}"
 	echo ""
 }
 
@@ -128,13 +129,13 @@ copy dotfiles/.omz/custom/tmux.zsh .oh-my-zsh/custom
 copy dotfiles/.omz/custom/latex.zsh .oh-my-zsh/custom
 copy dotfiles/.omz/custom/vim-plugins.zsh .oh-my-zsh/custom
 copy dotfiles/.vim/vimrc .dotfiles/.vim
-copy dotfiles/.pass/contraseñas.kdbx .dotfiles/.pass/contraseñas.kdbx
+copy dotfiles/.pass/contrasenas.kdbx .dotfiles/.pass/contraseñas.kdbx
 
 echo -e "${no_color}${bold}[+] ${green}Done setting up dotfiles${reset}"
 echo ""
 
 # Edit zshrc local config file and make it to stop calling compinit
-echo "${no_color}${bold}[+] ${blue}Editing ${brown}some${reset} ${blue}files ...${reset}"
+echo -e "${no_color}${bold}[+] ${blue}Editing ${brown}some${reset} ${blue}files ...${reset}"
 sleep 1
 sudo sed -i.bak -e '107 s/^#//' /etc/zsh/zshrc
 sudo sed -i.bak /TEMPLATES/s/^/#/ /etc/xdg/user-dirs.defaults
@@ -148,8 +149,9 @@ sudo sed -i.bak /DOCUMENTS/s/^/#/ ~/.config/user-dirs.dirs
 sudo sed -i.bak /MUSIC/s/^/#/ ~/.config/user-dirs.dirs
 sudo sed -i.bak /VIDEOS/s/^/#/ ~/.config/user-dirs.dirs
 sleep 5
-echo "${no_color}${bold}[+] ${blue}Opening file manager Nautilus, kindly proceed and remove the bookmarks by right click then click remove ... and some new bookmarks{reset}"
+echo -e "${no_color}${bold}[+] ${blue}Opening file manager Nautilus, kindly proceed and remove the bookmarks by right click then click remove ... and some new bookmarks{reset}"
 nohup nautilus &
+rm nohup.out
 sleep 2
 echo -e "${no_color}${bold}[+] ${green}Done${reset}"
 }
@@ -175,7 +177,7 @@ wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbol
 
 mv PowerlineSymbols.otf ~/.local/share/fonts/
 fc-cache -vf ~/.local/share/fonts/
-mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
+sudo mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
 echo ""
 
 echo -e "${no_color}${bold}[+] ${blink}${blue}Installing powerline status!!${reset}"
@@ -198,10 +200,10 @@ sleep 2
 echo ""
 
 #Setup eddie
-git clone https://github.com/victoriadrake/eddie-terminal.git ~/.dotfiles/eddie
-cp -r .eddie/greetings.txt ~/.dotfiles/eddie/greetings.txt
+sudo git clone https://github.com/victoriadrake/eddie-terminal.git ~/.dotfiles/eddie
+sudo cp -r dotfiles/.eddie/greetings.txt ~/.dotfiles/eddie/greetings.txt
 #Set up tmux plugin manager
-git clone https://github.com/tmux-plugins/tpm ~/.dotfiles/.tmux/plugins/tpm
+sudo git clone https://github.com/tmux-plugins/tpm ~/.dotfiles/.tmux/plugins/tpm
 #Set up zsh plugins for Oh-My-ZSH
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -219,22 +221,22 @@ function linkDotfile {
 
   if [ -h ~/${1} ]; then
     # Existing symlink 
-    echo "${no_color}${bold}[+] ${blue}Removing existing symlink: ${brown}${dest}${reset}"
-    rm ${dest} 
+    echo -e "${no_color}${bold}[+] ${blue}Removing existing symlink: ${brown}${dest}${reset}"
+    sudo rm ${dest} 
 
   elif [ -f "${dest}" ]; then
     # Existing file
-    echo "${no_color}${bold}[+] ${blue}Backing up existing file: ${brown}${dest}${reset}"
-    mv ${dest}{,.${dateStr}}
+    echo -e "${no_color}${bold}[+] ${blue}Backing up existing file: ${brown}${dest}${reset}"
+    sudo mv ${dest}{,.${dateStr}}
 
   elif [ -d "${dest}" ]; then
     # Existing dir
-    echo "${no_color}${bold}[+] ${blue}Backing up existing dir: ${brown}${dest}${reset}"
-    mv ${dest}{,.${dateStr}}
+    echo -e "${no_color}${bold}[+] ${blue}Backing up existing dir: ${brown}${dest}${reset}"
+    sudo mv ${dest}{,.${dateStr}}
   fi
 
-  echo "${no_color}${bold}[+] ${blue}Creating new symlink: ${brown}${dest}${reset}"
-  ln -sf ${dest} ${dest}
+  echo -e "${no_color}${bold}[+] ${blue}Creating new symlink: ${brown}${dest}${reset}"
+  sudo ln -sf ${dest} ${dest}
 }
 
 linkDotfile .dotfiles/.bash/.bashrc
