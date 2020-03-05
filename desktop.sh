@@ -51,6 +51,7 @@ make Pictures/Icons
 make Drudgery
 make Gitools
 make Gotools
+make Scripts
 
 function copy(){
 	dest="${HOME}/${2}"

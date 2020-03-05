@@ -37,18 +37,18 @@ bakwht='\[\e[47m\]'   # White
 txtrst='\[\e[0m\]'    # Text Reset
 
 # Export Personal Binaries
-export PATH=${PATH}:~/bin:~/.local/bin:~/drugery/scripts
+export PATH=${PATH}:~/bin:~/.local/bin:~/Scripts
 
 # Scan for open ports using naabu go tool
 Naabu(){
 
 if [ $# -eq 1 ]; then
 
-sudo ./drugery/gotools/bin/naabu -silent -host $1
+sudo ./Gotools/bin/naabu -silent -host $1
 
 elif [ $# -eq 2 ]; then
 
-sudo ./drugery/gotools/bin/naabu -silent -host $1 -o $2 ; alert
+sudo ./Gotools/bin/naabu -silent -host $1 -o $2 ; alert
 echo "${txtgrn}Saved output file as: ${undpur}${2}${txtrst}"
 
 else
@@ -81,14 +81,14 @@ curl https://certspotter.com/api/v0/certs\?domain\=$1 | jq '.[].dns_names[]' | s
 
 # Runs httprobe on all the hosts from certspotter
 certprobe(){ 
-if [ -d "$HOME/drugery/engagements/$1" ]; then
+if [ -d "$HOME/Drugery/engagements/$1" ]; then
 
-curl -s https://crt.sh/\?q\=\%.$1\&output\=json | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u | httprobe | tee -a $HOME/drugery/engagements/$1/httprobes.txt
+curl -s https://crt.sh/\?q\=\%.$1\&output\=json | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u | httprobe | tee -a $HOME/Drugery/engagements/$1/httprobes.txt
 
 else
 
-mkdir -p $HOME/drugery/engagements/$1
-curl -s https://crt.sh/\?q\=\%.$1\&output\=json | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u | httprobe | tee -a $HOME/drugery/engagements/$1/httprobes.txt
+mkdir -p $HOME/Drugery/engagements/$1
+curl -s https://crt.sh/\?q\=\%.$1\&output\=json | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u | httprobe | tee -a $HOME/Drugery/engagements/$1/httprobes.txt
 
 fi
 }
@@ -98,12 +98,12 @@ sublist3r(){
 inenv=$(python -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")')
 if [ inenv==0 ]; then
 
-source ~/drugery/gitools/Sublist3r/sublist3r/bin/activate
-python ~/drugery/gitools/Sublist3r/sublist3r.py -d $1
+source ~/Gitools/Sublist3r/sublist3r/bin/activate
+python ~/Gitools/Sublist3r/sublist3r.py -d $1
 
 else
 
-python ~/drugery/gitools/Sublist3r/sublist3r.py -d $1
+python ~/Gitools/Sublist3r/sublist3r.py -d $1
 
 fi
 }

@@ -20,6 +20,10 @@ sudo apt upgrade -y
 sudo apt autoremove -y
 sudo apt autoclean
 
+#Change dotfiles owner from root to user
+sudo chown -hR $USER ~/.dotfiles
+sudo chown -hR $USER ~/*
+
 #Reload configs
 source ~/.bashrc
 #Remove default bash-history

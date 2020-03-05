@@ -123,18 +123,13 @@ fi
 # I'd quite like for Go to work please.
 # Stolen from tomnomnom
 export PATH=${PATH}:/usr/local/go/bin
-export GOPATH=$~/Go-Tools
+export GOPATH=$~/Gotools
 
 # Vim for life
 export EDITOR=/usr/bin/vi
 
 # Color prompt
 export TERM=xterm-256color
-
-# Red pointer for root
-if [ "${UID}" -eq "0" ]; then
-    pointerC="${txtred}"
-fi
 
 #Eddie
 python3 ~/.dotfiles/eddie/randline.py ~/.dotfiles/eddie/greetings.txt $USER

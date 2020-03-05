@@ -59,6 +59,7 @@ function softwares(){
    install gpg-agent
    install gnupg
    install ufw
+   install fish
 
   echo -e "${green}Done Installing all required packages!!${reset}"
 sleep 2
@@ -125,7 +126,7 @@ function mullvad-vpn(){
 
   read VERSION
 
-  wget https://mullvad.net/media/app/MullvadVPN-$VERSION_amd64.deb
+  wget https://mullvad.net/media/app/MullvadVPN-${VERSION}_amd64.deb
   sudo dpkg -i MullvadVPN-$VERSION_amd64.deb
   rm MullvadVPN-$VERSION_amd64.deb
 echo -e "${green}Done installing Mullvad VPN!!${reset}"
@@ -170,8 +171,8 @@ function keepass2-plugins(){
         keepass2-plugin-keeagent \
         keepass2
    wget https://bitbucket.org/devinmartin/keecloud/downloads/KeeCloud.1.2.1.11.plgx
-   sudo mv KeeCloud.1.2.1.11.plgx /usr/lib/keepass2/Plugins/
-   sudo chown root:root /usr/lib/keepass2/Plugins/KeeCloud.1.2.1.11.plgx
+   sudo mv KeeCloud.1.2.1.11.plgx /usr/lib/keepass2/plugins/
+   sudo chown root:root /usr/lib/keepass2/plugins/KeeCloud.1.2.1.11.plgx
 
 echo -e "${green}Done installing Keepass2 and its Plugins!!${reset}"
 sleep 2
