@@ -20,9 +20,9 @@ sudo apt upgrade -y
 sudo apt autoremove -y
 sudo apt autoclean
 
-#Change dotfiles owner from root to user
-sudo chown -hR $USER ~/.dotfiles
-sudo chown -hR $USER ~/*
+# Change owner from root to user for all files and dir in home folder
+# Because I love owning my shit!!
+sudo chown -hR $USER:$USER /home/$USER
 
 #Reload configs
 source ~/.bashrc
@@ -40,12 +40,19 @@ tmux new-session -d
 # killing the server is not required, I guess
 tmux kill-server
 
+# Configuring YouCompleteMe Vim plugin
+python3 ~/.dotfiles/.vim/plugged/YouCompleteMe/install.py --clangd-completer
+
 # Enabling Uncomplicated Firewall
 sudo ufw enable
 sudo ufw status verbose
-
+echo ""
+chsh -s $(which zsh)
+echo ""
 figlet "... Here's to getting back into the groove" | lolcat
 sleep 5
 echo -e "${no_color}${bold}[+] ${brown}Ohhhh one more thing ...${no_color} ${blink}${blue}Bye enjoy ...${reset}"
-sleep 5
-clear
+sleep 20
+echo ""
+echo -e "${no_color}${bold}[+] ${blue}Loging out right now, for the settings to complete.${reset}"
+gnome-session-quit

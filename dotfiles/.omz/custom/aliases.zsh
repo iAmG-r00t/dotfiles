@@ -6,10 +6,11 @@ alias off='shutdown now'
 alias kp='pidof $1 | xargs kill -9'
 alias pi='sudo apt install -y'
 alias pu='sudo apt purge'
-alias 2day='sudo apt update'
-alias grade='sudo apt upgrade'
+alias Update='sudo apt update'
+alias Upgrade='sudo apt upgrade'
 alias clh='cat /dev/null > ~/.oh-my-zsh/.zsh_history && history -c'
 alias reload!='source ~/.oh-my-zsh/.zshrc'
+alias lock='gnome-screensaver-command -l'
 alias tools='source ~/.bash_profile'
 alias lhf='ls -d .?*'
 alias lf='ls -p | grep -v / --color=auto'
@@ -20,11 +21,15 @@ alias wget="wget --hsts-file ~/.cache/wget/.wget-hsts"
 alias vi="vi -i ~/.cache/vim/info"
 alias vim="vim -i ~/.cache/vim/info"
 alias update-OMZ="cd "$ZSH" && git stash && upgrade_oh_my_zsh && git stash pop"
+# Works with lenovo ThinkPad Yoga 260
+alias touchoff='xinput --disable $(xinput --list | egrep -io "Wacom.+Finger.+id=([0-9]+)" | awk '\''{print substr($8,length($8)-0)}'\'')'
+alias touchon='xinput --enable $(xinput --list | egrep -io "Wacom.+Finger.+id=([0-9]+)" | awk '\''{print substr($8,length($8)-0)}'\'')'
+alias public-ip="curl -s checkip.dyndns.org | grep -Eo '[0-9\.]+'"
 
 #Functions placed in ALIAS Mode:
 # CSV Editor with pspg
 csview(){
-	pspg -f "$1" --csv -s
+	pspg -f ${1} --csv -s 5
 }
 
 # List files in a directory
@@ -81,7 +86,7 @@ d(){
   cd $d
 }
 
-# Copy a file to a server with SSH Key.
+# Copy a file to a server.
 transfer-file(){
-  scp -i "$3" "$1" root@"$2":/root/
+  scp "$1" root@"$2":/root/
 }

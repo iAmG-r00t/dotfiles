@@ -10,6 +10,7 @@ alias reload='source ~/.bashrc'
 alias tools='source ~/.bash_profile'
 alias lf='ls -p | grep -v / --color=auto'
 alias ls='ls --color=auto'
+alias lock='gnome-screensaver-command -l'
 alias lhf='ls -d .?*'
 alias dir='dir --color=auto'
 alias off='shutdown now'
@@ -25,7 +26,11 @@ alias wget="wget --hsts-file ~/.cache/wget/.wget-hsts"
 alias vi="vi -i ~/.cache/vim/info"
 alias vim="vim -i ~/.cache/vim/info"
 alias docker="sudo docker"
-alias update-OMZ="cd "$ZSH" && git stash && upgrade_oh_my_zsh && git stash pop"
+alias update-OMZ='cd '$ZSH' && git stash && upgrade_oh_my_zsh && git stash pop'
+# Works with lenovo ThinkPad Yoga 260
+alias touchoff="xinput --disable $(xinput --list | egrep -io "Wacom.+Finger.+id=([0-9]+)" | awk '{print substr($8,length($8)-0)}')"
+alias touchon="xinput --enable $(xinput --list | egrep -io "Wacom.+Finger.+id=([0-9]+)" | awk '{print substr($8,length($8)-0)}')"
+alias public-ip='curl -s checkip.dyndns.org | grep -Eo '[0-9\.]+''
 
 # Keyboard Binds for each application/software and terminal Shortcuts
 alias k-b=' echo -e "

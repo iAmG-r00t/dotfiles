@@ -129,7 +129,7 @@ copy dotfiles/.omz/custom/tmux.zsh .oh-my-zsh/custom
 copy dotfiles/.omz/custom/latex.zsh .oh-my-zsh/custom
 copy dotfiles/.omz/custom/vim-plugins.zsh .oh-my-zsh/custom
 copy dotfiles/.vim/vimrc .dotfiles/.vim
-copy dotfiles/.pass/contrasenas.kdbx .dotfiles/.pass/contraseñas.kdbx
+copy dotfiles/.pass/contrasenas.kdbx .dotfiles/.pass/contrasenas.kdbx
 
 echo -e "${no_color}${bold}[+] ${green}Done setting up dotfiles${reset}"
 echo ""
@@ -175,7 +175,7 @@ echo ""
 wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
 wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
 
-mv PowerlineSymbols.otf ~/.local/share/fonts/
+sudo mv PowerlineSymbols.otf ~/.local/share/fonts/
 fc-cache -vf ~/.local/share/fonts/
 sudo mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
 echo ""
@@ -184,6 +184,7 @@ echo -e "${no_color}${bold}[+] ${blink}${blue}Installing powerline status!!${res
 sleep 1
 echo ""
 pip3 install powerline-status
+pip install --user git+git://github.com/powerline/powerline
 echo -e "${no_color}${bold}[+] ${green}Done setting up VIM requirements${reset}"
 }
 
@@ -216,34 +217,33 @@ sleep 2
 
 #Stolen from tomnomnom
 function linkDotfile {
-  dest="${HOME}/${1}"
-  dateStr=$(date +%Y-%m-%d-%H%M)
+  src="${HOME}/${1}"
+  dest="${HOME}/${2}"
+  dateStr=$(date +%Y-%m-%d-%H-%M)
 
   if [ -h ~/${1} ]; then
     # Existing symlink 
-    echo -e "${no_color}${bold}[+] ${blue}Removing existing symlink: ${brown}${dest}${reset}"
-    sudo rm ${dest} 
+    echo -e "${no_color}${bold}[+] ${blue}Removing existing symlink: ${brown}${src}${reset}"
+    sudo rm ${src} 
 
   elif [ -f "${dest}" ]; then
     # Existing file
     echo -e "${no_color}${bold}[+] ${blue}Backing up existing file: ${brown}${dest}${reset}"
     sudo mv ${dest}{,.${dateStr}}
 
-  elif [ -d "${dest}" ]; then
-    # Existing dir
-    echo -e "${no_color}${bold}[+] ${blue}Backing up existing dir: ${brown}${dest}${reset}"
-    sudo mv ${dest}{,.${dateStr}}
-  fi
+  else
 
-  echo -e "${no_color}${bold}[+] ${blue}Creating new symlink: ${brown}${dest}${reset}"
-  sudo ln -sf ${dest} ${dest}
+    echo -e "${no_color}${bold}[+] ${blue}Creating new symlink: ${brown}${dest}${reset}"
+    sudo ln -sf ${src} ${dest}
+
+  fi
 }
 
-linkDotfile .dotfiles/.bash/.bashrc
-linkDotfile .dotfiles/.bash/.bash_profile
-linkDotfile .dotfiles/.tmux/.tmux.conf
-linkDotfile .dotfiles/.vim/vimrc
-linkDotfile .oh-my-zsh/.zshrc
+linkDotfile .dotfiles/.bash/.bashrc .bashrc
+linkDotfile .dotfiles/.bash/.bash_profile .bash_profile
+linkDotfile .dotfiles/.tmux/.tmux.conf .tmux.conf
+linkDotfile .dotfiles/.vim/vimrc .vimrc
+linkDotfile .oh-my-zsh/.zshrc .zshrc
 
 echo ""
 sleep 1

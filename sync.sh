@@ -12,19 +12,22 @@ blink='\e[5m'
 
 sleep 2
 echo -e "${no_color}${bold}[+] ${brown}Our greatest glory is not in never falling, but in rising every time we fall ...${no_color} ${blink}${blue}Backing up!!${reset}"
+echo ""
 sleep 3
 
 function backup(){
-	dest="${HOME}/Gitools/desktop-setup/"
+	dest="${HOME}/Gitools/desktop-setup/${2}"
 	src="${HOME}/.dotfiles/${1}"
 
 	if test -f ${src}; then
 	cp ${src} ${dest}
-	echo "${no_color}${bold}[+] ${green}Backed up file: ${brown}${1} ...${reset}"
+	echo -e "${no_color}${bold}[+] ${green}Backed up file: ${brown}${1} ... ${green}to location ${brown}${dest}${reset}"
 	echo ""
+	sleep 2
     else
-    echo "${red}File at path: ${blue}${src} is not present ...${brown} can't back it up!!${reset}"
+    echo -e "${red}File at path: ${blue}${src} is not present ...${brown} can't back it up!!${reset}"
     echo ""
+    sleep 1
     fi
 }
 

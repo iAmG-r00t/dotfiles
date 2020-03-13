@@ -1,12 +1,8 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-#Make zsh my default shell
-exec zsh
+# Original version will be found at /etc/skel/
 
-#Reload my configs when starting terminal
-source ~/.dotfiles/.bash/.bashrc
-source ~/.oh-my-zsh/.zshrc
+#Make zsh my default shell you will never get bash with this
+#exec zsh
 
 # If not running interactively, don't do anything
 case $- in
@@ -14,9 +10,8 @@ case $- in
       *) return;;
 esac
 
-#HISTORY COMAND
-# See bash(1) for more options
-#Ignores saving bash duplicate commands and the ones that start with spaces
+
+# don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth:erasedups
 
 # append to the history file, don't overwrite it
@@ -24,6 +19,9 @@ shopt -s histappend
 
 # save and reload history after each command
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+# append to the history file, don't overwrite it
+shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=10000
@@ -53,13 +51,10 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
 	color_prompt=yes
     else
 	color_prompt=
@@ -67,16 +62,16 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1="\n\[\e[01;33m\]\u\[\e[0m\]\[\e[00;37m\]@\[\e[0m\]\[\e[01;36m\]\h\[\e[0m\]\[\e[00;37m\] \t \[\e[0m\]\[\e[01;35m\]\w\[\e[0m\]\[\e[01;37m\] \[\e[0m\]\n$ "
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
+# If this is an xterm set the title to user@host
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h \a\]$PS1"
     ;;
 *)
     ;;
@@ -85,8 +80,9 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    #alias ls='ls --color=auto'
-
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -95,11 +91,10 @@ fi
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+# Alert alias
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# Alias definitions.
 if [ -f ~/.dotfiles/.bash/.bash_aliases ]; then
     . ~/.dotfiles/.bash/.bash_aliases
 fi
@@ -121,12 +116,12 @@ if ! shopt -oq posix; then
 fi
 
 # I'd quite like for Go to work please.
-# Stolen from tomnomnom
-export PATH=${PATH}:/usr/local/go/bin
-export GOPATH=$~/Gotools
+export GOROOT=/usr/local/go/bin
+export GOPATH=${HOME}/Gotools
+export PATH=${PATH}:${GOROOT}/bin:${GOPATH}/bin
 
 # Vim for life
-export EDITOR=/usr/bin/vi
+export EDITOR=vim
 
 # Color prompt
 export TERM=xterm-256color

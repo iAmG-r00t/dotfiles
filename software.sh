@@ -60,6 +60,7 @@ function softwares(){
    install gnupg
    install ufw
    install fish
+   install gnome-screensaver
 
   echo -e "${green}Done Installing all required packages!!${reset}"
 sleep 2
@@ -127,8 +128,8 @@ function mullvad-vpn(){
   read VERSION
 
   wget https://mullvad.net/media/app/MullvadVPN-${VERSION}_amd64.deb
-  sudo dpkg -i MullvadVPN-$VERSION_amd64.deb
-  rm MullvadVPN-$VERSION_amd64.deb
+  sudo dpkg -i MullvadVPN-${VERSION}_amd64.deb
+  rm MullvadVPN-${VERSION}_amd64.deb
 echo -e "${green}Done installing Mullvad VPN!!${reset}"
 sleep 2
 }
@@ -168,11 +169,13 @@ function keepass2-plugins(){
    sudo add-apt-repository ppa:jtaylor/keepass ;\
    sudo apt update ;\
    sudo apt install -y \
-        keepass2-plugin-keeagent \
         keepass2
+	#keepass2-plugin-keeagent (facing error's pulling it from github repo)
    wget https://bitbucket.org/devinmartin/keecloud/downloads/KeeCloud.1.2.1.11.plgx
-   sudo mv KeeCloud.1.2.1.11.plgx /usr/lib/keepass2/plugins/
-   sudo chown root:root /usr/lib/keepass2/plugins/KeeCloud.1.2.1.11.plgx
+   wget https://github.com/dlech/KeeAgent/releases/download/v0.11.2/KeeAgent.plgx
+   sudo mv KeeAgent.plgx /usr/lib/keepass2/Plugins/
+   sudo mv KeeCloud.1.2.1.11.plgx /usr/lib/keepass2/Plugins/
+   sudo chown root:root /usr/lib/keepass2/Plugins/KeeCloud.1.2.1.11.plgx
 
 echo -e "${green}Done installing Keepass2 and its Plugins!!${reset}"
 sleep 2
@@ -277,6 +280,18 @@ echo -e "${green}Done Installing Weechat!!${reset}"
 sleep 2
 }
 
+#Install pspg from PostgreSQL repo for csv viewer and mysql stuff
+function pspg(){
+
+  echo -e "${no_color}${bold}[+] ${blink}${blue}Installing pspg (csv and DB viewer)!!${reset}"
+
+  curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+  sudo sh -c 'echo "deb [arch=amd64] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+  sudo apt update ;\
+  sudo apt install -y \
+       pspg
+}
+
 #Update... upgrade.. and clean!!
 function clean(){
    echo -e "${no_color}${bold}[+] ${blink}${blue}Updating and cleaning leftovers!!${reset}"
@@ -304,9 +319,11 @@ mullvad-vpn
 OMZ
 signal
 keepass2-plugins
+brave
 Go
 git-secret
 weechat
+pspg
 clean
 
 echo -e "${blue}${bold}Right here, I got you where I want${reset}"
