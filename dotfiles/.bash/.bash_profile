@@ -233,6 +233,6 @@ send2servers(){
 
 	for server in $(cat /home/$USER/Gitools/servers) 
 	do 
-		scp EDW-Ngrok.zip root@"$server":/root/ 
+		scp $1 root@"$server":/root/ 
 	done
 }
