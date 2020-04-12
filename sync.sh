@@ -16,12 +16,12 @@ echo ""
 sleep 3
 
 function backup(){
-	dest="${HOME}/Gitools/desktop-setup/${2}"
+	dest="${HOME}/Gitools/desktop-setup/dotfiles/${2}"
 	src="${HOME}/.dotfiles/${1}"
 
 	if test -f ${src}; then
 	cp ${src} ${dest}
-	echo -e "${no_color}${bold}[+] ${green}Backed up file: ${brown}${1} ... ${green}to location ${brown}${dest}${reset}"
+	echo -e "${no_color}${bold}[+] ${green}Backed up file: ${brown}${src} ... ${green}to file ${brown}${dest}${reset}"
 	echo ""
 	sleep 2
     else
@@ -31,24 +31,25 @@ function backup(){
     fi
 }
 
-backup .bash/.bash_aliases dotfiles/.bash
-backup .bash/.bashrc dotfiles/.bash
-backup .bash/.bash_profile dotfiles/.bash
-backup .bash/.bash_aliases.d/.bash_aliases dotfiles/.bash/.bash_aliases.d
-backup .pass/contrasenas.kdbx dotfiles/.pass
-backup .tmux/.tmux.conf dotfiles/.tmux
-backup .vim/vimrc dotfiles/.vim
-backup .vim/.ycm_extra_conf.py dotfiles/.vim
-backup eddie/greetings.txt dotfiles/.eddie
 #First Update i3config to the i3 dotfiles folder
-cp ${HOME}/.config/i3/config ${HOME}/.dotfiles/.i3
-backup .i3/bluetooth.sh dotfiles/.i3
-backup .i3/.config dotfiles/.i3
-backup .i3/every-5-minutes.sh dotfiles/.i3
-backup .i3/lowbatt.sh dotfiles/.i3
-backup .i3/suspendbattery.sh dotfiles/.i3
-backup .i3/.i3-blocks/i3blocks.conf dotfiles/.i3/.i3-blocks
-backup .i3/.i3-blocks/i3blocks2.conf dotfiles/.i3/.i3-blocks
+cp ${HOME}/.config/i3/config ${HOME}/.dotfiles/.i3/.config
+
+backup .bash/.bash_aliases .bash/.bash_aliases
+backup .bash/.bashrc .bash/.bashrc
+backup .bash/.bash_profile .bash/.bash_profile
+backup .bash/.bash_aliases.d/.bash_aliases .bash/.bash_aliases.d/.bash_aliases
+backup .pass/contrasenas.kdbx .pass/contrasenas.kdbx
+backup .tmux/.tmux.conf .tmux/.tmux.conf
+backup .vim/vimrc .vim/vimrc
+backup .vim/.ycm_extra_conf.py .vim/.ycm_extra_conf.py
+backup eddie/greetings.txt .eddie/greetings.txt
+backup .i3/bluetooth.sh .i3/bluetooth.sh
+backup .i3/.config .i3/.config
+backup .i3/every-5-minutes.sh .i3/every-5-minutes.sh
+backup .i3/lowbatt.sh .i3/lowbatt.sh
+backup .i3/suspendbattery.sh .i3/suspendbattery.sh
+backup .i3/.i3-blocks/i3blocks.conf .i3/.i3-blocks/i3blocks.conf
+backup .i3/.i3-blocks/i3blocks2.conf .i3/.i3-blocks/i3blocks2.conf
 
 
 function favorite-apps(){
