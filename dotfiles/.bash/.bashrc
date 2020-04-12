@@ -116,9 +116,12 @@ if ! shopt -oq posix; then
 fi
 
 # I'd quite like for Go to work please.
-export GOROOT=/usr/local/go/bin
+#If you face any go errors like 'import path does not begin with hostname'
+# unset GOROOT
+#export GOROOT=/usr/local/go/bin
+#export PATH=${PATH}:${GOROOT}/bin:${GOPATH}/bin
+export PATH=${PATH}:/usr/local/go/bin
 export GOPATH=${HOME}/Gotools
-export PATH=${PATH}:${GOROOT}/bin:${GOPATH}/bin
 
 # Vim for life
 export EDITOR=vim

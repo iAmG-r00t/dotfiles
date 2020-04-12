@@ -11,20 +11,23 @@ alias Upgrade='sudo apt upgrade'
 alias clh='cat /dev/null > ~/.oh-my-zsh/.zsh_history && history -c'
 alias reload!='source ~/.oh-my-zsh/.zshrc'
 alias lock='gnome-screensaver-command -l'
+alias log-out='gnome-session-quit --no-prompt'
 alias tools='source ~/.bash_profile'
 alias lhf='ls -d .?*'
 alias lf='ls -p | grep -v / --color=auto'
 alias ls='ls --color=auto'
 alias dir='dir --color=auto'
-alias history='history -E'
+alias history='history 0'
 alias wget="wget --hsts-file ~/.cache/wget/.wget-hsts"
 alias vi="vi -i ~/.cache/vim/info"
 alias vim="vim -i ~/.cache/vim/info"
 alias update-OMZ="cd "$ZSH" && git stash && upgrade_oh_my_zsh && git stash pop"
+alias docker='sudo docker'
 # Works with lenovo ThinkPad Yoga 260
 alias touchoff='xinput --disable $(xinput --list | egrep -io "Wacom.+Finger.+id=([0-9]+)" | awk '\''{print substr($8,length($8)-0)}'\'')'
 alias touchon='xinput --enable $(xinput --list | egrep -io "Wacom.+Finger.+id=([0-9]+)" | awk '\''{print substr($8,length($8)-0)}'\'')'
 alias public-ip="curl -s checkip.dyndns.org | grep -Eo '[0-9\.]+'"
+alias file-size='du -h $1'
 
 #Functions placed in ALIAS Mode:
 # CSV Editor with pspg
@@ -72,7 +75,7 @@ ext(){
  }
 
  #Directory navigation using down
-d(){
+behind(){
   local d=""
   limit=$1
   for ((i=1 ; i <= limit ; i++))

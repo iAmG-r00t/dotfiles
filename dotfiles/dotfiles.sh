@@ -55,6 +55,8 @@ make .dotfiles/.tmux/plugins
 make .dotfiles/.vim
 make .dotfiles/eddie
 make .dotfiles/.pass
+make .dotfiles/.i3/.i3-blocks/blocks
+make .dotfiles/.i3/.i3-blocks/scrots
 
 echo -e "${no_color}${bold}[+] ${blink}${blue}Original files being backed up!!${no_color}"
 sleep 2
@@ -130,6 +132,15 @@ copy dotfiles/.omz/custom/latex.zsh .oh-my-zsh/custom
 copy dotfiles/.omz/custom/vim-plugins.zsh .oh-my-zsh/custom
 copy dotfiles/.vim/vimrc .dotfiles/.vim
 copy dotfiles/.pass/contrasenas.kdbx .dotfiles/.pass/contrasenas.kdbx
+copy dotfiles/.i3/bluetooth.sh .dotfiles/.i3/bluetooth.sh
+copy dotfiles/.i3/.config .dotfiles/.i3/.config
+copy dotfiles/.i3/every-5-minutes.sh .dotfiles/.i3/every-5-minutes.sh
+copy dotfiles/.i3/lowbatt.sh .dotfiles/.i3/lowbatt.sh
+copy dotfiles/.i3/suspendbattery.sh .dotfiles/.i3/suspendbattery.sh
+copy dotfiles/.i3/.i3-blocks/i3blocks.conf .dotfiles/.i3/.i3-blocks/i3blocks.conf
+copy dotfiles/.i3/.i3-blocks/i3blocks2.conf .dotfiles/.i3/.i3-blocks/i3blocks2.conf
+cp -r ~/Gitools/desktop-setup/dotfiles/.i3/.i3-blocks/blocks/* ~/.dotfiles/.i3/.i3-blocks/blocks
+cp -r ~/Gitools/desktop-setup/dotfiles/.i3/.i3-blocks/scrots/* ~/.dotfiles/.i3/.i3-blocks/scrots
 
 echo -e "${no_color}${bold}[+] ${green}Done setting up dotfiles${reset}"
 echo ""
@@ -244,10 +255,23 @@ linkDotfile .dotfiles/.bash/.bash_profile .bash_profile
 linkDotfile .dotfiles/.tmux/.tmux.conf .tmux.conf
 linkDotfile .dotfiles/.vim/vimrc .vimrc
 linkDotfile .oh-my-zsh/.zshrc .zshrc
+#Create a hardlink for i3
+ln -f ${HOME}/.dotfiles/.i3/.config ${HOME}/.config/i3/config
 
 echo ""
 sleep 1
 echo -e "${no_color}${bold}[+] ${green}Done creating links!!${reset}"
+}
+
+function i3block-firewall-status(){
+#For one to be able to run ufw status we need to
+#To add a new line in the sudoers file
+#Which will allow the command uwf to be run by only a specific user in the specific host
+#Best security practice I thought about it
+sudo sh -c 'echo "  " >> /etc/sudoers'
+sudo sh -c 'echo "# Enable this command to run without sudo password" >> /etc/sudoers'
+sudo sh -c 'echo "w0lf the-d3n = (root) NOPASSWD: /usr/sbin/ufw" >> /etc/sudoers'
+
 }
 
 #======================================================================================#
@@ -256,6 +280,7 @@ echo -e "${no_color}${bold}[+] ${green}Done creating links!!${reset}"
 dotfiles
 vim-stuff
 Other
+i3block-firewall-status
 echo ""
 echo -e "${blue}${bold}We are almost done!!${reset}"
 sleep 2

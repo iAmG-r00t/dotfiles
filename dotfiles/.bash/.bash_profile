@@ -2,39 +2,39 @@
 # Recon Oneliners
 
 # Colours have names too. Stolen from @tomnomnom who stole it from Arch wiki
-txtblk='\[\e[0;30m\]' # Black - Regular
-txtred='\[\e[0;31m\]' # Red
-txtgrn='\[\e[0;32m\]' # Green
-txtylw='\[\e[0;93m\]' # Yellow
-txtblu='\[\e[0;34m\]' # Blue
-txtpur='\[\e[0;35m\]' # Purple
-txtcyn='\[\e[0;96m\]' # Cyan
-txtwht='\[\e[0;37m\]' # White
-bldblk='\[\e[1;30m\]' # Black - Bold
-bldred='\[\e[1;31m\]' # Red
-bldgrn='\[\e[1;32m\]' # Green
-bldylw='\[\e[1;33m\]' # Yellow
-bldblu='\[\e[1;34m\]' # Blue
-bldpur='\[\e[1;35m\]' # Purple
-bldcyn='\[\e[1;36m\]' # Cyan
-bldwht='\[\e[1;37m\]' # White
-unkblk='\[\e[4;30m\]' # Black - Underline
-undred='\[\e[4;31m\]' # Red
-undgrn='\[\e[4;32m\]' # Green
-undylw='\[\e[4;33m\]' # Yellow
-undblu='\[\e[4;34m\]' # Blue
-undpur='\[\e[4;35m\]' # Purple
-undcyn='\[\e[4;36m\]' # Cyan
-undwht='\[\e[4;37m\]' # White
-bakblk='\[\e[40m\]'   # Black - Background
-bakred='\[\e[41m\]'   # Red
-badgrn='\[\e[42m\]'   # Green
-bakylw='\[\e[43m\]'   # Yellow
-bakblu='\[\e[44m\]'   # Blue
-bakpur='\[\e[45m\]'   # Purple
-bakcyn='\[\e[46m\]'   # Cyan
-bakwht='\[\e[47m\]'   # White
-txtrst='\[\e[0m\]'    # Text Reset
+txtblk='\e[0;30m' # Black - Regular
+txtred='\e[0;31m' # Red
+txtgrn='\e[0;32m' # Green
+txtylw='\e[0;93m' # Yellow
+txtblu='\e[0;34m' # Blue
+txtpur='\e[0;35m' # Purple
+txtcyn='\e[0;96m' # Cyan
+txtwht='\e[0;37m' # White
+bldblk='\e[1;30m' # Black - Bold
+bldred='\e[1;31m' # Red
+bldgrn='\e[1;32m' # Green
+bldylw='\e[1;33m' # Yellow
+bldblu='\e[1;34m' # Blue
+bldpur='\e[1;35m' # Purple
+bldcyn='\e[1;36m' # Cyan
+bldwht='\e[1;37m' # White
+unkblk='\e[4;30m' # Black - Underline
+undred='\e[4;31m' # Red
+undgrn='\e[4;32m' # Green
+undylw='\e[4;33m' # Yellow
+undblu='\e[4;34m' # Blue
+undpur='\e[4;35m' # Purple
+undcyn='\e[4;36m' # Cyan
+undwht='\e[4;37m' # White
+bakblk='\e[40m'   # Black - Background
+bakred='\e[41m'   # Red
+badgrn='\e[42m'   # Green
+bakylw='\e[43m'   # Yellow
+bakblu='\e[44m'   # Blue
+bakpur='\e[45m'   # Purple
+bakcyn='\e[46m'   # Cyan
+bakwht='\e[47m'   # White
+txtrst='\e[0m'    # Text Reset
 
 # Pipe colors 'Yaaaaay'
 black()  { IFS= ; while read -r line; do echo -e '\e[30m'$line'\e[0m'; done; }
@@ -172,34 +172,6 @@ else
 fi
 }
 
-opendoor(){
-inenv=$(python -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")')
-if [ ! -f ~/Gitools/OpenDoor/opendoor/bin/activate ]
- then
-
- 	python3 -m virtualenv ~/Gitools/OpenDoor/opendoor
-    source ~/Gitools/OpenDoor/opendoor/bin/activate
-    pip3 install -r ~/Gitools/OpenDoor/requirements.txt
-    python3 ~/Gitools/OpenDoor/opendoor.py 
-
-else
-
- if [ inenv==0 ]
-  then
-
-  	source ~/Gitools/OpenDoor/opendoor/bin/activate
-    python3 ~/Gitools/OpenDoor/opendoor.py 
-
-else
-
-python3 ~/Gitools/OpenDoor/opendoor.py 
-
- fi
-
-fi
-
-}
-
 
 # If we have a file that contains some domains, where their is a specific domain that has both https and http protocal. This removes the duplicate domains with both protocals present and leaves the domain with https protocal only
 only-https(){
@@ -228,11 +200,45 @@ domains-ip(){
 send2servers(){
 
 	echo -e "${txtcyn}Do make sure, keepass is opened and you have the servers IPs in ${txtrst}${bldred}location:${txtrst} ${txtgrn}/home/$USER/Gitools/servers${txtrst}"
-	sleep 8
+	sleep 5
 
 
 	for server in $(cat /home/$USER/Gitools/servers) 
 	do 
 		scp $1 root@"$server":/root/ 
 	done
+}
+
+copy4rmservers(){
+
+	echo -e "${txtcyn}Do make sure, keepass is opened and you have the servers IPs in ${txtrst}${bldred}location:${txtrst} ${txtgrn}/home/$USER/Gitools/servers${txtrst}"
+	sleep 5
+
+	echo -e "${txtblu}Enter file name then press${txtrst} ${txtred}[ENTER]${txtrst} ${txtblu}to continue.${txtrst}"
+	read file
+
+	for server in $(cat /home/$USER/Gitools/servers) 
+	do 
+		scp root@"$server":/root/$file . 
+	done
+}
+
+ips-n-ports(){
+	cat $1 | sed 1d | awk -F',' '{print $1,$2}' | sort -t',' -n -k2 | awk -F' ' -v OFS=' ' '{x=$1;$1="";a[x]=a[x]","$0}END{for(x in a) print x,a[x]}' | sed 's/, /,/g' | sed 's/ ,/ /' | sort -V -k1 | less
+}
+
+ips(){
+	cat $1 | sed 1d | awk -F',' '{print $1,$2}' | sort -t',' -n -k2 | awk -F' ' -v OFS=' ' '{x=$1;$1="";a[x]=a[x]","$0}END{for(x in a) print x,a[x]}' | sed 's/, /,/g' | sed 's/ ,/ /' | sort -V -k1 | cut -d " " -f 1 | less
+}
+
+ports(){
+		cat $1 | sed 1d | awk -F',' '{print $1,$2}' | sort -t',' -n -k2 | awk -F' ' -v OFS=' ' '{x=$1;$1="";a[x]=a[x]","$0}END{for(x in a) print x,a[x]}' | sed 's/, /,/g' | sed 's/ ,/ /' | sort -V -k1 | cut -d " " -f 2 | less
+}
+
+ip-address(){
+	ip route get 1.2.3.4 | awk '{print $7}'
+}
+
+network-device(){
+	nmcli -p device show
 }

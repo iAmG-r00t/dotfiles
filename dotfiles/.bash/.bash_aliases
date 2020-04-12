@@ -31,6 +31,7 @@ alias update-OMZ='cd '$ZSH' && git stash && upgrade_oh_my_zsh && git stash pop'
 alias touchoff="xinput --disable $(xinput --list | egrep -io "Wacom.+Finger.+id=([0-9]+)" | awk '{print substr($8,length($8)-0)}')"
 alias touchon="xinput --enable $(xinput --list | egrep -io "Wacom.+Finger.+id=([0-9]+)" | awk '{print substr($8,length($8)-0)}')"
 alias public-ip='curl -s checkip.dyndns.org | grep -Eo '[0-9\.]+''
+alias file-size='du -h $1'
 
 # Keyboard Binds for each application/software and terminal Shortcuts
 alias k-b=' echo -e "
@@ -166,7 +167,7 @@ csview(){
 
 # List files in a directory
 lfd(){
-	ls -p '$1' | grep -v / --color=auto
+	ls -p "$1" | grep -v / --color=auto
 }
 
 # Show contents of dir after action

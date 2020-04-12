@@ -74,7 +74,7 @@ gsettings set org.gnome.nautilus.desktop home-icon-name '127.0.0.1'
 gsettings set org.gnome.desktop.background picture-uri 'file:///home/'$USER'/Pictures/Wallpapers/desktop.jpg'
 gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/'$USER'/Pictures/Wallpapers/lock.jpg'
 gsettings set org.gnome.desktop.screensaver user-switch-enabled false
-gsettings set org.gnome.shell favorite-apps "['org.gnome.Screenshot.desktop', 'gnome-control-center.desktop', 'org.gnome.Nautilus.desktop', 'sublime_text.desktop', 'org.gnome.Terminal.desktop', 'cherrytree.desktop', 'firefox.desktop', 'brave-browser.desktop', 'signal-desktop.desktop', 'mullvad-vpn.desktop', 'keepass2.desktop']"
+gsettings set org.gnome.shell favorite-apps "['org.gnome.Screenshot.desktop', 'gnome-control-center.desktop', 'org.gnome.Nautilus.desktop', 'sublime_text.desktop', 'org.gnome.Terminal.desktop', 'cherrytree.desktop', 'firefox.desktop', 'brave-browser.desktop', 'signal-desktop.desktop', 'mullvad-vpn.desktop', 'keepass2.desktop', 'discord.desktop', 'libreoffice_libreoffice.desktop', 'vmware-workstation.desktop', 'virtualbox.desktop', 'Lotion.desktop', 'tagspaces.desktop']"
 gsettings set org.gnome.settings-daemon.peripherals.keyboard bell-mode 'off'
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 20

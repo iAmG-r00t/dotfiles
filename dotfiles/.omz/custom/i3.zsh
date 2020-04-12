@@ -1,0 +1,5 @@
+#i3 Workspaces Aliases
+
+alias 2scr33n5-b@b3='xrandr --output VIRTUAL1 --off --output eDP1 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output DP1 --off --output HDMI2 --mode 1280x1024 --pos 0x0 --rotate normal --output HDMI1 --off --output DP2 --off ; feh --bg-fill ${HOME}/Pictures/Wallpapers/i3-desktop.jpg'
+alias 3scr33n5-b@b3='xrandr --output VIRTUAL1 --off --output eDP1 --primary --mode 1920x1080 --pos 1280x768 --rotate normal --output DP1 --off --output HDMI2 --mode 1366x768 --pos 1834x0 --rotate normal --output HDMI1 --mode 1280x1024 --pos 0x768 --rotate normal --output DP2 --off ; feh --bg-fill ${HOME}/Pictures/Wallpapers/i3-desktop.jpg'
+alias scr33n-reset='xrandr --output VIRTUAL1 --off --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP1 --off --output HDMI2 --off --output HDMI1 --off --output DP2 --off ; feh --bg-fill ${HOME}/Pictures/Wallpapers/i3-desktop.jpg'
