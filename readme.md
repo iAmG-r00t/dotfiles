@@ -10,6 +10,10 @@ Blogpost comming up later ...
 + **images** (Background and Screen saver) :grin:
 + **wg** folder :unamused:
 
+# Updates
+
+:hatching_chick: I started using i3 also, its a learning curve to configure it but once you get a hang of it you will enjoy it :smile:, just look around the dotfiles folder and figure the rest out :sloth:
+
 ## Included `scripts/`
 * `dotfiles.sh` sets up all my dotfiles, for `vim`, `tmux`, `bash`, `OMZ` and `etc`
 * `wg.sh` sets up wireguard config.. well not needed really but doesn't harm if it still stays there
