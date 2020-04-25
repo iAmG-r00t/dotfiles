@@ -3,8 +3,8 @@
 #acpi -b | grep "Battery 0" | awk -F'[,:%]' '{print $2, $3}'
 #acpi -b use this to find battery name
 
-status=`acpi -b | awk -F'[,:%]' '{print $2}'`
-capacity=`acpi -b | awk -F'[,:%]' '{print $3}'`
+status=`acpi -b | grep "Battery 0"  | awk -F'[,:%]' '{print $2}'`
+capacity=`acpi -b | grep "Battery 0" | awk -F'[,:%]' '{print $3}'`
 
 if [ $status = Discharging -a $capacity -lt 5 ]
  then

@@ -24,7 +24,7 @@ function softwares(){
 
           sudo apt install -y $1
     else
-    
+
       echo -e "${green}Already installed: ${1}${reset}"
 
     fi
@@ -32,18 +32,17 @@ function softwares(){
 
    sudo apt update
 
-	 install zsh
-	 install curl
-	 install git
-	 install apt-transport-https
+   install zsh
+   install curl
+   install git
+   install apt-transport-https
    install software-properties-common
-	 install ca-certificates
+   install ca-certificates
    install gnupg-agent
-	 install wget
+   install wget
    install vim-nox
    install tmux
-	 install mosh
-   install cherrytree
+   install mosh
    install python3-pip
    install python-pip
    install htop
@@ -56,7 +55,7 @@ function softwares(){
    install build-essential
    install python3-dev
    install mono-complete
-   install dirmngr 
+   install dirmngr
    install gpg-agent
    install gnupg
    install ufw
@@ -77,6 +76,9 @@ function softwares(){
    install fonts-font-awesome
    install microcode.ctl
    install intel-microcode
+   install mpv
+   install kazam
+   install jq
 
   echo -e "${green}Done Installing all required packages!!${reset}"
 sleep 2
@@ -86,9 +88,9 @@ sleep 2
 function snap-packages(){
   echo -e "${no_color}${bold}[+] ${blink}${blue}Installing Snap Packages!!${reset}"
 
-  function install(){
+  function Install(){
 
-    package=$(find /snap/bin/ -name $1)  
+    package=$(find /snap/bin/ -name $1)
 
     if [ -z "$package" ]; then
 
@@ -107,32 +109,50 @@ function snap-packages(){
     fi
     }
 
-    install wireguard-ammp
-    install docker
-    install walc
-    install libreoffice
-    install sublime-text
-    install signal-desktop
-    install discord
-    install cherrytree
-    install zoom-client
-    install obs-studio
-    install code-insiders
-    install asciinema
-    install telegram-desktop
-    install mpv
+    Install docker
+    Install walc
+    Install libreoffice
+    Install signal-desktop
+    Install discord
+    Install cherrytree
+    Install obs-studio
+    Install asciinema
+    Install telegram-desktop
+
+   #Other Cases
+   echo -e "${no_color}${bold}[+] ${blink}${blue}Installing: the classic ones${reset}"
+   sudo snap install --classic sublime-text
+   sudo snap install --classic code
+   sudo snap install --classic asciinema
+
+
+echo -e "${green}Done Installing all Snap packages${reset}"
 }
 
 
+#Installing wireguard
+function wireguard(){
+   echo -e "${no_color}${bold}[+] ${blink}${blue}Installing wireguard!!${reset}"
+   sleep 2
+   sudo add-apt-repository ppa:wireguard/wireguard ;\
+   sudo apt update ;\
+   sudo apt install -y \
+        wireguard \
+        resolvconf
 
+   sudo cp wg/*.conf /etc/wireguard/
+echo -e "${green}Done installing Wireguard!!${reset}"
+sleep 2
+}
 
+#Installing Docker-compose
 function docker-compose(){
    echo -e "${no_color}${bold}[+] ${blink}${blue}Installing docker-compose!!${reset}"
    sleep 2
 
    function install(){
-   
-   file=$(find /usr/local/bin/ -name $1)  
+
+   file=$(find /usr/local/bin/ -name $1)
 
    if [ -z "$file" ]; then
       echo -e "${no_color}${bold}[+] ${blink}${blue}Installing: ${1}....${reset}"
@@ -142,7 +162,7 @@ function docker-compose(){
       sudo ln -sf /usr/local/bin/docker-compose /usr/bin/docker-compose
 
    else
-    
+
       echo -e "${green}Already installed: ${1}${reset}"
 
    fi
@@ -163,7 +183,7 @@ function mullvad-vpn(){
     which $1 &> /dev/null
 
   if [ $? -ne 0 ]; then
-    
+
     echo -e "${no_color}${bold}[+] ${blink}${blue}Installing: ${1}....${reset}"
 
     echo -e "${brown}Please check Mullvad version from Download page and enter it here, example: 2020.3 and press [ENTER]${reset}"
@@ -200,7 +220,7 @@ function OMZ(){
 
     echo -e "${no_color}${bold}[+] ${blink}${blue}Installing: ${1}....${reset}"
     echo "  "
-   
+
     #Installing Oh-My-ZSH in the background
     0>/dev/null sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
     echo -e "${green}Done installing Oh-My-ZSH shell!!${reset}"
@@ -209,7 +229,7 @@ function OMZ(){
 
    echo -e "${green}Already installed: ${1}${reset}"
 
- fi  
+ fi
   }
 
     install oh-my-zsh
@@ -233,8 +253,8 @@ function keepass2-plugins(){
    sudo add-apt-repository ppa:jtaylor/keepass ;\
    sudo apt update ;\
    sudo apt install -y $1
-        
-	#keepass2-plugin-keeagent (facing error's pulling it from github repo)
+
+   #keepass2-plugin-keeagent (facing error's pulling it from github repo)
    wget https://bitbucket.org/devinmartin/keecloud/downloads/KeeCloud.1.2.1.11.plgx
    wget https://github.com/dlech/KeeAgent/releases/download/v0.11.2/KeeAgent.plgx
    sudo mv KeeAgent.plgx /usr/lib/keepass2/Plugins/
@@ -242,7 +262,7 @@ function keepass2-plugins(){
    sudo chown root:root /usr/lib/keepass2/Plugins/KeeCloud.1.2.1.11.plgx
 
    else
-    
+
       echo -e "${green}Already installed: ${1}${reset}"
 
     fi
@@ -270,7 +290,7 @@ function brave(){
       sudo apt install -y $1
 
    else
-    
+
       echo -e "${green}Already installed: ${1}${reset}"
 
     fi
@@ -348,7 +368,7 @@ echo -e "${no_color}${bold}[+] ${blink}${blue}Installing Git Secret!!${reset}"
    sudo apt install -y $1
 
    else
-    
+
       echo -e "${green}Already installed: ${1}${reset}"
 
     fi
@@ -392,7 +412,7 @@ echo -e "${no_color}${bold}[+] ${blink}${blue}Installing Weechat!!${reset}"
   sudo apt install -y $1
 
   else
-    
+
       echo -e "${green}Already installed: ${1}${reset}"
 
     fi
@@ -420,7 +440,7 @@ function pspg(){
   sudo apt install -y $1
 
   else
-    
+
       echo -e "${green}Already installed: ${1}${reset}"
 
     fi
@@ -461,8 +481,9 @@ echo -e "${no_color}${bold}[+] ${blink}${blue}Installing i3-gaps !!${reset}"
                       xutils-dev \
                       libtool \
                       automake \
+                      libxcb-shape0-dev \
                       libxcb-xrm-dev
-  
+
   mkdir tmp; cd tmp
   git clone https://www.github.com/Airblader/i3 i3-gaps; cd i3-gaps
   git checkout gaps && git pull
@@ -472,6 +493,34 @@ echo -e "${no_color}${bold}[+] ${blink}${blue}Installing i3-gaps !!${reset}"
   cd ../../../; rm -rf tmp
 
 echo -e "${green}Done Installing i3-gaps!!${reset}"
+sleep 2
+}
+
+#Instaling ansible
+function ansible(){
+  echo -e "${no_color}${bold}[+] ${blink}${blue}Installing Ansible!!${reset}"
+   sleep 2
+
+   function install(){
+    which $1 &> /dev/null
+
+    if [ $? -ne 0 ]; then
+      echo -e "${no_color}${bold}[+] ${blink}${blue}Installing: ${1}....${reset}"
+
+      sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+      echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" | sudo tee /etc/apt/sources.list.d/ansible-release.list
+      sudo apt update ;\
+      sudo apt install -y $1
+
+   else
+
+      echo -e "${green}Already installed: ${1}${reset}"
+
+    fi
+   }
+       install ansible
+
+echo -e "${green}Done installing Ansible!!${reset}"
 sleep 2
 }
 
@@ -497,6 +546,7 @@ sleep 2
 
 softwares
 snap-packages
+wireguard
 docker-compose
 mullvad-vpn
 OMZ

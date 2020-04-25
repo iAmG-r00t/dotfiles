@@ -139,8 +139,8 @@ copy dotfiles/.i3/lowbatt.sh .dotfiles/.i3/lowbatt.sh
 copy dotfiles/.i3/suspendbattery.sh .dotfiles/.i3/suspendbattery.sh
 copy dotfiles/.i3/.i3-blocks/i3blocks.conf .dotfiles/.i3/.i3-blocks/i3blocks.conf
 copy dotfiles/.i3/.i3-blocks/i3blocks2.conf .dotfiles/.i3/.i3-blocks/i3blocks2.conf
-cp -r ~/Gitools/desktop-setup/dotfiles/.i3/.i3-blocks/blocks/* ~/.dotfiles/.i3/.i3-blocks/blocks
-cp -r ~/Gitools/desktop-setup/dotfiles/.i3/.i3-blocks/scrots/* ~/.dotfiles/.i3/.i3-blocks/scrots
+sudo cp -r ~/Gitools/desktop-setup/dotfiles/.i3/.i3-blocks/blocks/* ~/.dotfiles/.i3/.i3-blocks/blocks
+sudo cp -r ~/Gitools/desktop-setup/dotfiles/.i3/.i3-blocks/scrots/* ~/.dotfiles/.i3/.i3-blocks/scrots
 
 echo -e "${no_color}${bold}[+] ${green}Done setting up dotfiles${reset}"
 echo ""
@@ -233,9 +233,9 @@ function linkDotfile {
   dateStr=$(date +%Y-%m-%d-%H-%M)
 
   if [ -h ~/${1} ]; then
-    # Existing symlink 
+    # Existing symlink
     echo -e "${no_color}${bold}[+] ${blue}Removing existing symlink: ${brown}${src}${reset}"
-    sudo rm ${src} 
+    sudo rm ${src}
 
   elif [ -f "${dest}" ]; then
     # Existing file
