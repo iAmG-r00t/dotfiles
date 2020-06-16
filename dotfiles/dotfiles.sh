@@ -270,7 +270,7 @@ function i3block-firewall-status(){
 #Best security practice I thought about it
 sudo sh -c 'echo "  " >> /etc/sudoers'
 sudo sh -c 'echo "# Enable this command to run without sudo password" >> /etc/sudoers'
-sudo sh -c 'echo "w0lf the-d3n = (root) NOPASSWD: /usr/sbin/ufw" >> /etc/sudoers'
+sudo sh -c 'echo "'$USER' '$HOST' = (root) NOPASSWD: /usr/sbin/ufw" >> /etc/sudoers'
 
 }
 

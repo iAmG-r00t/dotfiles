@@ -53,10 +53,11 @@ export LANG=en_US.UTF-8
 # I'd quite like for Go to work please.
 #If you face any go errors like 'import path does not begin with hostname'
 # unset GOROOT
-#export GOROOT=/usr/local/go/bin
-#export PATH=${PATH}:${GOROOT}/bin:${GOPATH}/bin
-export PATH=${PATH}:/usr/local/go/bin
+export GOROOT=/usr/local/go/bin
 export GOPATH=${HOME}/Gotools
+export PATH=${PATH}:${GOROOT}/bin:${GOPATH}/bin
+#export PATH=${PATH}:/usr/local/go/bin
+#export GOPATH=${HOME}/Gotools
 
 
 #Eddie

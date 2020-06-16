@@ -5,7 +5,6 @@ alias tns='tmux new-session -s'
 alias tks='tmux kill-server'
 alias tad='tmux attach -d -t'
 alias tkst='tmux kill-session -t'
-alias tm='tmux new-session -t r00t'
 alias reload='source ~/.bashrc'
 alias tools='source ~/.bash_profile'
 alias lf='ls -p | grep -v / --color=auto'
@@ -28,10 +27,25 @@ alias vim="vim -i ~/.cache/vim/info"
 alias docker="sudo docker"
 alias update-OMZ='cd '$ZSH' && git stash && upgrade_oh_my_zsh && git stash pop'
 # Works with lenovo ThinkPad Yoga 260
-alias touchoff="xinput --disable $(xinput --list | egrep -io "Wacom.+Finger.+id=([0-9]+)" | awk '{print substr($8,length($8)-0)}')"
-alias touchon="xinput --enable $(xinput --list | egrep -io "Wacom.+Finger.+id=([0-9]+)" | awk '{print substr($8,length($8)-0)}')"
+#alias touchoff="xinput --disable $(xinput --list | egrep -io "Wacom.+Finger.+id=([0-9]+)" | awk '{print substr($8,length($8)-0)}')"
+#alias touchon="xinput --enable $(xinput --list | egrep -io "Wacom.+Finger.+id=([0-9]+)" | awk '{print substr($8,length($8)-0)}')"
+# Works with lenovo Thinkpad T480
+alias touchoff="xinput --disable $(xinput --list | egrep "Raydium.+Corporation.+Touch.+System.+id=([0-9]+)" | awk '{print substr($8,length($8)-1)}')"
+alias touchon="xinput --enable $(xinput --list | egrep "Raydium.+Corporation.+Touch.+System.+id=([0-9]+)" | awk '{print substr($8,length($8)-1)}')"
 alias public-ip='curl -s checkip.dyndns.org | grep -Eo '[0-9\.]+''
 alias file-size='du -h $1'
+alias 1HDMI="xrandr --output HDMI-1-2 --mode 1280x1024 --pos 1928x0 --rotate normal --output eDP-1-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1-1 --off --output DP-1-1 --off --output DP-1-2 --off"
+# tmux Workspaces
+alias appsec='sh /home/$USER/.dotfiles/.bash/tmux-workspaces/appsec.sh'
+alias scanservers='sh /home/$USER/.dotfiles/.bash/tmux-workspaces/scan_servers.sh'
+alias analyze='/home/$USER/.dotfiles/.bash/tmux-workspaces/analyze.sh'
+alias ACGH='/home/$USER/.dotfiles/.bash/tmux-workspaces/AnythingCanGoHere.sh'
+alias automationlab='sh /home/$USER/.dotfiles/.bash/tmux-workspaces/AutomationLab.sh'
+alias workspaces='/home/$USER/.dotfiles/.bash/tmux-workspaces/workspaces.sh'
+alias tm='/home/$USER/.dotfiles/.bash/tmux-workspaces/tm.sh'
+
+# WiFi connect when in i3
+alias wifi='nmtui'
 
 # Keyboard Binds for each application/software and terminal Shortcuts
 alias k-b=' echo -e "

@@ -24,10 +24,16 @@ alias vim="vim -i ~/.cache/vim/info"
 alias update-OMZ="cd "$ZSH" && git stash && upgrade_oh_my_zsh && git stash pop"
 alias docker='sudo docker'
 # Works with lenovo ThinkPad Yoga 260
-alias touchoff='xinput --disable $(xinput --list | egrep -io "Wacom.+Finger.+id=([0-9]+)" | awk '\''{print substr($8,length($8)-0)}'\'')'
-alias touchon='xinput --enable $(xinput --list | egrep -io "Wacom.+Finger.+id=([0-9]+)" | awk '\''{print substr($8,length($8)-0)}'\'')'
+#alias touchoff='xinput --disable $(xinput --list | egrep -io "Wacom.+Finger.+id=([0-9]+)" | awk '\''{print substr($8,length($8)-0)}'\'')'
+#alias touchon='xinput --enable $(xinput --list | egrep -io "Wacom.+Finger.+id=([0-9]+)" | awk '\''{print substr($8,length($8)-0)}'\'')'
+# Works with lenovo Thinkpad T480
+alias touchoff='xinput --disable $(xinput --list | egrep "Raydium.+Corporation.+Touch.+System.+id=([0-9]+)" | awk '\''{print substr($8,length($8)-1)}'\'')'
+alias touchon='xinput --enable $(xinput --list | egrep "Raydium.+Corporation.+Touch.+System.+id=([0-9]+)" | awk '\''{print substr($8,length($8)-1)}'\'')'
 alias public-ip="curl -s checkip.dyndns.org | grep -Eo '[0-9\.]+'"
 alias file-size='du -h $1'
+alias 1HDMI='xrandr --output HDMI-1-2 --mode 1280x1024 --pos 1928x0 --rotate normal --output eDP-1-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1-1 --off --output DP-1-1 --off --output DP-1-2 --off'
+# WiFi connect when in i3
+alias wifi='nmtui'
 
 #Functions placed in ALIAS Mode:
 # CSV Editor with pspg

@@ -118,10 +118,12 @@ fi
 # I'd quite like for Go to work please.
 #If you face any go errors like 'import path does not begin with hostname'
 # unset GOROOT
-#export GOROOT=/usr/local/go/bin
-#export PATH=${PATH}:${GOROOT}/bin:${GOPATH}/bin
-export PATH=${PATH}:/usr/local/go/bin
+export GOROOT=/usr/local/go/bin
 export GOPATH=${HOME}/Gotools
+export PATH=${PATH}:${GOROOT}/bin:${GOPATH}/bin
+#export PATH=${PATH}:/usr/local/go/bin
+#export GOPATH=${HOME}/Gotools
+
 
 # Vim for life
 export EDITOR=vim
@@ -130,4 +132,4 @@ export EDITOR=vim
 export TERM=xterm-256color
 
 #Eddie
-python3 ~/.dotfiles/eddie/randline.py ~/.dotfiles/eddie/greetings.txt $USER
+python3 ~/.dotfiles/eddie/randline.py ~/.dotfiles/eddie/greetings.txt $USERsource $GOPATH/src/github.com/tomnomnom/gf/gf-completion.bash

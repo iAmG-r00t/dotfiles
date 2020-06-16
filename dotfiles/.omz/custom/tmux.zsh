@@ -4,4 +4,12 @@ alias tns='tmux new-session -s'
 alias tks='tmux kill-server'
 alias tad='tmux attach -d -t'
 alias tkst='tmux kill-session -t'
-alias tm='tmux new-session -t r00t'
+alias tm='/home/$USER/.dotfiles/.bash/tmux-workspaces/tm.sh'
+
+# Workspaces
+alias appsec='sh /home/$USER/.dotfiles/.bash/tmux-workspaces/appsec.sh'
+alias scanservers='sh /home/$USER/.dotfiles/.bash/tmux-workspaces/scan_servers.sh'
+alias ACGH='/home/$USER/.dotfiles/.bash/tmux-workspaces/AnythingCanGoHere.sh'
+alias automationlab='sh /home/$USER/.dotfiles/.bash/tmux-workspaces/AutomationLab.sh'
+alias analyze='/home/$USER/.dotfiles/.bash/tmux-workspaces/analyze.sh'
+alias workspaces='/home/$USER/.dotfiles/.bash/tmux-workspaces/workspaces.sh'

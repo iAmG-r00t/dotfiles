@@ -79,6 +79,8 @@ function softwares(){
    install mpv
    install kazam
    install jq
+   install tree
+   install speedtest-cli
 
   echo -e "${green}Done Installing all required packages!!${reset}"
 sleep 2

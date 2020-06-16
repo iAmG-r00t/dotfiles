@@ -136,7 +136,7 @@ alias out='deactivate'
 
 # Start Burpro
 burp(){
-$HOME/Scripts/Burp/jre1.8.0_60/bin/java -noverify -Xbootclasspath/p:$HOME/Scripts/Burp/burp-loader-keygen-2_1_07.jar -jar $HOME/Scripts/Burp/burpsuite_pro_v2.1.07.jar
+$HOME/Scripts/Burp/jre1.8.0_60/bin/java -noverify -Xbootclasspath/p:$HOME/Scripts/Burp/burp-loader-keygen-2_1_07.jar -jar $HOME/Scripts/Burp/burpsuite_pro_v2.1.07.jar& ; firefox -P Burp --class="hacking" -no-remote
 }
 
 # Dirsearch from anywhere
@@ -191,37 +191,92 @@ remove-www(){
 	cat $1 | sed 's/^www.//g' | sort -u
 }
 
+# Get domains ip
 domains-ip(){
 
 	cat $1 | sed 's/^http[s]:\/\///g' | awk '{print $1}' | xargs -n1 sh -c 'dig a $1 +short' sh | sort -u
 
 }
 
+# Send a file to a list of servers
 send2servers(){
 
-	echo -e "${txtcyn}Do make sure, keepass is opened and you have the servers IPs in ${txtrst}${bldred}location:${txtrst} ${txtgrn}/home/$USER/Gitools/servers${txtrst}"
+	echo -e "${txtcyn}Do make sure, keepass is opened.${txtrst}"
 	sleep 5
 
 
-	for server in $(cat /home/$USER/Gitools/servers) 
+	for server in $(S-Srs) 
 	do 
 		scp $1 root@"$server":/root/ 
 	done
 }
 
+# Pull a file from multiple servers
 copy4rmservers(){
 
-	echo -e "${txtcyn}Do make sure, keepass is opened and you have the servers IPs in ${txtrst}${bldred}location:${txtrst} ${txtgrn}/home/$USER/Gitools/servers${txtrst}"
+	echo -e "${txtcyn}Do make sure, keepass is opened.${txtrst}"
 	sleep 5
 
-	echo -e "${txtblu}Enter file name then press${txtrst} ${txtred}[ENTER]${txtrst} ${txtblu}to continue.${txtrst}"
+	echo -e "${txtblu}Enter file path and regex but don't start from root  then press${txtrst} ${txtred}[ENTER]${txtrst} ${txtblu}to continue.${txtrst}"
 	read file
 
-	for server in $(cat /home/$USER/Gitools/servers) 
+	for server in $(S-Srs) 
 	do 
 		scp root@"$server":/root/$file . 
 	done
 }
+
+# Pull a file from a single server
+copy4rmserver(){
+	echo -e "${txtcyn}Do make sure, keepass is opened.${txtrst}"
+	sleep 5
+
+	echo -e "${txtblu}Enter file path and regex but don't start from root then press${txtrst} ${txtred}[ENTER]${txtrst} ${txtblu}to continue.${txtrst}"
+	read file
+
+		scp root@$1:/root/$file .
+}
+
+# Get public ip
+ip-address(){
+	ip route get 1.2.3.4 | awk '{print $7}'
+}
+
+network-device(){
+	nmcli -p device show
+}
+
+# Create a virtual enviroment when inside a python project folder that requires me to install pip packages
+create-virtualenv(){
+	echo -e "${txtcyn}Creating Virtual Enviroment ...${txtrst}"
+	sleep 1
+
+	#echo -e "${txtblu}Enter virtual enviroment name please then press${txtrst} ${txtred}[ENTER]${txtrst}"
+
+	location=$(pwd)
+	envname="virtual-enviroment"
+	
+	python3 -m virtualenv ${location}/${envname}
+    source ${location}/${envname}/bin/activate
+
+    echo -e "${txtblu}Done creating virtual enviroment ${txtred}${envname}${txtrst}"
+}
+
+# Enter virtual enviroment when inside a python project folder where I had created a virtual enviroment
+enter-virtualenv(){
+	echo -e "${txtcyn}Entering Virtual Enviroment ...{txtrst}"
+	sleep 1
+
+	#echo -e "${txtblu}Enter virtual enviroment name please then press${txtrst} ${txtred}[ENTER]${txtrst}"
+
+	location=$(pwd)
+	envname="virtual-enviroment"
+
+	source ${location}/${envname}/bin/activate
+}
+
+# Data analysis options, I use this most of the time hence why they are here!!
+# ------------------------------------------------------------------------------
 
 ips-n-ports(){
 	cat $1 | sed 1d | awk -F',' '{print $1,$2}' | sort -t',' -n -k2 | awk -F' ' -v OFS=' ' '{x=$1;$1="";a[x]=a[x]","$0}END{for(x in a) print x,a[x]}' | sed 's/, /,/g' | sed 's/ ,/ /' | sort -V -k1 | less
@@ -235,10 +290,18 @@ ports(){
 		cat $1 | sed 1d | awk -F',' '{print $1,$2}' | sort -t',' -n -k2 | awk -F' ' -v OFS=' ' '{x=$1;$1="";a[x]=a[x]","$0}END{for(x in a) print x,a[x]}' | sed 's/, /,/g' | sed 's/ ,/ /' | sort -V -k1 | cut -d " " -f 2 | less
 }
 
-ip-address(){
-	ip route get 1.2.3.4 | awk '{print $7}'
+ips-n-ports15(){
+	awk -F'"|","' -v lines=$(wc -l < $1) '
+	BEGIN{
+	  print "IpAddr,Ports"
+	}
+	FNR>1{
+	  num=split($3,array," ")
+	  for(i=1;i<=num;i++){
+	    if(i==1){ printf $2 OFS }
+	    printf("%s%s",array[i],i%15==0||i==num?ORS:FNR==lines && i==num?ORS:",")
+	    if(i%15==0){ printf $2 OFS }
+	  }
+	}' $1
 }
-
-network-device(){
-	nmcli -p device show
-}
+# ------------------------------------------------------------------------------
