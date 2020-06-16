@@ -1,5 +1,5 @@
 #!/bin/bash
-# script to run my sync dotfiles script 
+# script to run my sync dotfiles script
 # and update the git repo
 # By th3gr00t
 
@@ -13,11 +13,11 @@ no_color='\e[0m'
 blink='\e[5m'
 
 
-# first we run the sync script
+# First we run the sync script
 $HOME/Gitools/desktop-setup/sync.sh
 sleep 1
 
-# delete some backup file for desktop.sh script file
+# Delete some backup file for desktop.sh script file
 if [[ -f desktop.sh.old.bak ]]
 then
 
@@ -26,20 +26,55 @@ then
 fi
 sleep 1
 
-# checking git status
-echo ""
-echo -e "${no_color}[+] ${blue}Checking git status${reset}"
-echo ""
-git status | sed '/add\|checkout\|added/d'
+# My if function
+command1=$(git status | grep "Changes to be committed:")
+command2=$(git status | grep "nothing to commit, working tree clean")
 
-# Encrypt all git files with git secret
-echo ""
-git secret hide
-echo ""
+if [[ "$command1" != "Changes to be committed:" ]]
+then
 
-# Add untracked files and modified files to git
-git ls-files -m | xargs git add
-git ls-files -o --exclude-standard | xargs git add
+   # Checking git status
+   echo ""
+   echo -e "${no_color}[+] ${blue}Checking git status${reset}"
+   echo ""
+   git status | sed '/add\|checkout\|added/d'
 
-# Check git status
-git status | sed '/add\|checkout\|added\|HEAD/d'
+   # Encrypt all git files with git secret
+   echo ""
+   git secret hide
+   echo ""
+
+   # Add untracked files and modified files to git
+   git ls-files -m | xargs git add
+   git ls-files -o --exclude-standard | xargs git add
+
+   # Check git status
+   git git status | sed '/add\|checkout\|added\|HEAD/d'
+
+   # Git commit message
+   echo -e "${no_color}${bold}[+] ${brown}Adding git commit message ...${reset}"
+   git commit -m "¯\\_(ツ)_//¯ We call it updates ... :adhesive_bandage:"
+
+   # Git commit
+   echo -e "${no_color}${bold}[+] ${brown}Pushing to git master repo ...${reset}"
+   git push -u origin master
+
+elif [[ "$command2" == "Your branch is up to date with 'origin/master'." ]]
+then
+   echo -e "${no_color}${bold}[+] ${brown}Your branch is up to date with ${red}'origin/master'${brown}.${reset}"
+
+else
+
+  # Check git status
+  git status | sed '/add\|checkout\|added\|HEAD/d'
+
+  # Git commit message
+  echo -e "${no_color}${bold}[+] ${brown}Adding git commit message ...${reset}"
+  sleep 1
+  git commit -m "¯\\_(ツ)_//¯ We call it updates ... :adhesive_bandage:"
+
+  # Git commit
+  echo -e "${no_color}${bold}[+] ${brown}Pushing to git master repo ...${reset}"
+  git push -u origin master
+
+fi
