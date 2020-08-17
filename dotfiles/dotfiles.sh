@@ -137,6 +137,7 @@ copy dotfiles/.i3/.config .dotfiles/.i3/.config
 copy dotfiles/.i3/every-5-minutes.sh .dotfiles/.i3/every-5-minutes.sh
 copy dotfiles/.i3/lowbatt.sh .dotfiles/.i3/lowbatt.sh
 copy dotfiles/.i3/suspendbattery.sh .dotfiles/.i3/suspendbattery.sh
+copy dotfiles/.i3/displayselect.sh .dotfiles/.i3/displayselect.sh
 copy dotfiles/.i3/.i3-blocks/i3blocks.conf .dotfiles/.i3/.i3-blocks/i3blocks.conf
 copy dotfiles/.i3/.i3-blocks/i3blocks2.conf .dotfiles/.i3/.i3-blocks/i3blocks2.conf
 sudo cp -r ~/Gitools/desktop-setup/dotfiles/.i3/.i3-blocks/blocks/* ~/.dotfiles/.i3/.i3-blocks/blocks

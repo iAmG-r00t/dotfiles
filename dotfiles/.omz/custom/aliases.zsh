@@ -31,16 +31,24 @@ alias touchoff='xinput --disable $(xinput --list | egrep "Raydium.+Corporation.+
 alias touchon='xinput --enable $(xinput --list | egrep "Raydium.+Corporation.+Touch.+System.+id=([0-9]+)" | awk '\''{print substr($8,length($8)-1)}'\'')'
 alias public-ip="curl -s checkip.dyndns.org | grep -Eo '[0-9\.]+'"
 alias file-size='du -h $1'
-alias 1HDMI='xrandr --output HDMI-1-2 --mode 1280x1024 --pos 1928x0 --rotate normal --output eDP-1-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1-1 --off --output DP-1-1 --off --output DP-1-2 --off'
 # WiFi connect when in i3
 alias wifi='nmtui'
-
+alias displayselect='${HOME}/.dotfiles/.i3/displayselect.sh'
 #Functions placed in ALIAS Mode:
 # CSV Editor with pspg
 csview(){
 	pspg -f ${1} --csv -s 5
 }
-
+# Move certain workspace to the HDMI screen
+small-screen(){xrandr --output HDMI-1-2 --mode 1280x1024 --pos 0x0 --rotate normal --output eDP-1-1 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output HDMI-1-1 --off --output DP-1-1 --off --output DP-1-2 --off
+sleep 1
+nitrogen --set-auto --head=0 Pictures/Wallpapers/i3-desktop.jpg
+nitrogen --set-zoom-fill --head=1 Pictures/Wallpapers/i3-desktop.jpg
+i3-msg '[workspace="Notes"]' move workspace to output hdmi-1-2 > /dev/null
+i3-msg '[workspace="Research Browser"]' move workspace to output hdmi-1-2 > /dev/null
+i3-msg '[workspace="Firefox Browser"]' move workspace to output hdmi-1-2 > /dev/null
+i3-msg '[workspace="Brave Browser"]' move workspace to output hdmi-1-2 > /dev/null
+}
 # List files in a directory
 lfd(){
 	ls -p "$1" | grep -v / --color=auto

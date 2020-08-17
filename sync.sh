@@ -69,6 +69,7 @@ backup .dotfiles/.i3/.config .i3/.config
 backup .dotfiles/.i3/every-5-minutes.sh .i3/every-5-minutes.sh
 backup .dotfiles/.i3/lowbatt.sh .i3/lowbatt.sh
 backup .dotfiles/.i3/suspendbattery.sh .i3/suspendbattery.sh
+backup .dotfiles/.i3/displayselect.sh .i3/displayselect.sh
 backup .dotfiles/.i3/.i3-blocks/i3blocks.conf .i3/.i3-blocks/i3blocks.conf
 backup .dotfiles/.i3/.i3-blocks/i3blocks2.conf .i3/.i3-blocks/i3blocks2.conf
 backup .oh-my-zsh/custom/aliases.zsh .omz/custom/aliases.zsh

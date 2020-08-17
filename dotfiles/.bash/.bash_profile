@@ -134,9 +134,14 @@ fi
 # Exit out of a virtualenv
 alias out='deactivate'
 
-# Start Burpro
+# Start Burpro and a new firefox profile
 burp(){
 $HOME/Scripts/Burp/jre1.8.0_60/bin/java -noverify -Xbootclasspath/p:$HOME/Scripts/Burp/burp-loader-keygen-2_1_07.jar -jar $HOME/Scripts/Burp/burpsuite_pro_v2.1.07.jar& ; firefox -P Burp --class="hacking" -no-remote
+}
+
+# Start new firefox profile for research
+ResearchBrowser(){
+firefox -P OpSec --class="OpSec" -no-remote &
 }
 
 # Dirsearch from anywhere
@@ -211,6 +216,16 @@ send2servers(){
 	done
 }
 
+# Send a file to a server
+send2server(){
+
+	echo -e "${txtcyn}Do make sure, keepass is opened.${txtrst}"
+	sleep 5
+
+
+		scp $1 root@$2:/root/ 
+}
+
 # Pull a file from multiple servers
 copy4rmservers(){
 
@@ -230,11 +245,12 @@ copy4rmservers(){
 copy4rmserver(){
 	echo -e "${txtcyn}Do make sure, keepass is opened.${txtrst}"
 	sleep 5
+	server=$1
 
 	echo -e "${txtblu}Enter file path and regex but don't start from root then press${txtrst} ${txtred}[ENTER]${txtrst} ${txtblu}to continue.${txtrst}"
 	read file
 
-		scp root@$1:/root/$file .
+		scp root@"$server":"$file" .
 }
 
 # Get public ip
@@ -305,3 +321,15 @@ ips-n-ports15(){
 	}' $1
 }
 # ------------------------------------------------------------------------------
+
+#Update mullvad VPN
+update-vpn(){
+ 	echo -e "${txtcyn}Updating Mullvad VPN,${bldylw} Please check Mullvad version from Download page and enter it here, example: ${txtblu}2020.3${txtrst} ${bldylw}and press ${txtred}[ENTER]${txtrst}"
+
+ 	read VERSION
+ 	echo " "
+ 	wget -P ${HOME}/Downloads/ https://mullvad.net/media/app/MullvadVPN-${VERSION}_amd64.deb
+ 	sudo dpkg -i ${HOME}/Downloads/MullvadVPN-${VERSION}_amd64.deb
+ 	rm ${HOME}/Downloads/MullvadVPN-${VERSION}_amd64.deb
+ 	echo -e "${bldgrn}Done installing Update!!${txtrst}"
+}
