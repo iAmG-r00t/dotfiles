@@ -49,88 +49,6 @@ white()  { IFS= ; while read -r line; do echo -e '\e[37m'$line'\e[0m'; done; }
 # Export Personal Binaries
 export PATH=${PATH}:~/bin:~/.local/bin:~/Scripts
 
-# Scan for open ports using naabu go tool
-Naabu(){
-
-if [ $# -eq 1 ]; then
-
-sudo $HOME/Gotools/bin/naabu -silent -host $1
-
-elif [ $# -eq 2 ]; then
-
-sudo $HOME/Gotools/bin/naabu -silent -host $1 -o $2
-echo "${txtgrn}Saved output file as: ${undpur}${2}${txtrst}"
-
-else
-
-echo "${txtred}Kindly provide one argument as host or two arguments one as host and the other as name of output file.${txtrst}"
-
-fi
-
-}
-
-# Find domains and subdomains from certificates using certspotter
-certspotter(){ 
-curl https://certspotter.com/api/v0/certs\?domain\=$1 | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | uniq
-}
-
-# Find ip's of domain using dig
-domain-ip(){
-dig a $1 +short ; alert
-}
-
-# Find sub-domains from crtsh
-crtsh(){
-curl -s https://crt.sh/?Identity=%.$1 | grep ">*.$1" | sed 's/<[/]*[TB][DR]>/\n/g' | grep -vE "<|^[\*]*[\.]*$1" | sort -u | awk 'NF'
-}
-
-# Discover domains ips from crtsh and scan with nmap
-certnmap(){
-curl https://certspotter.com/api/v0/certs\?domain\=$1 | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | uniq | dig +short -f - | uniq | sudo nmap -A -sS -sV -i - --open -n ; alert
-}
-
-# Runs httprobe on all the hosts from certspotter
-certprobe(){ 
-if [ -d "$HOME/Drugery/engagements/$1" ]; then
-
-curl -s https://crt.sh/\?q\=\%.$1\&output\=json | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u | httprobe | tee -a $HOME/Drugery/engagements/$1/httprobes.txt
-
-else
-
-mkdir -p $HOME/Drugery/engagements/$1
-curl -s https://crt.sh/\?q\=\%.$1\&output\=json | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u | httprobe | tee -a $HOME/Drugery/engagements/$1/httprobes.txt
-
-fi
-}
-
-# Start sublister in its virtual env
-sublist3r(){
-inenv=$(python -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")')
-if [ ! -f ~/Gitools/Sublist3r/sublist3r/bin/activate ]
- then
-
- 	python -m virtualenv ~/Gitools/Sublist3r/sublist3r
-    source ~/Gitools/Sublist3r/sublist3r/bin/activate
-    pip install -r ~/Gitools/Sublist3r/requirements.txt
-    python ~/Gitools/Sublist3r/sublist3r.py -d $1 -o $2
-
-else
-
- if [ inenv==0 ]
-  then
-
-  	source ~/Gitools/Sublist3r/sublist3r/bin/activate
-    python ~/Gitools/Sublist3r/sublist3r.py -d $1 -o $2
-
-else
-
-python ~/Gitools/Sublist3r/sublist3r.py -d $1 -o $2
-
- fi
-
-fi
-}
-
 # Exit out of a virtualenv
 alias out='deactivate'
 
@@ -142,39 +60,6 @@ $HOME/Scripts/Burp/jre1.8.0_60/bin/java -noverify -Xbootclasspath/p:$HOME/Script
 # Start new firefox profile for research
 ResearchBrowser(){
 firefox -P OpSec --class="OpSec" -no-remote &
-}
-
-# Dirsearch from anywhere
-dirsearch(){
-python3 $HOME/Gitools/dirsearch/dirsearch.py -u $1 -e $2
-}
-
-# Start CMSeek
-cmseek(){
-inenv=$(python -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")')
-if [ ! -f ~/Gitools/CMSeeK/cmseek/bin/activate ]
- then
-
- 	python3 -m virtualenv ~/Gitools/CMSeeK/cmseek
-    source ~/Gitools/CMSeek/cmseek/bin/activate
-    pip3 install -r ~/Gitools/CMSeeK/requirements.txt
-    python3 ~/Gitools/CMSeeK/cmseek.py -u $1
-
-else
-
- if [ inenv==0 ]
-  then
-
-  	source ~/Gitools/CMSeeK/cmseek/bin/activate
-    python3 ~/Gitools/CMSeeK/cmseek.py -u $1
-
-else
-
-    python3 ~/Gitools/CMSeeK/cmseek.py -u $1
-
- fi
-
-fi
 }
 
 
@@ -220,7 +105,7 @@ send2servers(){
 send2server(){
 
 	echo -e "${txtcyn}Do make sure, keepass is opened.${txtrst}"
-	sleep 5
+	sleep 2
 
 
 		scp $1 root@$2:/root/ 
@@ -322,7 +207,7 @@ ips-n-ports15(){
 }
 # ------------------------------------------------------------------------------
 
-#Update mullvad VPN
+# Update mullvad VPN
 update-vpn(){
  	echo -e "${txtcyn}Updating Mullvad VPN,${bldylw} Please check Mullvad version from Download page and enter it here, example: ${txtblu}2020.3${txtrst} ${bldylw}and press ${txtred}[ENTER]${txtrst}"
 
@@ -332,4 +217,9 @@ update-vpn(){
  	sudo dpkg -i ${HOME}/Downloads/MullvadVPN-${VERSION}_amd64.deb
  	rm ${HOME}/Downloads/MullvadVPN-${VERSION}_amd64.deb
  	echo -e "${bldgrn}Done installing Update!!${txtrst}"
+}
+
+# Check if port is running something
+chckport(){
+	lsof -i 
 }

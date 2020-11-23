@@ -14,11 +14,15 @@ esac
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth:erasedups
 
-# append to the history file, don't overwrite it
-shopt -s histappend
-
 # save and reload history after each command
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob
+
+
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell
 
 # append to the history file, don't overwrite it
 shopt -s histappend
