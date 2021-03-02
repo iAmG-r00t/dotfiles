@@ -1,7 +1,6 @@
 # Dotfiles Setup Scripts
 
->Project has been renamed from desktop-setup to dotfiles
->❔ Because they are my dotfiles to be honest.
+>Project has been renamed from desktop-setup to dotfiles ⁉ Because they are my dotfiles to be honest.
 
 This script basically setups everything I would do in a new installation, automation is key in productivity :relieved:
 
