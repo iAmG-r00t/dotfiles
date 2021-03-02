@@ -1,4 +1,7 @@
-# Desktop Setup Scripts
+# Dotfiles Setup Scripts
+
+>Project has been renamed from desktop-setup to dotfiles
+>❔ Because they are my dotfiles to be honest.
 
 This script basically setups everything I would do in a new installation, automation is key in productivity :relieved:
 
@@ -30,3 +33,11 @@ Blogpost comming up later ...
 	:raised_hand: Encrypt your secret files/vital files to be able to commit in git repos
 - [KeePass](https://keepass.info/)
 	:fire: Realy good on handling ssh-keys and working as an SSH Agent
+	
+# Future Updates
+
+- [ ] Re-write the each scripts into single modules. (I had already done this but, I ended up deleting the whole directory by mistake that made me feel fed up.)
+- [ ] Resctructure the whole repository.
+- [ ] Add one liner's section for installing some certain tools and my custom `.bashrc`, this would be benefit if I am setting up a new server that I would only prefer to use bash in it.
+- [ ] Custom common aliases that I use in a single file, to be deployed in a bash enviroment.
+- [ ] Other things that I will think of in the future ...
