@@ -1,0 +1,158 @@
+"""""""""""""""""""
+" VIM Config File "
+"""""""""""""""""""
+"
+"""""""""""
+" General "
+"""""""""""
+"
+
+" With a map leader it's possible to do extra key combinations
+" example <leader>w == ,w saves the current file
+let mapleader = ","
+
+" Enable filetype plugins
+filetype on
+filetype plugin on
+filetype indent on
+
+" Allow mouse events
+" set mouse=a
+
+" vimrc reload
+nmap <leader>r :source $MYVIMRC<cr> 
+
+" missing ZZ tends to SAVE and EXIT and ZQ tends to force quit counterparts:
+" quick save-buffer and quit-everything (all splits and tabs)
+nnoremap ZS :w<CR>
+nnoremap ZX :qa<CR>
+
+" ,w save file, ,q exit without saving and ,sq save and exit
+nmap <leader>w :w!<cr>
+nmap <leader>q :q!<cr>
+nmap <leader>sq :wq!<cr>
+
+"" Easier split navigations
+" source: https://thoughtbot.com/blog/vim-splits-move-faster-and-more-naturally
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" set split below by default
+set splitbelow
+
+"
+""""""""""""""""""
+" Auto configure "
+""""""""""""""""""
+"
+
+" Automatic installation of vim-tmux-navigator for VIM version 8 and above
+if v:version >= 800
+	let dir = '~/.vim/pack/plugins/start'
+	if empty(glob(dir))
+		silent exec '!git clone -q https://github.com/christoomey/vim-tmux-navigator.git ' .dir
+		silent exec '!mkdir -p ~/.vim/pack/plugins/start/vim-tmux-navigator'
+		silent exec '!mv  ~/.vim/pack/plugins/start/* ~/.vim/pack/plugins/start/vim-tmux-navigator' | redraw! |  source $MYVIMRC
+	endif
+endif
+
+" Automatic installation for vim-plug and the plugins
+"let data_dir = has('vim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob('~/.vim/autoload/plug.vim')) " edited for my liking ;)
+  silent exec '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+"
+"""""""""""
+" Plugins "
+"""""""""""
+"
+
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " Snippet support
+
+
+call plug#end()
+
+" Snippet configs
+let g:UltiSnipsExpandTrigger="<c-e>" " default is tab
+" list all snippets for current filetype
+let g:UltiSnipsListSnippets="<c-l>"
+let g:UltiSnipsEditSplit="vertical" " show snippets vertically
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
+
+
+"
+""""""""""""""""""
+" User Interface "
+""""""""""""""""""
+"
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw 
+
+"
+"""""""""""""""
+" Status Line "
+"""""""""""""""
+"
+
+" Always show the status line
+set laststatus=2
+
+" Format the status line
+set statusline=\%{HasPaste()}\ File:\ %F%m%r%h\ %w\ \ PWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+
+
+"
+""""""""
+" MISC "
+""""""""
+"
+" Toggle paste mode on and off
+map <leader>pp :setlocal paste!<cr>
+
+" Quickly open a buffer for scribble
+map <leader>e :e ~/buffer<cr>
+
+" Quickly open a markdown buffer for scribble
+map <leader>m :e ~/buffer.md<cr>
+
+" Switch PWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+
+"
+"""""""""""
+" Buffers "
+"""""""""""
+"
+
+" open terminal in new buffer
+map <leader>t :term ++curwin<cr>
+
+" Change between buffers with menu
+map <leader>bf :buffers<cr>:buffer<Space>
+
+" Change between buffers
+map <leader>bn :bnext<cr>
+map <leader>bp :bprevious<cr>
+
+
+"
+""""""""""""""""""""
+" Helper Functions "
+""""""""""""""""""""
+"
+
+function! HasPaste()
+	if &paste
+		return '[PASTE MODE]'
+	endif
+    return ''
+endfunction
