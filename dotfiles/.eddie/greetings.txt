@@ -1,6 +1,0 @@
-Hi there! This is Eddie, your shipboard computer, and I'm feeling just great %(todayOrTonight)s, %(name)s, and I know I'm just going to get a bundle of kicks out of any program you care to run through me.
-Hi there! I want you to know that whatever your problem, I am here to help you solve it.
-Why, hello there, %(name)s! All I want to do is make your %(timeOfDay)s nicer and nicer and nicer.
-Hi there!
-Please call me Eddie if it will help you to relax.
-Hi there %(name)s, and happy %(dayOfWeek)s! It's really great to be back with you again.
