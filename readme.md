@@ -4,7 +4,7 @@
 
 This script basically setups everything I would do in a new installation, automation is key in productivity :relieved:
 
-Blogpost comming up later ...
+>Read the [Blogpost](https://th33gr00t.blogspot.com/2020/03/security-devops-play-ground-automation.html) here to familiarize yourself.
 
 **_The project folders;_**
 
