@@ -35,8 +35,10 @@ Blogpost comming up later ...
 	
 # Future Updates
 
-- [ ] Re-write the each scripts into single modules. (I had already done this but, I ended up deleting the whole directory by mistake that made me feel fed up.)
-- [ ] Resctructure the whole repository.
-- [ ] Add one liner's section for installing some certain tools and my custom `.bashrc`, this would be benefit if I am setting up a new server that I would only prefer to use bash in it.
-- [ ] Custom common aliases that I use in a single file, to be deployed in a bash enviroment.
-- [ ] Other things that I will think of in the future ...
+~~- [ ] Re-write the each scripts into single modules. (I had already done this but, I ended up deleting the whole directory by mistake that made me feel fed up.)~~
+- [x] Resctructure the whole repository.
+- [x] Add one liner's section for installing some certain tools and my custom `.bashrc`, this would be benefit if I am setting up a new server that I would only prefer to use bash in it.
+- [x] Custom common aliases that I use in a single file, to be deployed in a bash enviroment.
+- [x] Other things that I will think of in the future ...
+
+**NB:** This project has been changed but for sure it was an amaizing experience.
