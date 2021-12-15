@@ -181,14 +181,6 @@ source /usr/share/doc/fzf/examples/key-bindings.bash
 # shellcheck source=/dev/null
 source /usr/share/doc/fzf/examples/completion.bash
 
-# Add tab completion for SSH hostnames based on ~/.ssh/config
-# ignoring wildcards
-[[ -e "$HOME/.ssh/config" ]] && complete -o "default" \
-	-o "nospace" \
-	-W "$(grep "^Host" ~/.ssh/config | \
-	grep -v "[?*]" | cut -d " " -f2 | \
-	tr ' ' '\n')" scp sftp ssh mosh
-
 # we do this before the following so that all paths work
 for file in ~/.{aliases,exports,dockerfunc}; do
 	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
