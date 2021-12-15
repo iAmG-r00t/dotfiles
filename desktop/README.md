@@ -8,6 +8,7 @@
 	- If vim is not installed, it will install VIM from github.
 	- Install basic tools/apps from the [modules](./modules) directory (will name some, check the rest ...);
 		- `tailscale`, `wireguard` & `mulvad`: VPN Service.
+        - `ngrok` : provides a real-time web UI where you can introspect all HTTP traffic running over your tunnels.
 		- `tmux`: Terminal multiplexer.
 		- `mosh`: the mobile shell.
 		- `fzf`: A command-line fuzzy finder

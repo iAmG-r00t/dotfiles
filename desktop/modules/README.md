@@ -16,3 +16,4 @@
 - [udis86.sh](./udis86.sh) : Installs udis\_cli which is a disassembler library for x86 and x86-64, really good for trying to understand your C codes while learning assembly.
 - [vim.sh](./vim.sh) : Installs vim from source, the default from debian package is not up to date.
 - [docker.sh](./docker.sh) : Installs docker and docker-compose.
+- [ngrok.sh](./ngrok.sh) : Installs ngrok binary file.
