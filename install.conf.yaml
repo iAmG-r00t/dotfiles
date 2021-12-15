@@ -1,0 +1,49 @@
+# Dotbot install config file for my dotfiles.
+
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ["~", "~/.ssh"]
+
+- shell:
+    - [
+        test ! -h $HOME/.bashrc && mv $HOME/.bashrc $HOME/.bashrc_"$(date '+%Y-%m')".bak || true,
+        Backing up default bashrc if it is present,
+      ] # backup .bashrc file that is not a symlink
+    - [
+        test ! -h $HOME/.bash_profile && mv $HOME/.bash_profile $HOME/.bash_profile_"$(date '+%Y-%m')".bak || true && test ! -h $HOME/.profile && mv $HOME/.profile $HOME/.profile_"$(date '+%Y-%m')".bak || true,
+        Backing up bash_profile & profile if either/both is present,
+      ] # backup .bash_profile or .profile file that is not a symlink
+    - [
+        test -f $HOME/.wget-hsts && rm $HOME/.wget-hsts || true,
+        Removing .wget-hsts file if present,
+      ] #cleanup
+    - [
+        test -f $HOME/.viminfo &&  rm $HOME/.viminfo || true,
+        Removing .viminfo file if present,
+      ] #cleanup
+
+- create:
+    - ~/.vim/ftplugin
+    - ~/.vim/mysnippets
+    - ~/tools/scripts
+    - ~/tools/go
+
+- link:
+    ~/.profile: desktop/dotfiles/bash/profile
+    ~/.bashrc: desktop/dotfiles/bash/bashrc
+    ~/.aliases: desktop/dotfiles/bash/aliases
+    ~/.dockerfunc: desktop/dotfiles/bash/dockerfunc
+    ~/.exports: desktop/dotfiles/bash/exports
+    ~/.randline.py: desktop/dotfiles/eddie/randline.py
+    ~/.greetings.txt: desktop/dotfiles/eddie/greetings.txt
+    ~/.tmux.conf: desktop/dotfiles/tmux.conf
+    ~/.vimrc: desktop/dotfiles/vim/vimrc
+    ~/.vim/ftplugin/c.vim: desktop/dotfiles/vim/c.vim
+    ~/.vim/ftplugin/markdown.vim: desktop/dotfiles/vim/markdown.vim
+    ~/.vim/mysnippets/c.snippets: desktop/dotfiles/vim/c.snippets
+    ~/.vim/ycm_extra_conf.py: desktop/dotfiles/vim/ycm_extra_conf.py
+    ~/tools/scripts/tm: desktop/dotfiles/workspaces/tm.sh
+    ~/tools/scripts/workspaces: desktop/dotfiles/workspaces/workspaces.sh

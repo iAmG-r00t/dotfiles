@@ -1,0 +1,166 @@
+#!/bin/bash
+
+# send to clipboard
+pbcopy() {
+	stdin=$(</dev/stdin);
+	echo "$stdin" | xclip -selection clipboard
+}
+
+# paste from clipboard
+pbpaste() {
+	xclip -selection clipboard
+}
+
+# cvs view
+csview() {
+	pspg -f "$1" --csv -s
+}
+
+# List files of a directory
+lfd() {
+	#shellcheck disable=SC2010
+	ls -p "$1" | grep -v / --color=auto
+}
+
+# kill process
+kp() {
+	pidof "$1" | xargs kill -9
+}
+
+# generate random password
+random_pass() {
+	#shellcheck disable=SC2015
+	[ -z "$1" ] && echo "random_pass <length>" || keepassxc-cli generate -L "$1" -nslU
+}
+
+cd() {
+	builtin cd "$1" || return
+	ls
+}
+
+#use bat if installed if not just use cat
+cat() {
+	command -v bat &>/dev/null
+	
+	# shellcheck disable=SC2181
+	if [ $? -ne 0 ]; then
+		cat "$@"
+	else
+		bat "$@"
+	fi
+}
+
+# Extract common type of archived file types
+ext() {
+	if [ -f "$1" ] ; then
+		case "$1" in
+			*.tar.bz2)   command -v tar &>/dev/null && tar xvjf "$1" || echo -e "\033[1;31m Please install tar \033[0m"									;;
+			*.tar.gz)    command -v tar &>/dev/null && tar xvzf "$1" || echo -e "\033[1;31m Please install tar \033[0m"									;;
+			*.tar.xz)    command -v tar &>/dev/null && tar xf "$1" || echo -e "\033[1;31m Please install tar \033[0m"    							;;
+			*.bz2)       command -v bunzip2 &>/dev/null && bunzip2 "$1" || echo -e "\033[1;31m Please install bunzip2 \033[0m"    			;;
+			*.rar)       command -v unrar &>/dev/null && unrar x "$1" || echo -e "\033[1;31m Please install unrar \033[0m"	    				;;
+			*.gz)        command -v gunzip &>/dev/null && gunzip "$1" || echo -e "\033[1;31m Please install gunzip \033[0m"		    			;;
+			*.tar)       command -v tar &>/dev/null && tar xvf "$1" || echo -e "\033[1;31m Please install tar \033[0m"			    				;;
+			*.tbz2)      command -v tar &>/dev/null && tar xvjf "$1" || echo -e "\033[1;31m Please install tar \033[0m"			    				;;
+			*.tgz)       command -v tar &>/dev/null && tar xvzf "$1" || echo -e "\033[1;31m Please install tar \033[0m"									;;
+			*.zip)       command -v unzip &>/dev/null && unzip "$1" || echo -e "\033[1;31m Please install unzip \033[0m"								;;
+			*.Z)         command -v uncompress &>/dev/null && uncompress "$1" || echo -e "\033[1;31m Please install uncompress \033[0m" ;;
+			*.7z)        command -v 7z &>/dev/null && 7z x "$1" || echo -e "\033[1;31m Please install p7zip-full \033[0m"       				;;
+			*)           echo "don't know how to extract $1 ... and also add it to the alias function." ;;
+		esac
+	else
+		echo "$1 is not a valid file!"
+	fi
+}
+
+# copy working directory
+alias cwd='pwd | tr -d "\r\n" | xclip -selection clipboard'
+
+# shortcuts
+## tmux
+alias t='tmux'
+alias tls='t ls'
+alias ta='t a -t'
+alias tn='t new -s'
+alias tkS='t kill-server'
+alias tks='t kill-session -t'
+
+# lock, reboot, off, update, upgrade and cleanapt
+alias lock='gnome-screensaver-command -l'
+alias reboot='shutdown -r now'
+alias off='shutdown now'
+alias update="sudo apt update -qq"
+alias upgrade="sudo apt upgrade -qq -y"
+alias cleanapt="sudo apt autoremove -y && sudo apt remove -y && sudo apt clean"
+
+# Git shortcuts
+alias status="git status"
+#shellcheck disable=SC2142
+alias commit="git commit -m \$1"
+alias gll="git log --graph --pretty=oneline --abbrev-commit"
+alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+alias add="git add"
+alias push="git push"
+
+# install, purge, update and upgrade
+alias pi='sudo apt install -y'
+alias pu='sudo apt purge'
+
+alias vi='vim -i ~/.cache/vim/info'
+alias vim='vim -i ~/.cache/vim/info'
+
+alias wget='wget --hsts-file ~/.cache/wget/.wget-hsts'
+alias fzf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+alias reload='source ~/.bashrc'
+alias h='history'
+alias lf='ls -p | grep -v / --color=auto'
+alias ls='ls --color=auto'
+alias lhf='ls -d .?*'
+alias dir='dir --color=auto'
+
+# Works with lenovo Thinkpad T480
+#shellcheck disable=SC2142
+alias touchoff="xinput --disable \$(xinput --list | grep -E 'Raydium.+Corporation.+Touch.+System.+id=([0-9]+)' | awk '{print substr(\$8,length(\$8)-1)}')"
+#shellcheck disable=SC2142
+alias touchon="xinput --enable \$(xinput --list | grep -E 'Raydium.+Corporation.+Touch.+System.+id=([0-9]+)' | awk '{print substr(\$8,length(\$8)-1)}')"
+
+# copy file interactive
+alias cp='cp -i'
+
+# move file interactive
+alias mv='mv -i'
+
+# Just an import alias
+alias rm='rm -i'
+
+# Easier navigation: .., ..., ...., ....., ~ and -
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd ~" # `cd` is probably faster to type though
+alias -- -="cd -"
+
+# IP addresses
+alias pubip="dig +short myip.opendns.com @resolver1.opendns.com"
+#shellcheck disable=SC2142
+alias localip="ip route get 1.2.3.4 | awk '{print \$7}' | sed '/^$/d'"
+#shellcheck disable=SC2142
+alias ips="ip -4 -o addr show | awk '{print \$2\" \"\$4}' | cut -d \"/\" -f 1"
+
+# ngrok
+alias ngrok="\$HOME/.ngrok"
+
+#open
+alias o='xdg-open'
+
+# common docker commands
+# credit: Andy Gherna
+alias datt='docker attach'
+alias dimg='docker images'
+alias dps='docker ps'
+alias drm='docker rm'
+alias drmi='docker rmi'
+alias drun='docker run'
+alias dstart='docker start'
+alias dstop='docker stop'

@@ -70,10 +70,10 @@ fi
 
 # get current branch in git repo
 function parse_git_branch() {
-        BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+        BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
         if [ ! "${BRANCH}" == "" ]
         then
-                STAT=`parse_git_dirty`
+                STAT=$(parse_git_dirty)
                 echo "[${BRANCH}${STAT}]"
         else
                 echo ""
@@ -82,13 +82,13 @@ function parse_git_branch() {
 
 # get current status of git repo
 function parse_git_dirty {
-        status=`git status 2>&1 | tee`
-        dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
-        untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
-        ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
-        newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
-        renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
-        deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
+        status=$(git status 2>&1 | tee)
+        dirty=$(echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?")
+        untracked=$(echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?")
+        ahead=$(echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?")
+        newfile=$(echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?")
+        renamed=$(echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?")
+        deleted=$(echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?")
         bits=''
         if [ "${renamed}" == "0" ]; then
                 bits=">${bits}"
@@ -160,8 +160,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.aliases ]; then
+    # shellcheck source=/dev/null
+    . ~/.aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -169,8 +170,10 @@ fi
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
+    # shellcheck source=/dev/null
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
+    # shellcheck source=/dev/null
     . /etc/bash_completion
   fi
 fi
@@ -189,15 +192,18 @@ alias update="sudo apt update -qq"
 alias upgrade="sudo apt upgrade -qq -y"
 alias cleanapt="sudo apt autoremove -y && sudo apt remove -y && sudo apt clean"
 alias push="git push"
-alias commit="git commit -m "$1""
+#shellcheck disable=SC2142
+alias commit="git commit -m \$1"
 alias add="git add"
 alias reload="source ~/.bashrc"
 alias status="git status"
 
 # Enables fzf keybindings for Bash
+# shellcheck source=/dev/null
 source /usr/share/doc/fzf/examples/key-bindings.bash
 
-# Enables fuzzy uto-completion for Bash
+# Enables fuzzy auto-completion for Bash
+# shellcheck source=/dev/null
 source /usr/share/doc/fzf/examples/completion.bash
 
 # Make Go Work
@@ -228,7 +234,7 @@ fi
 # Pass login messages to tmux
 MOTD="/run/motd.dynamic"
 
-if [ ! -z "$TMUX" ]; then       # check if we are inside tmux
+if [ -n "$TMUX" ]; then         # check if we are inside tmux
   if [ -f "$MOTD" ]; then       # check if file file is present
     cat "$MOTD"                 # show motd contents
   fi

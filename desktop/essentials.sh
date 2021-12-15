@@ -75,12 +75,13 @@ function essentials() {
 	get python
 	get python3
 	get pip3
-	get python2
+	get xclip
+	#get python2				# remove python2 will be using virtualenv
 	get speedtest-cli #speedtest on the terminal
 	get asciinema     #record your terminal sessions
 
 	#install pip2
-	bash "$path"/modules/pip2.sh
+	#bash "$path"/modules/pip2.sh
 
 	#install vim
 	bash "$path"/modules/vim.sh
@@ -117,6 +118,9 @@ function essentials() {
 
 	#get sublimetext
 	bash "$path"/modules/subl.sh
+
+	#get ngrok
+	bash "$path"/modules/ngrok.sh
 }
 
 function clean_up() {

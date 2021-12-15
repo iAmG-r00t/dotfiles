@@ -1,0 +1,223 @@
+" ----------
+" VIM Config
+" ----------
+"
+"
+" Install vim-plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+"
+"
+" ----------
+" My Plugins
+" ----------
+"
+"
+" Call Plugin-manager
+call plug#begin('~/.vim/plugged')
+"
+Plug 'preservim/nerdtree'               " Nerd-Tree Plugin
+Plug 'lervag/vimtex'                    " Vim-text plugin
+Plug 'scrooloose/syntastic'             " Syntastic plugin (syntax checker)
+Plug 'SirVer/ultisnips'                 " Ultisnips plugin
+Plug 'ycm-core/YouCompleteMe'           " YouCompleteMe plugin
+Plug 'tmsvg/pear-tree'                  " Pear Tree Plugin
+Plug 'vim-airline/vim-airline'          " Lightweight powerline status
+Plug 'vim-airline/vim-airline-themes'   " Powerline themes
+Plug 'honza/vim-snippets'               " Snippet support
+"
+call plug#end()
+"
+"
+" -------------
+" Miscellaneous
+" -------------
+"
+"
+" With a map leader it is possible to do extra key combinations
+" ... example <leader>w == (,w) saves the current file
+let mapleader = ","
+"
+" Missing ZZ tends to SAVE and EXIT and ZQ tends to force quit counterparts:
+" ... quick save-buffer and quit-everything (all splits and tabs)
+nnoremap ZS :w<CR>
+nnoremap ZX :qa<CR>
+"
+" (,w) save file, ,q exit without saving and ,sq save and exit
+nmap <leader>s :w!<cr>
+nmap <leader>q :q!<cr>
+nmap <leader>sq :wq!<cr>
+"
+" Vimrc reload
+nmap <leader>r :source $MYVIMRC<cr>
+"
+"
+" Easier split navigations
+" ... source: https://thoughtbot.com/blog/vim-splits-move-faster-and-more-naturally
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+"
+" Quickly open a buffer for scribble
+map <leader>e :e ~/buffer<cr>
+"
+" Quickly open a markdown buffer for scribble
+map <leader>m :e ~/buffer.md<cr>
+"
+" Open terminal in new buffer
+map <leader>t :term ++curwin<cr>
+"
+" Change between buffers with menu
+map <leader>bf :buffers<cr>:buffer<Space>
+"
+" Change between buffers
+map <leader>bn :bnext<cr>
+map <leader>bp :bprevious<cr>
+"
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
+"
+" Make Vim to handle long lines nicely.
+" set wrap
+" set textwidth=79
+" set formatoptions=qrn1
+"
+" Reload vim config
+" nnoremap <F2> :so $MYVIMRC<CR>
+"
+"
+" --------
+" Settings
+" --------
+"
+"
+" Make vim to stop running the default config
+let skip_defaults_vim=1
+set viminfo="~/.vim"
+"
+" To set vim-plug config
+set rtp +=~/.vim
+"
+" set split below by default
+set splitbelow
+"
+" Enable filetype plugins
+filetype on
+filetype plugin on
+filetype indent on
+"
+syntax on           " Syntax coloring
+"
+set number          " Show line numbers
+"
+set noerrorbells		" No beeps
+"
+set showcmd			    " Show me what I am typing
+"
+set ruler			      " Show the cursor position all the time
+"
+set ignorecase			" Search case insensitive ...
+"
+set smartcase			  " ... but not when search pattern contains upper case characters
+"
+set hlsearch			  " Highlight found searches
+"
+"set nobackup			  " Don't create backup files
+"
+set showmode			  " Show current mode
+"
+set encoding=utf-8	" Use UTF-8 as the default text encoding
+"
+set backspace=indent,eol,start	" Allow backspacing over everything in insert mode
+"
+" show vim status line always
+set laststatus=2
+"
+" On pressing tab, insert 2 spaces
+set expandtab
+"
+" show existing tab with 2 spaces width
+set tabstop=2
+set softtabstop=2
+"
+" when indenting with '>', use 2 spaces width
+set shiftwidth=2
+"
+" Disable vim automatic visual mode on mouse select
+set mouse-=a
+"
+"
+" ---------------
+" Snippet configs
+" ---------------
+"
+"
+let g:UltiSnipsExpandTrigger="<c-e>"        " default is tab
+"
+" list all snippets for current filetype
+let g:UltiSnipsListSnippets="<c-l>"
+let g:UltiSnipsEditSplit="vertical"         " show snippets vertically
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
+"
+"
+" ----------------
+" Plugins settings
+" ----------------
+"
+"
+" Close NERDTree after a file is opened
+let NERDTreeQuitOnOpen=1
+"
+" Show hidden files in NERDTree
+let NERDTreeShowHidden=1
+"
+" Toggle NERDTree
+nmap <F1> :NERDTreeToggle<CR>
+"
+" Vim-latex-preview remove cursor hold autorecompile
+let g:livepreview_cursorhold_recompile = 0
+"
+" Syntastic change of error and warning signs
+let g:syntastic_error_symbol = "✗ "
+let g:syntastic_warning_symbol = "⚠ "
+"
+" Set a global config for YoucompleteMe plugin
+let g:ycm_global_ycm_extra_conf='~/.vim/ycm_extra_conf.py'
+"
+"
+" ---------------
+" Powerline Stuff
+" ---------------
+"
+"
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+"
+" Path to file
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved' " f/p/file-name.js
+"
+" Poweline status theme
+let g:airline_theme='violet'
+"
+" Load powerline symbols
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+"
+" Powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.dirty='⚡'
+"
+"

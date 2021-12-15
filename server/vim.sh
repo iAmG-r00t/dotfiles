@@ -11,18 +11,18 @@
 set -e
 
 # colors
-bold=`tput bold`
+bold=$(tput bold)
 reset='\033[0m'
 blue='\e[1;34m'
-green='\e[1;32m'
+#green='\e[1;32m'
 brown='\e[0;33m'
 magenta="\e[95m"
 red="\033[1;31m"
-no_color='\e[0m'
-blink='\e[5m'
+#no_color='\e[0m'
+#blink='\e[5m'
 
 # Report errors when file exits out
-filename=$(basename "$BASH_SOURCE")
+filename=$(basename "${BASH_SOURCE[@]}")
 err_report() {
 	  echo -e "\n* ${brown}Error on line ${red}$1${reset} file: ${magenta}${filename}${reset}\n"
 }
@@ -42,7 +42,8 @@ wget -q --show-progress https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/ma
 echo -e "${bold}[>]${reset}     ${blue}Creating a soft link for vimrc file.\n${reset}".
 ln -s ~/.vim/vimrc ~/.vimrc
 
-echo -e "${bold}[>]${reset}     ${blue}Sourcing vimrc file to installing vim plug and vim plugins.\n${reset}".
+echo -e "${bold}[>]${reset}     ${blue}Sourcing vimrc file to installing vim plug and vim plugins.\n${reset}"
+# shellcheck source=/dev/null
 source ~/.vimrc
 
 echo -e "${bold}[+] ${reset}${brown}Basic vanilla vim setup is done.\n${reset}"

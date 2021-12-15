@@ -1,0 +1,72 @@
+#!/bin/bash
+# Bash wrappers for docker run commands, credit goes to jessfraz
+# source for detach stuff.. https://www.cloudsavvyit.com/14226/how-to-detach-from-a-docker-container-without-stopping-it/
+
+export DOCKER_REPO_PREFIX=gr00ti3
+
+dcleanup() {
+  local containers
+  mapfile -t containers < <(docker ps -aq 2>/dev/null)
+  docker rm "${containers[@]}" 2>/dev/null
+  local volumes
+  mapfile -t volumes < <(docker ps --filter status=exited -q 2>/dev/null)
+  docker rm -v "${volumes[@]}" 2>/dev/null
+  local images
+  mapfile -t images < <(docker images --filter dangling=true -q 2>/dev/null)
+  docker rmi "${images[@]}" 2>/dev/null
+}
+del_stopped() {
+  local name=$1
+  local state
+  state=$(docker inspect --format "{{.State.Running}}" "$name" 2>/dev/null)
+
+  if [[ "$state" == "false" ]]; then
+    docker rm "$name"
+  fi
+}
+
+rmctr() {
+  # shellcheck disable=SC2068
+  docker rm -f $@ 2>/dev/null || true
+}
+
+ubuntu_container() {
+  # example: ubuntu_container ALX github/alx/
+
+  local name=$1
+  local directory_path=$2
+  local dir
+
+  dir=$(echo "$directory_path" | sed 's:/*$::' | grep -oE '[^/]+$')
+
+  if [ -z "$name" ]; then
+    echo -e "USAGE: ubuntu_container <container_name> <directory_path> \n NB: Do note the directory path should be a directory inside the Documents folder.\n     ... and you don't need a directory."
+  else
+    if [ -z "$directory_path" ]; then
+      docker run -it \
+        --hostname "$name" \
+        --name "$name" \
+        --user d3v \
+        -v "$HOME"/Documents:/home/d3v/Documents ${DOCKER_REPO_PREFIX}/ubuntu_template
+    else
+      docker run -it \
+        --hostname "$name" \
+        --name "$name" \
+        --user d3v \
+        -v "$HOME"/Documents/"$directory_path":/home/d3v/"$dir" ${DOCKER_REPO_PREFIX}/ubuntu_template
+    fi
+  fi
+}
+
+alx_box() {
+  local name=$1
+
+  if [ -z "$name" ]; then
+    echo -e "USAGE: alx_box <container_name>"
+  else
+    docker run -it \
+      --hostname "$name" \
+      --name "$name" \
+      -v "$HOME"/Documents/github/alx:/home/d3v/alx ${DOCKER_REPO_PREFIX}/alx_box
+  fi
+}

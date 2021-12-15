@@ -8,17 +8,17 @@
 - bashrc
 
   ```sh
-  curl -fsSL -o .bashrc https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/main/server/bashrc
+  curl -fsSL -o .bashrc https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/master/server/bashrc
   ```
 
 - tmuxconf
   ```sh
-  curl -fsSL -o .tmux.conf https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/main/server/tmux.conf
+  curl -fsSL -o .tmux.conf https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/master/server/tmux.conf
   ```
 
 - vimrc
   ```sh
-  curl -fsSL -o ~/.vim/vimrc https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/main/server/vim/vimrc
+  curl -fsSL -o ~/.vim/vimrc https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/master/server/vim/vimrc
   ```
 
 ## Tools
@@ -26,5 +26,5 @@
 - Kindly check the [modules directory](./desktop/modules) for any tool you want to install the run this command.
 
   ```sh
-  curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/main/desktop/modules/----.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/master/desktop/modules/${module}.sh | bash
   ```
