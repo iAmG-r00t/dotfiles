@@ -1,17 +1,51 @@
-# .dotfiles 🗃  repo
+# My dotfiles 🗃
 
-- Replacement of the main [dotfiles](https://github.com/iAmG-r00t/dotfiles) repository.
-- Basically I will start building this repository bit by bit.
+- Replacement of the main [dotfiles](https://github.com/iAmG-r00t/dotfiles/tree/oldotfiles) repository.
+- Basically this is a long life project.
+
+Branch Hierarchy
+----------------
+
+```
+master
+|
++- dotbot [gitsubmodule, dotfiles bootstrap]
+|
++- desktop
+|    |
+|    +- modules
+|    +- dotfiles
+|         |
+|         +- bash
+|         +- eddie
+|         +- vim [! simple configs]
+|         +- workspaces [tmux workspaces]
+|         +- tmux.conf
+|    +- essentials.sh [install script]
+|    +- others.md [Apps & Extensions]
++- server
+|    |
+|    +- vim [simple configs]
+|    +- bashrc
+|    +- tmux.conf
+|    +- servers.sh [install script]
+|    +- vim.sh [install script]
++- quickgrab.md [oneliners]
++- install.conf.yaml [dotbot install config file]
++- template.sh [bash script template]
+
+oldotfiles [inactive]
+```
 
 ---
 
-## Quick Grab dotfiles
+Quick Grab dotfiles
+-------------------
 
 - You can get the updated dotfiles from the following [onliners](./quickgrab.md).
 
-## Server Setup 
-
-### Basic Vanilla Bash and VIM setup. 🍽
+Server Setup 🍽
+---------------
 
 - Simple basic server set-up script.
   - Installs several tools; `fzf`, `bat`, `tmux` and `mosh`.
@@ -21,37 +55,19 @@
 - Run this command to install and setup up basic vanilla setup that I mainly use in new server setups.
 
   ```sh
-  curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/main/server/servers.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/master/server/servers.sh | bash
   ```
 - Run this command to setup basic vanilla vim setup.
 
   ```sh
-  curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/main/server/vim.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/master/server/vim.sh | bash
   ```
 
-## Desktop Setup
+Desktop Setup 🍽
+----------------
 
 - [Essentials script](./desktop/essentials.sh) set's up the pc for a normal day to day use.
-	- [Read more](./essentials.md) on what exactly it installs or you read the script.
+	- For more information on desktop setup read [here](./desktop/README.md).
   ```sh
-  curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/main/desktop/essentials.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/master/desktop/essentials.sh | bash
   ```
-
-- [Others](./desktop/others.md) is a file that contains applications that you will be required to install manually either from the os store (**Pop OS** == ***Pop Shop***) or from [here](https://google.com). I would love to note that Pop Shop is up to date and that's why I love it so much and it has two options either flatpak or deb files.
-
-- [Modules](./desktop/modules) scripts.
-
-# To Do:
-
-## on Automation
-
-- [ ] Dotfiles setup.
-- [x] Docker install
-- [ ] Backup setup and script sync with backblaze.
-
-## Docs / files
-
-- [ ] Update dotfiles accordingly.
-- [ ] Update server script install *vim* & *tmux* section.
-- [ ] Create a script manual/script that will have a menu to choose what to install.
-- [ ] Check if I have missed anything from the previous setup and bring it here.
