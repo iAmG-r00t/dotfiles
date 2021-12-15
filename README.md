@@ -55,12 +55,12 @@ Server Setup 🍽
 - Run this command to install and setup up basic vanilla setup that I mainly use in new server setups.
 
   ```sh
-  curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/master/server/servers.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/dotfiles/master/server/servers.sh | bash
   ```
 - Run this command to setup basic vanilla vim setup.
 
   ```sh
-  curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/master/server/vim.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/dotfiles/master/server/vim.sh | bash
   ```
 
 Desktop Setup 🍽
@@ -69,5 +69,5 @@ Desktop Setup 🍽
 - [Essentials script](./desktop/essentials.sh) set's up the pc for a normal day to day use.
 	- For more information on desktop setup read [here](./desktop/README.md).
   ```sh
-  curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/master/desktop/essentials.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/dotfiles/master/desktop/essentials.sh | bash
   ```
