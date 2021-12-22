@@ -1,7 +1,7 @@
 # Desktop Setup
 
 - [Modules](./modules) directory contains install scripts.
-- [Others](./desktop/others.md) is a file that contains applications that you will be required to install manually either from the os store (**Pop OS** == ***Pop Shop***) or from [here](https://google.com). I would love to note that Pop Shop is up to date and that's why I love it so much and it has two options either flatpak or deb files.
+- [Others](./others.md) is a file that contains applications that you will be required to install manually either from the os store (**Pop OS** == ***Pop Shop***) or from [here](https://google.com). I would love to note that Pop Shop is up to date and that's why I love it so much and it has two options either flatpak or deb files.
 
 - In here you will find the essential script that installs the basic stuff to get you started.
 	- Basic vanilla bash
