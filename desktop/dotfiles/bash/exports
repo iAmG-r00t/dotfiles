@@ -9,7 +9,7 @@ export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 
 # Vim for life
-export EDITOR=/bin/vim
+export EDITOR=/usr/local/bin/vim
 
 # Color prompt
 export TERM=xterm-256color
