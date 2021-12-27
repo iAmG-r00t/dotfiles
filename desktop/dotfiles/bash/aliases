@@ -33,12 +33,13 @@ random_pass() {
 	[ -z "$1" ] && echo "random_pass <length>" || keepassxc-cli generate -L "$1" -nslU
 }
 
+# enter a directory then list the contents in one go
 cd() {
 	builtin cd "$1" || return
 	ls
 }
 
-#use bat if installed if not just use cat
+# use bat if installed if not just use cat
 cat() {
 	command -v bat &>/dev/null
 	
@@ -71,6 +72,10 @@ ext() {
 	else
 		echo "$1 is not a valid file!"
 	fi
+}
+
+ssh_ips() {
+  awk '$1=="Host"{$1="";H=substr($0,2)};$1=="HostName"{print H,"$",$2}' ~/.ssh/config | column -s '$' -t
 }
 
 # copy working directory
