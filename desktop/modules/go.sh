@@ -52,7 +52,7 @@ function go_module() {
 		echo -e "		Installing: ${blue}Go${reset} ...\n"
 		version=$(curl -s https://go.dev/dl/ | grep -oP 'id=\K["]go[0-9].*["]' | sed 's/\"\|go//g' | \
 		sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | grep -v beta | tail -n 1) && \
-		curl -Ss https://go.dev/dl/"$version".linux-amd64.tar.gz | \
+		curl -Ss https://go.dev/dl/go"$version".linux-amd64.tar.gz | \
 		sudo tar -C /usr/local -xzf- && mkdir -p ~/gotools && \
 		sed -i "/unset file/i # Make Go Work\nexport GOPATH=~/gotools\nexport PATH=\${PATH}:/usr/local/go/bin:\${GOPATH}/bin\n" ~/.bashrc
 		# shellcheck source=/dev/null
