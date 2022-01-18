@@ -35,9 +35,9 @@ echo -e "${bold}[>]${reset}	${blue}Creating .vim directory in your home director
 mkdir -p ~/.vim/{ftplugin,mysnippets}
 
 echo -e "${bold}[>]${reset}	${blue}Copying important file to the .vim directory in your home directory.\n${reset}"
-wget -q --show-progress https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/main/server/vim/vimrc -P ~/.vim/
-wget -q --show-progress https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/main/server/vim/{c,markdown}.vim -P ~/.vim/ftplugin/
-wget -q --show-progress https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/main/server/vim/c.snippets -P ~/.vim/mysnippets/
+wget -q --show-progress https://raw.githubusercontent.com/iAmG-r00t/dotfiles/main/server/vim/vimrc -P ~/.vim/
+wget -q --show-progress https://raw.githubusercontent.com/iAmG-r00t/dotfiles/main/server/vim/{c,markdown}.vim -P ~/.vim/ftplugin/
+wget -q --show-progress https://raw.githubusercontent.com/iAmG-r00t/dotfiles/main/server/vim/c.snippets -P ~/.vim/mysnippets/
 
 echo -e "${bold}[>]${reset}     ${blue}Creating a soft link for vimrc file.\n${reset}".
 ln -s ~/.vim/vimrc ~/.vimrc
