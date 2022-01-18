@@ -4,12 +4,15 @@
 # Originally by Tim Britton (@wintermanc3r), multiargument added by
 # Larry Madeo (@hillmonkey)
 
+red="\033[1;31m"
+reset='\033[0m'
+
 BIN_PATH="/usr/local/bin"
 BETTY_STYLE="betty-style"
 BETTY_DOC="betty-doc"
 
 if [ "$#" = "0" ]; then
-    echo "No arguments passed."
+    echo -e "${red}No arguments passed.${reset}"
     exit 1
 fi
 

@@ -50,12 +50,12 @@ function betty_module() {
 	if [ $? -ne 0 ]; then
 		echo -e "		Installing: ${blue}betty${reset} ...\n"
 		git clone https://github.com/holbertonschool/Betty.git /tmp/betty \
-		&& sudo /tmp/betty/install.sh \
+		&& cd /tmp/betty/ && sudo bash install.sh && cd - \
 		&& rm -rf /tmp/betty
 
 		# shellcheck disable=SC2154
 		curl -fsSL -o betty https://raw.githubusercontent.com/iAmG-r00t/dotfiles/master/desktop/modules/betty_script \
-		&& chmod a+x betty && sudo mv betty /usr/bin/
+		&& chmod a+x betty && sudo mv betty /usr/local/bin/
 	else
 		echo -e "		${green}Betty is already installed.${reset}\n"
 	fi
