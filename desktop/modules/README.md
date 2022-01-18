@@ -2,6 +2,12 @@
 
 - This are install scripts for specific tools / softwares for easy maintenance.
 
+- Quick grab option:
+
+```sh
+  curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/dotfiles/master/desktop/modules/${module}.sh | bash
+```
+
 ---
 
 - [batcat.sh](./batcat.sh) : Installs `bat` which works like `cat` but it supports syntax highlighting for a large number of programming and markup languages.
