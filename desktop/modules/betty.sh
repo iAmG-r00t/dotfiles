@@ -52,6 +52,10 @@ function betty_module() {
 		git clone https://github.com/holbertonschool/Betty.git /tmp/betty \
 		&& sudo /tmp/betty/install.sh \
 		&& rm -rf /tmp/betty
+
+		# shellcheck disable=SC2154
+		curl -fsSL -o betty https://raw.githubusercontent.com/iAmG-r00t/dotfiles/master/desktop/modules/betty_script \
+		&& chmod a+x betty && sudo mv betty /usr/bin/
 	else
 		echo -e "		${green}Betty is already installed.${reset}\n"
 	fi
