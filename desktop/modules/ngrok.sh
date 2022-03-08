@@ -44,9 +44,9 @@ function ngrok_module() {
 
 	# Download ngrok
 	echo -e "		Downloading ${blue}ngrok${reset} from source...\n"
-	wget -P "$HOME" "$(curl -s https://ngrok.com/download | grep -o -E 'https://bin.equinox.io/c/[A-Za-z0-9]{4,}/ngrok-stable-linux-amd64.zip')"
-	command -v unzip &>/dev/null || sudo apt install unzip && echo "Done"
-	command -v unzip &>/dev/null && unzip "$HOME"/ngrok-stable-linux-amd64.zip -d "$HOME" && rm "$HOME"/ngrok-stable-linux-amd64.zip
+	wget -P "$HOME" "$(curl -s https://ngrok.com/download | grep -o -E -m 1 'https://bin.equinox.io/c/[A-Za-z0-9]{4,}/ngrok-stable-linux-amd64.tgz')"
+	command -v tar &>/dev/null || sudo apt install tar && echo "Done"
+	command -v tar &>/dev/null && tar xvzf "$HOME"/ngrok-stable-linux-amd64.tgz -C "$HOME" && rm "$HOME"/ngrok-stable-linux-amd64.tgz
 	[ -f "$HOME"/ngrok ] && mv "$HOME"/ngrok "$HOME"/.ngrok
 
 }

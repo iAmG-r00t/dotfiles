@@ -53,6 +53,7 @@ function vim_module() {
 		&& make -C /tmp/vim \
 		&& sudo make install -C /tmp/vim \
 		&& rm -fr /tmp/vim
+		echo -e "\n"
 	else
 		echo -e "		${green}VIM is already installed.${reset}\n"
 	fi
@@ -62,5 +63,4 @@ echo -e "${bold}[+] ${brown} Desktop: ${cyan}${module}${brown} 🧾 installation
 
 vim_module
 
-echo -e "\n"
 echo -e "${magenta} ✅ Completed${reset}\n"

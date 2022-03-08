@@ -51,6 +51,7 @@ function mullvad_module() {
 		curl -s -L https://mullvad.net/download/app/deb/latest/ --output MullvadVPN.deb
 		sudo dpkg -i MullvadVPN.deb
 		rm MullvadVPN.deb
+		echo -e "\n"
 	else
 		echo -e "		${green}Mullvad is already installed.${reset}\n"
 	fi
@@ -60,5 +61,4 @@ echo -e "${bold}[+] ${brown} Desktop: ${cyan}${module}${brown} 🧾 installation
 
 mullvad_module
 
-echo -e "\n"
 echo -e "${magenta} ✅ Completed${reset}\n"

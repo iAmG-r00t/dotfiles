@@ -1,5 +1,9 @@
 # Desktop Setup
 
+<p align="center">
+	<img src="https://user-images.githubusercontent.com/29776892/157200686-322c05f2-1196-45d4-8072-31d1dc098e22.png">
+</p>
+
 - [Modules](./modules) directory contains install scripts.
 - [Others](./others.md) is a file that contains applications that you will be required to install manually either from the os store (**Pop OS** == ***Pop Shop***) or from [here](https://google.com). I would love to note that Pop Shop is up to date and that's why I love it so much and it has two options either flatpak or deb files.
 

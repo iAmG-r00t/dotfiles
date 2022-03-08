@@ -57,6 +57,7 @@ function go_module() {
 		sed -i "/unset file/i # Make Go Work\nexport GOPATH=~/gotools\nexport PATH=\${PATH}:/usr/local/go/bin:\${GOPATH}/bin\n" ~/.bashrc
 		# shellcheck source=/dev/null
 		source ~/.bashrc
+		echo -e "\n"
 	else
 		echo -e "		${green}Go is already installed.${reset}\n"
 	fi
@@ -66,5 +67,4 @@ echo -e "${bold}[+] ${brown} Desktop: ${cyan}${module}${brown} 🧾 installation
 
 go_module
 
-echo -e "\n"
 echo -e "${magenta} ✅ Completed${reset}\n"

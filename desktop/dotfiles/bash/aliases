@@ -34,9 +34,8 @@ random_pass() {
 }
 
 # enter a directory then list the contents in one go
-cd() {
-	builtin cd "$1" || return
-	ls
+cl() {
+	builtin cd "$@" && ls
 }
 
 # use bat if installed if not just use cat
@@ -45,9 +44,9 @@ cat() {
 	
 	# shellcheck disable=SC2181
 	if [ $? -ne 0 ]; then
-		cat "$@"
+		/bin/cat "$@"
 	else
-		bat "$@"
+		bat -p "$@"
 	fi
 }
 

@@ -37,93 +37,107 @@ report_error() {
 
 trap 'report_error $LINENO' ERR
 
-# --main function-- #
+# --functions-- #
+function get() {
 
-function essentials() {
+	command -v "$1" &>/dev/null
 
-	function get() {
-
-		command -v "$1" &>/dev/null
-
-		# shellcheck disable=SC2181
-		if [ $? -ne 0 ]; then
-			echo -e "		Installing: ${blue}${1}${reset} ...\n"
-			sudo apt install -y "$1" -qq
-			echo " "
-		else
-			echo -e "		${green}${1} is already installed.${reset}\n"
-		fi
-	}
-	sudo apt update -qq
-	get curl
-	get git
-	get wget
-	get build-essential # for building vim and tmux
-	get libevent-dev    # for building tmux
-	get ncurses-dev     # for building tmux
-	get bison           # for building tmux
-	get pkg-config      # for building tmux
-	get libpcap-dev     # for naabu go tool
-	get shellcheck      #shell script analysis script
-	get valgrind        #c memory leak checker
-	get mosh            #the mobile shell
-	get wireguard       #fast, modern, secure VPN tunnel
-	get fzf             #fuzzy file finder
-	get ufw             #uncomplicated firewall
-	get jq              # command-line JSON processor
-	get tree            # recursive directory listing
-	get python
-	get python3
-	get pip3
-	get xclip
-	#get python2				# remove python2 will be using virtualenv
-	get speedtest-cli #speedtest on the terminal
-	get asciinema     #record your terminal sessions
-
-	#install pip2
-	#bash "$path"/modules/pip2.sh
-
-	#install vim
-	bash "$path"/modules/vim.sh
-
-	#install tmux
-	#bash "$path"/modules/tmux.sh
-
-	#install batcat
-	bash "$path"/modules/batcat.sh
-
-	#install tailscale
-	bash "$path"/modules/tailscale.sh
-
-	#install mullvad
-	bash "$path"/modules/mullvad.sh
-
-	#install keepassx
-	bash "$path"/modules/keepassXC.sh
-
-	#install betty
-	bash "$path"/modules/betty.sh
-
-	#install udis86
-	bash "$path"/modules/udis86.sh
-
-	#install go
-	bash "$path"/modules/go.sh
-
-	#get gotools
-	bash "$path"/modules/go_tools.sh
-
-	#get docker & dockercompose
-	bash "$path"/modules/go_tools.sh
-
-	#get sublimetext
-	bash "$path"/modules/subl.sh
-
-	#get ngrok
-	bash "$path"/modules/ngrok.sh
+	# shellcheck disable=SC2181
+	if [ $? -ne 0 ]; then
+		echo -e "		Installing: ${blue}${1}${reset} ...\n"
+		sudo apt install -y "$1" -qq
+		echo " "
+	else
+		echo -e "		${green}${1} is already installed.${reset}\n"
+	fi
 }
 
-function clean_up() {
+function basic() { : Basic tools.
+	get curl									# curl install
+	get git										# git install
+	get wget									# wget install
+	get mosh            						# the mobile shell
+	get jq										# command-line JSON processor
+	get tree 									# recursive directory listing
+	get fzf										# fuzzy file finder
+	get ufw										# uncomplicated firewall
+	get xclip									# command line interface to the X11 clipboard
+	get speedtest-cli							# speedtest on the terminal
+	get asciinema								# record your terminal sessions
+	get htop									# interactive system-monitor and process viewer
+}
+
+function ngrok() { : Ngrok install.
+	bash "$path"/modules/ngrok.sh				# installs ngrok
+}
+
+function bat() {	: A cat clone with wings install.
+	bash "$path"/modules/batcat.sh				# installs batcat
+}
+
+function dev_tools() { : Tools for bash, python & C programming.
+	sudo apt update -qq
+	get python3									# python3 install
+	sudo apt install python3-pip				# pip3 install
+	get shellcheck      						# shell script analysis script
+	get valgrind        						# c memory leak checker
+	bash "$path"/modules/betty.sh				# betty; Holberton-style C code checker
+}
+
+function vim() { : VIM install.
+	get build-essential 						# for building vim
+	bash "$path"/modules/vim.sh					# install vim
+}
+
+function tmux() { : TMUX install.
+	get build-essential 						# for building tmux
+	get libevent-dev    						# for building tmux
+	get ncurses-dev     						# for building tmux
+	get bison           						# for building tmux
+	get pkg-config      						# for building tmux
+	bash "$path"/modules/tmux.sh				# install tmux
+}
+
+function go() { : Go install.
+	bash "$path"/modules/go.sh					# installs go
+}
+
+function go_tools() { : Go tools install.
+	get libpcap-dev								# for naabu go tool
+	bash "$path"/modules/go_tools.sh			# installs gotools
+}
+
+function wireguard() { Wireguard VPN install.
+	get wireguard								# fast, modern, secure VPN tunnel
+}
+
+function mullvad() { : Mullvad VPN install.
+	bash "$path"/modules/mullvad.sh				# mullvad VPN
+}
+
+function tailscale() { : Tailscale VPN install.
+	bash "$path"/modules/tailscale.sh			# install tailscale
+}
+
+function docker() { : Docker & Docker Compose install.
+	bash "$path"/modules/docker.sh				# installs both docker and dockercompose
+}
+
+function r3_tools() { : Installs reversing tools.
+	get gdb										# installs GDB
+	bash "$path"/modules/udis86.sh				# installs udis86
+}
+
+function sublime_text() { : Sublime Text install.
+	get apt-transport-https
+	bash "$path"/modules/subl.sh				# sublime text install
+}
+
+function keepassxc() {	: KeePassXC Password Manager install.
+	bash "$path"/modules/keepassXC.sh			# installs keepassxc
+}
+
+function clean_up() { : Cleans up APT and package stuff.
 	echo -e "	Doing some clean up.\n"
 	sudo apt autoremove -y -qq && sudo apt remove -y -qq && sudo apt clean -qq
 	if [[ -f ~/.wget-hsts ]]; then
@@ -133,8 +147,44 @@ function clean_up() {
 
 echo -e "${bold}[+] ${brown} Desktop: ${cyan}${module}${brown} 🧾 module is running.${reset}\n"
 
-essentials
-clean_up
+sudo apt update -qq							# system update
 
-echo -e "\n"
-echo -e "${magenta} ✅ Completed${reset}\n"
+echo -e "\n${magenta}Available Tool Sections:${reset}\n"
+
+typeset -f | awk '/ \() $/{fn=$1} /^ *:/{ print fn $0 }' | awk '!/report|get/' | column -s ':' -t | sed 's/.$//'
+
+
+PS3=$'\n'$'\e[95m'"Option: "$'\033[0m'
+options=("All" "Specific" "Exit")
+
+echo -e "\n${brown}Would you want to install ${blue}All${brown} the tools or ${blue}Specific${brown} ones?${reset}"
+select opt in "${options[@]}"; do
+  case $opt in
+  "Specific")
+    echo ""
+	# shellcheck disable=SC2162
+    read -p $'\e[0;33m Enter the tool sections you would want to install (\e[1;34m eg: dev_tools essentials ... \e[0;33m) : \033[0m' func
+    functions=$(echo "$func" | tr ' ' '\n')
+    echo -e "\n${blue}Installing the following [tools/tool]:${reset} $functions\n\n"
+    break
+    ;;
+  "All")
+    functions=$(typeset -f | awk '/ \(\) $/ && !/^main / {print $1}' | awk '!/report|get/')
+    echo -e"\n${blue}Installing all tools.${reset}\n"
+    break
+    ;;
+  "Exit")
+	exit
+	;;
+  *)
+    echo -e "\t\t${red}Kindly choose between option ${blue}1 ${red}and ${blue}2${red}."
+  esac
+done
+
+exec 3>&1
+exec 1> >(paste /dev/null -)
+
+eval "$functions"
+
+exec 1>&3 3>&-
+echo -e "${magenta} ✅ Set-up Completed${reset}\n"

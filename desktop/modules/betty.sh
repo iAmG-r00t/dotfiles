@@ -56,6 +56,7 @@ function betty_module() {
 		# shellcheck disable=SC2154
 		curl -fsSL -o betty https://raw.githubusercontent.com/iAmG-r00t/dotfiles/master/desktop/modules/betty_script \
 		&& chmod a+x betty && sudo mv betty /usr/local/bin/
+		echo -e "\n"
 	else
 		echo -e "		${green}Betty is already installed.${reset}\n"
 	fi
@@ -65,5 +66,4 @@ echo -e "${bold}[+] ${brown} Desktop: ${cyan}${module}${brown} 🧾 installation
 
 betty_module
 
-echo -e "\n"
 echo -e "${magenta} ✅ Completed${reset}\n"

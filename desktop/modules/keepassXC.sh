@@ -51,6 +51,7 @@ function keepassxc_module() {
 		sudo add-apt-repository ppa:phoerious/keepassxc
 		sudo apt-get update -qq
 		sudo apt-get install keepassxc
+		echo -e "\n"
 	else
 		echo -e "		${green}KeepassXC is already installed.${reset}\n"
 	fi
@@ -60,5 +61,4 @@ echo -e "${bold}[+] ${brown} Desktop: ${cyan}${module}${brown} 🧾 installation
 
 keepassxc_module
 
-echo -e "\n"
 echo -e "${magenta} ✅ Completed${reset}\n"

@@ -53,6 +53,7 @@ function tailscale_module() {
 		sudo apt-get update -qq
 		sudo apt-get install tailscale
 		sudo tailscale up
+		echo -e "\n"
 	else
 		echo -e "		${green}Tailscale is already installed.${reset}\n"
 	fi
@@ -62,5 +63,4 @@ echo -e "${bold}[+] ${brown} Desktop: ${cyan}${module}${brown} 🧾 installation
 
 tailscale_module
 
-echo -e "\n"
 echo -e "${magenta} ✅ Completed${reset}\n"

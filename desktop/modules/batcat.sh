@@ -66,5 +66,4 @@ echo -e "${bold}[+] ${brown} .....: ${cyan}${module}${brown} 🧾 installation m
 
 batcat_module
 
-echo -e "\n"
 echo -e "${magenta} ✅ Completed${reset}\n"

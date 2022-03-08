@@ -59,9 +59,9 @@ function sublime_module() {
 		# update and install
 		sudo apt-get update -qq &&
 			sudo apt-get install sublime-text -y -qq
-		echo " "
+		echo -e "\n"
 	else
-		echo -e "		${green}Go is already installed.${reset}\n"
+		echo -e "		${green}Sublime is already installed.${reset}\n"
 	fi
 
 }
@@ -70,5 +70,4 @@ echo -e "${bold}[+] ${brown} Desktop: ${cyan}${module}${brown} 🧾 installation
 
 sublime_module
 
-echo -e "\n"
 echo -e "${magenta} ✅ Completed${reset}\n"

@@ -55,6 +55,7 @@ function udis86_module() {
 		&& ./configure && make \
 		&& sudo make install \
 		&& cd - && rm -fr /tmp/udis86*
+		echo -e "\n"
 	else
 		echo -e "		${green}udis86 is already installed.${reset}\n"
 	fi
@@ -64,5 +65,4 @@ echo -e "${bold}[+] ${brown} Desktop: ${cyan}${module}${brown} 🧾 installation
 
 udis86_module
 
-echo -e "\n"
 echo -e "${magenta} ✅ Completed${reset}\n"

@@ -88,8 +88,9 @@ function docker_module() {
 
 		sudo chmod +x /usr/local/bin/docker-compose
 		
-		# fix an future error on dial unix /var/run/docker.sock: connect: permission denied
+		# fix a future error on dial unix /var/run/docker.sock: connect: permission denied
 		sudo chmod 666 /var/run/docker.sock
+		echo -e "\n"
 	else
 		echo -e "		${green}Docker is already installed.${reset}\n"
 	fi
@@ -99,5 +100,4 @@ echo -e "${bold}[+] ${brown} Desktop: ${cyan}${module}${brown} 🧾 installation
 
 docker_module
 
-echo -e "\n"
 echo -e "${magenta} ✅ Completed${reset}\n"

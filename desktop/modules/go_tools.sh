@@ -78,11 +78,11 @@ function go_tools() {
 
 	# gowitness web screenshot
 	if tool_check gowitness; then go get -u github.com/sensepost/gowitness && echo " "; fi
+	echo -e "\n"
 }
 
 echo -e "${bold}[+] ${brown} Desktop: ${cyan}${module}${brown} 🧾 installation module running.${reset}\n"
 
 go_tools
 
-echo -e "\n"
 echo -e "${magenta} ✅ Completed${reset}\n"

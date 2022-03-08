@@ -78,5 +78,4 @@ echo -e "${bold}[+] ${brown} .....: ${cyan}${module}${brown} 🧾 installation m
 
 tmux_module
 
-echo -e "\n"
 echo -e "${magenta} ✅ Completed${reset}\n"
