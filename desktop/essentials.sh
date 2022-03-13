@@ -77,24 +77,25 @@ function bat() {	: A cat clone with wings install.
 
 function dev_tools() { : Tools for bash, python & C programming.
 	sudo apt update -qq
-	get python3									# python3 install
+	get python3									        # python3 install
 	sudo apt install python3-pip				# pip3 install
-	get shellcheck      						# shell script analysis script
-	get valgrind        						# c memory leak checker
+  sudo pip install grip               # grip markdown Github preview
+	get shellcheck      						    # shell script analysis script
+	get valgrind        						    # c memory leak checker
 	bash "$path"/modules/betty.sh				# betty; Holberton-style C code checker
 }
 
 function vim() { : VIM install.
-	get build-essential 						# for building vim
+	get build-essential 						    # for building vim
 	bash "$path"/modules/vim.sh					# install vim
 }
 
 function tmux() { : TMUX install.
-	get build-essential 						# for building tmux
-	get libevent-dev    						# for building tmux
-	get ncurses-dev     						# for building tmux
-	get bison           						# for building tmux
-	get pkg-config      						# for building tmux
+	get build-essential 						    # for building tmux
+	get libevent-dev    						    # for building tmux
+	get ncurses-dev     						    # for building tmux
+	get bison           						    # for building tmux
+	get pkg-config      						    # for building tmux
 	bash "$path"/modules/tmux.sh				# install tmux
 }
 
@@ -103,12 +104,12 @@ function go() { : Go install.
 }
 
 function go_tools() { : Go tools install.
-	get libpcap-dev								# for naabu go tool
+	get libpcap-dev								        # for naabu go tool
 	bash "$path"/modules/go_tools.sh			# installs gotools
 }
 
 function wireguard() { Wireguard VPN install.
-	get wireguard								# fast, modern, secure VPN tunnel
+	get wireguard								          # fast, modern, secure VPN tunnel
 }
 
 function mullvad() { : Mullvad VPN install.
@@ -124,13 +125,13 @@ function docker() { : Docker & Docker Compose install.
 }
 
 function r3_tools() { : Installs reversing tools.
-	get gdb										# installs GDB
+	get gdb										            # installs GDB
 	bash "$path"/modules/udis86.sh				# installs udis86
 }
 
 function sublime_text() { : Sublime Text install.
 	get apt-transport-https
-	bash "$path"/modules/subl.sh				# sublime text install
+	bash "$path"/modules/subl.sh				  # sublime text install
 }
 
 function keepassxc() {	: KeePassXC Password Manager install.
@@ -147,7 +148,7 @@ function clean_up() { : Cleans up APT and package stuff.
 
 echo -e "${bold}[+] ${brown} Desktop: ${cyan}${module}${brown} 🧾 module is running.${reset}\n"
 
-sudo apt update -qq							# system update
+sudo apt update -qq							        # system update
 
 echo -e "\n${magenta}Available Tool Sections:${reset}\n"
 
