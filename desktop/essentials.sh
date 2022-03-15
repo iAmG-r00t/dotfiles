@@ -87,6 +87,9 @@ function dev_tools() { : Tools for bash, python & C programming.
 
 function vim() { : VIM install.
 	get build-essential 						    	# for building vim
+	get libpython3-dev									# Python3 Support
+	get cmake											# For Building YCM plugin
+	get fonts-powerline									# vim-airline plugin fonts
 	bash "$path"/modules/vim.sh							# install vim
 }
 

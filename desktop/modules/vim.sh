@@ -50,10 +50,10 @@ function vim_module() {
 	if [ $? -ne 0 ]; then
 		echo -e "		Installing: ${blue}VIM${reset} ...\n"
 		git clone https://github.com/vim/vim.git /tmp/vim \
+		&& cd /tmp/vim/src/ && ./configure --with-features=huge --enable-python3interp \
 		&& make -C /tmp/vim \
 		&& sudo make install -C /tmp/vim \
 		&& rm -fr /tmp/vim
-		echo -e "\n"
 	else
 		echo -e "		${green}VIM is already installed.${reset}\n"
 	fi

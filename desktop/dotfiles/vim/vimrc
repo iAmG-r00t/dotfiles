@@ -1,7 +1,176 @@
-" ----------
-" VIM Config
-" ----------
+" ------------
+"  VIM CONFIG
+" ------------
 "
+"  Basic Settings
+"
+" Disable compatibility with vi which can cause unexpected issues.
+if &compatible
+  set nocompatible
+endif
+
+" Turn syntax highlighting on.
+if has("syntax") && !exists('g:syntax_on')
+  syntax on
+endif
+
+" Enable type file detection && load plugin for the detected file type.
+if has('autocmd')
+  filetype plugin indent on
+endif
+
+" ....   ......
+" Swap & Backup files location to ~/.vim/tmp
+" ....   ......
+"
+if !isdirectory($HOME."/.vim/tmp")
+  silent! execute "!mkdir ~/.vim/tmp"
+endif
+"
+set directory="~/.vim/tmp//"           " where to store swap files
+"set backup                            " Turn on backup option
+"set backupdir="~/.vim/tmp//"          " where to store backups
+"set writebackup                       " make backup first
+"set backupcopy=yes                    " overwrite original back up
+"
+"Meaningful backup name, ex: filename@2022-04-05.14:59
+"au BufWritePre * let &bex = '@' . strftime("%F.%H:%M")
+
+" Allow backspacing over everything in insert mode.
+set backspace=indent,eol,start
+
+set autoindent
+set encoding=utf-8          " enable unicode
+set wrap                    " enable soft wrap
+set linebreak               " make it not wrap in the middle of a word
+set display=truncate        " Show @@@ in the last line if it is truncated.
+set splitbelow              " set split below by default
+set history=1000            " keep 1000 lines of command line history
+set scrolloff=10            " Show a few lines of context around the cursor.
+set showmode                " Show the mode you are on the last line.
+set showcmd                 " Show partial command you type in the last line.
+set noerrorbells            " No beeps
+set wildmenu                " display completion matches in a status line
+set wildmode=list:longest   " make wildmenu behave like bash completion
+set ttimeout                " time out for key codes
+set ttimeoutlen=100         " wait up to 100ms after Esc for special key
+
+" Wildmenu will ignore files with these extensions.
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+
+" Netrw Configs
+"
+" netrw configure like nerdtree
+" ... source: http://ellengummesson.com/blog/2014/02/22/make-vim-really-behave-like-netrw/
+" netrw commands: https://vonheikemen.github.io/devlog/tools/using-netrw-vim-builtin-file-explorer/
+let g:netrw_banner = 0            " hide banner
+let g:netrw_liststyle = 3         " use tree style listing
+let g:netrw_browse_split = 4      " open file to the right
+let g:netrw_altv = 1              " ... of the project drawer
+let g:netrw_winsize = 20          " window size when it creates a split
+
+" start vim with project drawer opened
+augroup ProjectDrawer
+  autocmd!
+  autocmd VimEnter * :Vexplore
+augroup END
+
+" defines a gray colour for the horizontal line
+hi CursorLine cterm=NONE ctermbg=240
+
+" Search Settings
+"
+" Do incremental searching when it's possible to timeout.
+if has('reltime')
+  set incsearch
+endif
+
+set ignorecase    " Ignore capital letters during search.
+set smartcase     " Override the ignorecase option if searching for capital letters.
+set showmatch     " Show matching words during a search.
+set hlsearch      " Use highlighting when doing a search.
+
+" Spacing Settings
+"
+set shiftwidth=2  " Set shift width to 2 spaces.
+set tabstop=2     " Set tab width to 2 columns.
+set expandtab     " Use space characters instead of tabs.
+
+" Coursor Settings
+"
+set cursorline              " Highlight cursor line underneath the cursor horizontally.
+let &t_SI = "\e[6 q"        " set steady bar while in insert mode
+let &t_EI = "\e[3 q"        " set blinking underline in normal mode
+
+"
+" MAPPINGS
+"
+" With a map leader it is possible to do extra key combinations
+" ... example <leader>w == (,w) saves the current file
+" Change leader key from , to \
+let mapleader = ","
+
+" Missing ZZ tends to SAVE and EXIT and ZQ tends to force quit counterparts:
+" ... quick save-buffer and quit-everything (all splits and tabs)
+nnoremap ZS :w<CR>
+nnoremap ZX :qa<CR>
+
+" (,w) save file, ,q exit without saving and ,sq save and exit
+nmap <leader>s :w!<cr>
+nmap <leader>q :q!<cr>
+nmap <leader>sq :wq!<cr>
+
+" Vimrc reload
+nmap <leader>r :source $MYVIMRC<cr>
+
+" Type jj to exit insert mode quickly.
+inoremap jj <Esc>
+
+" Turn off search highlighting by presseing \\
+nnoremap <leader>\ :nohlsearch<CR>
+
+" Press the space bar to type the : character in command mode.
+nnoremap <space> :
+
+" Change between themes
+map <leader>vt :call ToggleThemeMode('tomorrow')<CR>
+map <leader>ve :call ToggleThemeMode('')<CR>
+
+" Easier split navigations
+" ... source: https://thoughtbot.com/blog/vim-splits-move-faster-and-more-naturally
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Resize split windows using arrow keys by pressing:
+" CTRL+UP, CTRL+DOWN, CTRL+LEFT, or CTRL+RIGHT.
+noremap <c-up> <c-w>+
+noremap <c-down> <c-w>-
+noremap <c-left> <c-w>>
+noremap <c-right> <c-w><
+
+" Quickly open a buffer for scribble
+map <leader>e :e ~/.vim/tmp/buffer<cr>
+
+" Open terminal in split window
+map <leader>t :term ++close<cr>
+
+" Open terminal in a new tab
+map <Leader>T :tab term ++close<cr>
+
+" Change between buffers with menu
+map <leader>bf :buffers<cr>:buffer<Space>
+
+" Change between buffers
+map <leader>bn :bnext<cr>
+map <leader>bp :bprevious<cr>
+
+" Open Netrw in the cwd
+nnoremap <Leader>da :Lexplore<CR>
+
+"
+" Plugins
 "
 " Install vim-plug if not found
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -9,215 +178,104 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 "
-"
-" ----------
-" My Plugins
-" ----------
-"
-"
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+
 " Call Plugin-manager
+"
 call plug#begin('~/.vim/plugged')
 "
-Plug 'preservim/nerdtree'               " Nerd-Tree Plugin
-Plug 'lervag/vimtex'                    " Vim-text plugin
-Plug 'scrooloose/syntastic'             " Syntastic plugin (syntax checker)
-Plug 'SirVer/ultisnips'                 " Ultisnips plugin
-Plug 'ycm-core/YouCompleteMe'           " YouCompleteMe plugin
-Plug 'tmsvg/pear-tree'                  " Pear Tree Plugin
-Plug 'vim-airline/vim-airline'          " Lightweight powerline status
-Plug 'vim-airline/vim-airline-themes'   " Powerline themes
-Plug 'honza/vim-snippets'               " Snippet support
+Plug 'scrooloose/syntastic'                               " Syntastic plugin (syntax checker)
+Plug 'SirVer/ultisnips'                                   " Ultisnips plugin
+Plug 'honza/vim-snippets'                                 " Snippet support
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }   " YouCompleteMe plugin
+Plug 'sainnhe/everforest'                                 " Theme
+Plug 'chriskempson/vim-tomorrow-theme'                    " Theme
+Plug 'vim-airline/vim-airline'                            " Lightweight powerline status
+Plug 'vim-airline/vim-airline-themes'                     " Powerline themes
 "
 call plug#end()
+
+" Plugins-Settings
 "
+" --> Theme <--
 "
-" -------------
-" Miscellaneous
-" -------------
-"
-"
-" With a map leader it is possible to do extra key combinations
-" ... example <leader>w == (,w) saves the current file
-let mapleader = ","
-"
-" Missing ZZ tends to SAVE and EXIT and ZQ tends to force quit counterparts:
-" ... quick save-buffer and quit-everything (all splits and tabs)
-nnoremap ZS :w<CR>
-nnoremap ZX :qa<CR>
-"
-" (,w) save file, ,q exit without saving and ,sq save and exit
-nmap <leader>s :w!<cr>
-nmap <leader>q :q!<cr>
-nmap <leader>sq :wq!<cr>
-"
-" Vimrc reload
-nmap <leader>r :source $MYVIMRC<cr>
-"
-"
-" Easier split navigations
-" ... source: https://thoughtbot.com/blog/vim-splits-move-faster-and-more-naturally
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-"
-" Quickly open a buffer for scribble
-map <leader>e :e ~/buffer<cr>
-"
-" Quickly open a markdown buffer for scribble
-map <leader>m :e ~/buffer.md<cr>
-"
-" Open terminal in new buffer
-map <leader>t :term ++curwin<cr>
-"
-" Change between buffers with menu
-map <leader>bf :buffers<cr>:buffer<Space>
-"
-" Change between buffers
-map <leader>bn :bnext<cr>
-map <leader>bp :bprevious<cr>
-"
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
+if has('termguicolors')
+  set termguicolors
 endif
+
+set background=dark
+" set contrast
+let g:everforest_background = 'hard'
+
+colorscheme everforest
+
+" Toggles the theme from everforest to tomorrow
+function! ToggleThemeMode(style)
+    if a:style == "tomorrow"
+        set background=dark
+        colorscheme Tomorrow-Night
+    else
+        set background=dark
+        let g:everforest_background = 'hard'
+        colorscheme everforest
+    en
+endfunction
+
+" --> Utilsnips <--
 "
-" Make Vim to handle long lines nicely.
-" set wrap
-" set textwidth=79
-" set formatoptions=qrn1
-"
-" Reload vim config
-" nnoremap <F2> :so $MYVIMRC<CR>
-"
-"
-" --------
-" Settings
-" --------
-"
-"
-" Make vim to stop running the default config
-let skip_defaults_vim=1
-set viminfo="~/.vim"
-"
-" To set vim-plug config
-set rtp +=~/.vim
-"
-" set split below by default
-set splitbelow
-"
-" Enable filetype plugins
-filetype on
-filetype plugin on
-filetype indent on
-"
-syntax on           " Syntax coloring
-"
-set number          " Show line numbers
-"
-set noerrorbells		" No beeps
-"
-set showcmd			    " Show me what I am typing
-"
-set ruler			      " Show the cursor position all the time
-"
-set ignorecase			" Search case insensitive ...
-"
-set smartcase			  " ... but not when search pattern contains upper case characters
-"
-set hlsearch			  " Highlight found searches
-"
-"set nobackup			  " Don't create backup files
-"
-set showmode			  " Show current mode
-"
-set encoding=utf-8	" Use UTF-8 as the default text encoding
-"
-set backspace=indent,eol,start	" Allow backspacing over everything in insert mode
-"
-" show vim status line always
-set laststatus=2
-"
-" On pressing tab, insert 2 spaces
-set expandtab
-"
-" show existing tab with 2 spaces width
-set tabstop=2
-set softtabstop=2
-"
-" when indenting with '>', use 2 spaces width
-set shiftwidth=2
-"
-" Disable vim automatic visual mode on mouse select
-set mouse-=a
-"
-"
-" ---------------
-" Snippet configs
-" ---------------
-"
-"
-let g:UltiSnipsExpandTrigger="<c-e>"        " default is tab
-"
-" list all snippets for current filetype
-let g:UltiSnipsListSnippets="<c-l>"
-let g:UltiSnipsEditSplit="vertical"         " show snippets vertically
+let g:UltiSnipsExpandTrigger="<c-e>"                            " default is tab / autocomplete snippets
+let g:UltiSnipsListSnippets="<c-l>"                             " list all snippets for current filetype
+let g:UltiSnipsEditSplit="vertical"                             " show snippets vertically
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
-"
-"
-" ----------------
-" Plugins settings
-" ----------------
-"
-"
-" Close NERDTree after a file is opened
-let NERDTreeQuitOnOpen=1
-"
-" Show hidden files in NERDTree
-let NERDTreeShowHidden=1
-"
-" Toggle NERDTree
-nmap <F1> :NERDTreeToggle<CR>
-"
-" Vim-latex-preview remove cursor hold autorecompile
-let g:livepreview_cursorhold_recompile = 0
+
+
+" --> syntastic <--
 "
 " Syntastic change of error and warning signs
 let g:syntastic_error_symbol = "✗ "
 let g:syntastic_warning_symbol = "⚠ "
-"
+
+" --> YCM <--
 " Set a global config for YoucompleteMe plugin
 let g:ycm_global_ycm_extra_conf='~/.vim/ycm_extra_conf.py'
-"
-"
-" ---------------
-" Powerline Stuff
-" ---------------
-"
+
+" --> Powerline <--
 "
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
-"
+
+" Show buffer number
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
+" Disable whitespace status
+let g:airline#extensions#whitespace#enabled = 0
+
+" Enable modified detection
+let g:airline_detect_modified=1
+
+" Automatically populate g:airline_symbols
+let g:airline_powerline_fonts = 1
+
 " Path to file
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved' " f/p/file-name.js
-"
+let g:airline#extensions#tabline#formatter = 'unique_tail' " file-name.js
+
 " Poweline status theme
-let g:airline_theme='violet'
-"
+"let g:airline_theme='deus'
+let g:airline_theme='desertink'
+
 " Load powerline symbols
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
-"
+
 " Powerline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = '☰'
-let g:airline_symbols.maxlinenr = ''
-let g:airline_symbols.dirty='⚡'
-"
-"
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = ' ☰ '
+let g:airline_symbols.colnr = ' ㏇:'
+let g:airline_symbols.whitespace = ' ¶ '
+let g:airline_symbols.maxlinenr = ' Ξ '
