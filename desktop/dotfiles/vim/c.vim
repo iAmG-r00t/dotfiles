@@ -6,6 +6,9 @@ set tabstop=8 shiftwidth=8
 " Indentation
 set autoindent
 
+" Disable Space
+set noexpandtab
+
 " Display numbers
 set number 
 

@@ -77,6 +77,9 @@ ssh_ips() {
   awk '$1=="Host"{$1="";H=substr($0,2)};$1=="HostName"{print H,"$",$2}' ~/.ssh/config | column -s '$' -t
 }
 
+# source: https://unix.stackexchange.com/questions/94498/what-causes-this-green-background-in-ls-output#:~:text=Blue%20text%20with%20green%20background,%2Bw%2C%20%2Dt%20).
+de-greener() { chmod -R a-x,o-w,+X "$@"; }
+
 # copy working directory
 alias cwd='pwd | tr -d "\r\n" | xclip -selection clipboard'
 
