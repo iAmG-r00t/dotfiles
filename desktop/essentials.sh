@@ -129,7 +129,17 @@ function docker() { : Docker & Docker Compose install.
 
 function r3_tools() { : Installs reversing tools.
 	get gdb										    # installs GDB
+	bash "$path"/modules/GDBplugins.sh				# installs gdb plugins
 	bash "$path"/modules/udis86.sh					# installs udis86
+	get python3										# pwntools requirements
+	get python3-pip									# '
+	get python3-dev									# '
+	get git											# '
+	get libssl-dev									# '
+	get libffi-dev									# '
+	get build-essential								# '
+	python3 -m pip install --upgrade pip			# '
+	python3 -m pip install --upgrade pwntools		# install pwntools
 }
 
 function sublime_text() { : Sublime Text install.

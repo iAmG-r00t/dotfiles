@@ -100,6 +100,11 @@ alias update="sudo apt update -qq"
 alias upgrade="sudo apt upgrade -qq -y"
 alias cleanapt="sudo apt autoremove -y && sudo apt remove -y && sudo apt clean"
 
+# other-stuff
+alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
+#shellcheck disable=SC2142
+alias gdb='gdb -q "$@"'
+
 # Git shortcuts
 alias status="git status"
 #shellcheck disable=SC2142

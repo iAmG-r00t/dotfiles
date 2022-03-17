@@ -232,7 +232,6 @@ let g:UltiSnipsListSnippets="<c-l>"                             " list all snipp
 let g:UltiSnipsEditSplit="vertical"                             " show snippets vertically
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 
-
 " --> syntastic <--
 "
 " Syntastic change of error and warning signs

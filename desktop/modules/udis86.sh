@@ -52,7 +52,7 @@ function udis86_module() {
 		curl -s -L http://sourceforge.net/projects/udis86/files/udis86/1.7/udis86-1.7.2.tar.gz/download -o /tmp/udis86.tar.gz \
 		&& tar -zxf /tmp/udis86.tar.gz -C /tmp/ \
 		&& cd /tmp/udis86-* \
-		&& ./configure && make \
+		&& ./configure --with-python="$(command -v python3)" && make \
 		&& sudo make install \
 		&& cd - && rm -fr /tmp/udis86*
 		echo -e "\n"

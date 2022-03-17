@@ -43,6 +43,7 @@
     ~/.vimrc: desktop/dotfiles/vim/vimrc
     ~/.vim/ftplugin/c.vim: desktop/dotfiles/vim/c.vim
     ~/.vim/ftplugin/markdown.vim: desktop/dotfiles/vim/markdown.vim
+    ~/.vim/mysnippets/markdown.snippets: desktop/dotfiles/vim/markdown.snippets
     ~/.vim/mysnippets/c.snippets: desktop/dotfiles/vim/c.snippets
     ~/.vim/ycm_extra_conf.py: desktop/dotfiles/vim/ycm_extra_conf.py
     ~/tools/scripts/tm: desktop/dotfiles/workspaces/tm.sh
