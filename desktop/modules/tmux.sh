@@ -72,6 +72,10 @@ function tmux_module() {
                 && cd - && rm -rf /tmp/tmux*
                 echo " "
 	fi
+
+  #installing tmux attach bash completion script
+  curl -fsSL -o tmux-attach https://raw.githubusercontent.com/iAmG-r00t/dotfiles/master/desktop/modules/tmux-attach \
+  && sudo mv tmux-attach /etc/bash_completion.d/
 }
 
 echo -e "${bold}[+] ${brown} .....: ${cyan}${module}${brown} 🧾 installation module running.${reset}\n"

@@ -86,8 +86,16 @@ alias cwd='pwd | tr -d "\r\n" | xclip -selection clipboard'
 # shortcuts
 ## tmux
 alias t='tmux'
+#tmux attach with shell bash completion
+ta() {
+  t a -t "$1"
+}
+
+if [ -f /etc/bash_completion.d/tmux-attach ]; then
+  source /etc/bash_completion.d/tmux-attach
+fi
+
 alias tls='t ls'
-alias ta='t a -t'
 alias tn='t new -s'
 alias tkS='t kill-server'
 alias tks='t kill-session -t'
@@ -113,6 +121,7 @@ alias gll="git log --graph --pretty=oneline --abbrev-commit"
 alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias add="git add"
 alias push="git push"
+alias pull="git pull"
 
 # install, purge, update and upgrade
 alias pi='sudo apt install -y'

@@ -27,6 +27,11 @@ export MANPAGER="less -X"
 # Get color support for 'less'
 export LESS="--RAW-CONTROL-CHARS"
 
+# virtaulenv stuff
+export WORKON_HOME=~/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
+
 # make man have color
 #shellcheck disable=SC2155
 export LESS_TERMCAP_mb="$(tput bold; tput setaf 2)" # green

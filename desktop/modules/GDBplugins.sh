@@ -66,10 +66,12 @@ function gdb_plugins() {
 		echo -e "		Installing: ${blue}GDB Plugins${reset} ...\n"
 
 		echo -e "[+] ${magenta}Downloading PEDA${reset}\n"
-		git clone https://github.com/longld/peda.git "$toolspath"/peda
+		#git clone https://github.com/longld/peda.git "$toolspath"/peda
+		git clone https://github.com/bet4it/peda.git "$toolspath"/peda #works with hyperpwn
 	    
 		echo -e "\n[+] ${magenta}Downloading PEDA ARM${reset}\n"
-		git clone https://github.com/alset0326/peda-arm.git "$toolspath"/peda-arm
+		#git clone https://github.com/alset0326/peda-arm.git "$toolspath"/peda-arm
+		git clone https://github.com/bet4it/peda-arm.git "$toolspath"/peda-arm #works with hyperpwn
 
 		echo -e "\n[+] ${magenta}Downloading Pwndbg${reset}\n"
 		git clone https://github.com/pwndbg/pwndbg.git "$toolspath"/pwndbg

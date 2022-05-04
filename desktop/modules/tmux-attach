@@ -1,0 +1,9 @@
+#tmux attach -t bash completion
+#shellcheck disable=SC2148
+_tma() {
+    TMUX_SESSIONS=$(tmux ls -F '#S' | xargs)
+
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( "$(compgen -W "$TMUX_SESSIONS" -- "$cur")" )
+}
+complete -F _tma ta

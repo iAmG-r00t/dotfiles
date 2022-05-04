@@ -53,7 +53,6 @@ function betty_module() {
 		&& cd /tmp/betty/ && sudo bash install.sh && cd - \
 		&& rm -rf /tmp/betty
 
-		# shellcheck disable=SC2154
 		curl -fsSL -o betty https://raw.githubusercontent.com/iAmG-r00t/dotfiles/master/desktop/modules/betty_script \
 		&& chmod a+x betty && sudo mv betty /usr/local/bin/
 		echo -e "\n"

@@ -56,7 +56,7 @@ function basic() { : Basic tools.
 	get curl									# curl install
 	get git										# git install
 	get wget									# wget install
-	get mosh            						# the mobile shell
+	get mosh									# the mobile shell
 	get jq										# command-line JSON processor
 	get tree 									# recursive directory listing
 	get fzf										# fuzzy file finder
@@ -77,16 +77,18 @@ function bat() {	: A cat clone with wings install.
 
 function dev_tools() { : Tools for bash, python & C programming.
 	sudo apt update -qq
-	get python3									        # python3 install
+	get python3											# python3 install
 	sudo apt install python3-pip						# pip3 install
-  	sudo pip install grip               				# grip markdown Github preview
-	get shellcheck      						    	# shell script analysis script
-	get valgrind        						    	# c memory leak checker
+	sudo pip3 install virtualenv						# virtualenv
+	sudo pip install virtualenvwrapper					# virtualenvwrapper
+	sudo pip install grip								# grip markdown Github preview
+	get shellcheck										# shell script analysis script
+	get valgrind										# c memory leak checker
 	bash "$path"/modules/betty.sh						# betty; Holberton-style C code checker
 }
 
 function vim() { : VIM install.
-	get build-essential 						    	# for building vim
+	get build-essential									# for building vim
 	get libpython3-dev									# Python3 Support
 	get cmake											# For Building YCM plugin
 	get fonts-powerline									# vim-airline plugin fonts
@@ -94,11 +96,11 @@ function vim() { : VIM install.
 }
 
 function tmux() { : TMUX install.
-	get build-essential 						    # for building tmux
-	get libevent-dev    						    # for building tmux
-	get ncurses-dev     						    # for building tmux
-	get bison           						    # for building tmux
-	get pkg-config      						    # for building tmux
+	get build-essential								# for building tmux
+	get libevent-dev								# for building tmux
+	get ncurses-dev									# for building tmux
+	get bison										# for building tmux
+	get pkg-config									# for building tmux
 	bash "$path"/modules/tmux.sh					# install tmux
 }
 
@@ -107,12 +109,12 @@ function go() { : Go install.
 }
 
 function go_tools() { : Go tools install.
-	get libpcap-dev								    # for naabu go tool
+	get libpcap-dev									# for naabu go tool
 	bash "$path"/modules/go_tools.sh				# installs gotools
 }
 
 function wireguard() { Wireguard VPN install.
-	get wireguard								    # fast, modern, secure VPN tunnel
+	get wireguard									# fast, modern, secure VPN tunnel
 }
 
 function mullvad() { : Mullvad VPN install.
@@ -128,7 +130,8 @@ function docker() { : Docker & Docker Compose install.
 }
 
 function r3_tools() { : Installs reversing tools.
-	get gdb										    # installs GDB
+	get gdb											# installs GDB
+	get gdbserver									# installs gdbserver
 	bash "$path"/modules/GDBplugins.sh				# installs gdb plugins
 	bash "$path"/modules/udis86.sh					# installs udis86
 	get python3										# pwntools requirements
@@ -140,11 +143,26 @@ function r3_tools() { : Installs reversing tools.
 	get build-essential								# '
 	python3 -m pip install --upgrade pip			# '
 	python3 -m pip install --upgrade pwntools		# install pwntools
+	get ipython3									# installs i3
+
+	#-- hyper terminal install --#
+
+	command -v hyper &>/dev/null
+
+	# shellcheck disable=SC2181
+	if [ $? -eq 0 ]; then
+		curl -LSs -o /tmp/hyper.deb https://releases.hyper.is/download/deb
+		sudo dpkg -i /tmp/hyper.deb && rm /tmp/hyper.deb
+	fi
+
+	#hyper plugins
+	hyper i hyperinator
+	hyper i hyperpwn
 }
 
 function sublime_text() { : Sublime Text install.
 	get apt-transport-https
-	bash "$path"/modules/subl.sh				  	# sublime text install
+	bash "$path"/modules/subl.sh					# sublime text install
 }
 
 function keepassxc() {	: KeePassXC Password Manager install.

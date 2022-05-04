@@ -26,6 +26,7 @@
       ] #cleanup
 
 - create:
+    - ~/.virtualenvs
     - ~/.vim/ftplugin
     - ~/.vim/mysnippets
     - ~/tools/scripts
