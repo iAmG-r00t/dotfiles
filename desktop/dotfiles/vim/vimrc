@@ -70,12 +70,22 @@ let g:netrw_liststyle = 3         " use tree style listing
 let g:netrw_browse_split = 4      " open file to the right
 let g:netrw_altv = 1              " ... of the project drawer
 let g:netrw_winsize = 20          " window size when it creates a split
+let g:netrw_keepdir = 0           " keep the current directory and browsing directory synced
 
 " start vim with project drawer opened
 augroup ProjectDrawer
   autocmd!
   autocmd VimEnter * :Vexplore
 augroup END
+
+" A function to close ProjectDrawer
+function! s:close_explorer_buffers()
+  for i in range(1, bufnr('$'))
+    if getbufvar(i, '&filetype') == "netrw"
+      silent exe 'bdelete! ' . i
+    endif
+  endfor
+endfunction
 
 " defines a gray colour for the horizontal line
 hi CursorLine cterm=NONE ctermbg=240
@@ -170,6 +180,9 @@ map <leader>bp :bprevious<cr>
 
 " Open Netrw in the cwd
 nnoremap <Leader>da :Lexplore<CR>
+
+" Mapping for close_explorer_buffers function that closes projectDrawer
+nnoremap <Leader>qda :call <sid>close_explorer_buffers()<cr>
 
 "
 " Plugins
