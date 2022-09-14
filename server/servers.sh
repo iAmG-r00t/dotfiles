@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Script to setup afew things in a server
 
 # author: iAmG-r00t a.k.a th3_gr00t a.k.a Peter Numi.
