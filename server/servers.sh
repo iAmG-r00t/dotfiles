@@ -24,7 +24,7 @@ red="\033[1;31m"
 
 # Report errors when file exits out
 #[ ! -z "$BASH_SOURCE[@]" ] && filename=$(basename "${BASH_SOURCE[@]}")
-[ ! -z "$BASH_SOURCE[@]" ] && echo "I am Empty"
+[ -z "$BASH_SOURCE[@]" ] && echo "I am Empty"
 err_report() {
   echo " "
   #echo -e "* ${brown}Error on line ${red}$1${reset} file: ${magenta}${filename}${reset}"
