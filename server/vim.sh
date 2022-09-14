@@ -22,7 +22,8 @@ red="\033[1;31m"
 #blink='\e[5m'
 
 # Report errors when file exits out
-[ -z "$BASH_SOURCE[@]" ] || filename=$(basename "${BASH_SOURCE[@]}")
+#filename=$(basename "${BASH_SOURCE[@]}")
+filename=vim.sh
 err_report() {
 	  echo -e "\n* ${brown}Error on line ${red}$1${reset} file: ${magenta}${filename}${reset}\n"
 }
