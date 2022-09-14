@@ -23,8 +23,9 @@ red="\033[1;31m"
 
 
 # Report errors when file exits out
-file="${BASH_SOURCE[0]}"
+file="${BASH_SOURCE[0]:+server.sh}"
 echo "${file:+server.sh}"
+echo "$file"
 [ -z "$BASH_SOURCE[@]" ] || filename=$(basename "${file:+server.sh}")
 err_report() {
   echo " "
@@ -33,6 +34,9 @@ err_report() {
 }
 
 trap 'err_report $LINENO' ERR
+
+# to delete
+curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/dotfiles/master/server/vim.sh | bash
 
 echo -e "\n"
 echo -e "${bold}[+] ${reset}${brown}First doing a simple update and upgrade.\n${reset}"
