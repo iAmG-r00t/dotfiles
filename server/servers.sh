@@ -23,7 +23,9 @@ red="\033[1;31m"
 
 
 # Report errors when file exits out
-[ -z "$BASH_SOURCE[@]" ] || filename=$(basename "${BASH_SOURCE[@]:=true}")
+file="${BASH_SOURCE[0]}"
+echo "${file:+server.sh}"
+[ -z "$BASH_SOURCE[@]" ] || filename=$(basename "${file:+server.sh}")
 err_report() {
   echo " "
   echo -e "* ${brown}Error on line ${red}$1${reset} file: ${magenta}${filename}${reset}"
