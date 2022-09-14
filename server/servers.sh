@@ -23,7 +23,7 @@ red="\033[1;31m"
 
 
 # Report errors when file exits out
-filename=$(basename "${BASH_SOURCE[@]}")
+[ ! -z "$BASH_SOURCE[@]"] && filename=$(basename "${BASH_SOURCE[@]}")
 err_report() {
   echo " "
   echo -e "* ${brown}Error on line ${red}$1${reset} file: ${magenta}${filename}${reset}"
@@ -73,18 +73,18 @@ echo -e "\n"
 
 # Get configuration files from github
 echo -e "${bold}[+]${reset} ${brown}Downloading bashrc file from github.\n${reset}"
-wget -q --show-progress https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/main/server/bashrc -P ~/
+wget -q --show-progress https://raw.githubusercontent.com/iAmG-r00t/dotfiles/master/server/bashrc -P ~/
 mv ~/.bashrc ~/.bashrc.original
 mv ~/bashrc ~/.bashrc
 echo -e "\n"
 
 echo -e "${bold}[+]${reset} ${brown}Downloading tmux configuration file from github.\n${reset}"
-wget -q --show-progress https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/main/server/tmux.conf -P ~/
+wget -q --show-progress https://raw.githubusercontent.com/iAmG-r00t/dotfiles/master/server/tmux.conf -P ~/
 mv ~/tmux.conf ~/.tmux.conf
 echo -e "\n"
 
 # vim setup
-curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/.dotfiles/main/server/vim.sh | bash
+curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/dotfiles/master/server/vim.sh | bash
 
 # clean up
 echo -e "${bold}[+]${reset} ${brown}Cleaning up server.\n${reset}"
