@@ -43,7 +43,7 @@ wget -q --show-progress https://raw.githubusercontent.com/iAmG-r00t/dotfiles/mas
 echo -e "${bold}[>]${reset}     ${blue}Creating a soft link for vimrc file.\n${reset}".
 ln -s ~/.vim/vimrc ~/.vimrc
 
-echo -e "${bold}[>]${reset}     ${blue}Enter vim to installing vim plug and vim plugins.\n${reset}"
+echo -e "${bold}[>]${reset}     ${blue}Enter vim to install vim plug and vim plugins.\n${reset}"
 # shellcheck source=/dev/null
 #source ~/.vimrc
 
