@@ -23,9 +23,9 @@ red="\033[1;31m"
 
 
 # Report errors when file exits out
-server_sh="${BASH_SOURCE[0]:?server_script}"
-filename=$(basename "${server_sh}")
-#[ -z "$BASH_SOURCE[@]" ] || filename=$(basename "${server_sh}")
+#filename=$(basename "${BASH_SOURCE[@]}")
+
+filename=servers.sh
 err_report() {
   echo " "
   echo -e "* ${brown}Error on line ${red}$1${reset} file: ${magenta}${filename}${reset}"
@@ -33,9 +33,6 @@ err_report() {
 }
 
 trap 'err_report $LINENO' ERR
-
-# to delete
-curl -fsSL https://raw.githubusercontent.com/iAmG-r00t/dotfiles/master/server/vim.sh | bash
 
 echo -e "\n"
 echo -e "${bold}[+] ${reset}${brown}First doing a simple update and upgrade.\n${reset}"
