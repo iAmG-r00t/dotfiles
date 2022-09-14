@@ -24,7 +24,6 @@ red="\033[1;31m"
 
 # Report errors when file exits out
 #filename=$(basename "${BASH_SOURCE[@]}")
-
 filename=servers.sh
 err_report() {
   echo " "
