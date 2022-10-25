@@ -54,8 +54,8 @@ function tmux_module() {
 		| grep "browser_download_url.*" | grep "tmux-.*.tar.gz" \
 		| cut -d : -f 2,3 | tr -d '"' \
 		| wget -P /tmp -qi - \
-		&& tar -zxf /tmp/tmux-*.tar.gz -C /tmp/ \
-		&& cd /tmp/tmux-*/ && ./configure \
+		&& tar -zxf /tmp/tmux-*.tar.gz -C /tmp/ && cd /tmp/tmux-*/ \
+		&& ./configure \
 		&& make && sudo make install \
 		&& cd - && rm -rf /tmp/tmux*
 		echo " "
@@ -63,14 +63,14 @@ function tmux_module() {
 		echo -e "       	Installing updated tmux version.\n"
 		sudo apt-get remove tmux -y -qq \
 		&& curl -s https://api.github.com/repos/tmux/tmux/releases/latest \
-                | grep "browser_download_url.*" | grep "tmux-.*.tar.gz" \
-                | cut -d : -f 2,3 | tr -d '"' \
-                | wget -P /tmp -qi - \
-                && tar -zxf /tmp/tmux-*.tar.gz -C /tmp/ \
-                && cd /tmp/tmux-*/ && ./configure \
-                && make && sudo make install \
-                && cd - && rm -rf /tmp/tmux*
-                echo " "
+		| grep "browser_download_url.*" | grep "tmux-.*.tar.gz" \
+		| cut -d : -f 2,3 | tr -d '"' \
+		| wget -P /tmp -qi - \
+		&& tar -zxf /tmp/tmux-*.tar.gz -C /tmp/ && cd /tmp/tmux-*/ \
+		&& ./configure \
+		&& make && sudo make install \
+		&& cd - && rm -rf /tmp/tmux*
+		echo " "
 	fi
 
   #installing tmux attach bash completion script

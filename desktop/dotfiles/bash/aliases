@@ -145,6 +145,9 @@ alias touchoff="xinput --disable \$(xinput --list | grep -E 'Raydium.+Corporatio
 #shellcheck disable=SC2142
 alias touchon="xinput --enable \$(xinput --list | grep -E 'Raydium.+Corporation.+Touch.+System.+id=([0-9]+)' | awk '{print substr(\$8,length(\$8)-1)}')"
 
+# start cracked burpro
+alias burp='java -javaagent:/home/workshop/Documents/BurpSuite/burpsuite_pro_v2022.5.1/BurpSuiteLoader_v2022.5.1.jar -noverify -jar /home/workshop/Documents/BurpSuite/burpsuite_pro_v2022.5.1/burpsuite_pro_v2022.5.1.jar'
+
 # copy file interactive
 alias cp='cp -i'
 

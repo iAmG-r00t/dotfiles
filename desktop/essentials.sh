@@ -62,50 +62,51 @@ function basic() { : Basic tools.
 	get fzf										# fuzzy file finder
 	get ufw										# uncomplicated firewall
 	get xclip									# command line interface to the X11 clipboard
-	get speedtest-cli							# speedtest on the terminal
-	get asciinema								# record your terminal sessions
+	get speedtest-cli					# speedtest on the terminal
+	get asciinema							# record your terminal sessions
 	get htop									# interactive system-monitor and process viewer
 }
 
 function ngrok() { : Ngrok install.
-	bash "$path"/modules/ngrok.sh				# installs ngrok
+	bash "$path"/modules/ngrok.sh				  # installs ngrok
 }
 
 function bat() {	: A cat clone with wings install.
 	bash "$path"/modules/batcat.sh				# installs batcat
 }
 
-function dev_tools() { : Tools for bash, python & C programming.
+function dev_tools() { : Tools for bash, python and C programming.
 	sudo apt update -qq
-	get python3											# python3 install
+	get python3											        # python3 install
 	sudo apt install python3-pip						# pip3 install
 	sudo pip3 install virtualenv						# virtualenv
-	sudo pip install virtualenvwrapper					# virtualenvwrapper
-	sudo pip install grip								# grip markdown Github preview
-	get shellcheck										# shell script analysis script
-	get valgrind										# c memory leak checker
+	sudo pip install virtualenvwrapper			# virtualenvwrapper
+	sudo pip install grip								    # grip markdown Github preview
+	get shellcheck										      # shell script analysis script
+	get valgrind										        # c memory leak checker
 	bash "$path"/modules/betty.sh						# betty; Holberton-style C code checker
 }
 
 function vim() { : VIM install.
 	get build-essential									# for building vim
 	get libpython3-dev									# Python3 Support
-	get cmake											# For Building YCM plugin
+	get cmake											      # For Building YCM plugin
 	get fonts-powerline									# vim-airline plugin fonts
-	bash "$path"/modules/vim.sh							# install vim
+  get vim                             # install vim works better with my vimrc file out of the box
+	#bash "$path"/modules/vim.sh				# install vim doesn't work properly with my vimrc config file out of the box
 }
 
 function tmux() { : TMUX install.
-	get build-essential								# for building tmux
+	get build-essential							# for building tmux
 	get libevent-dev								# for building tmux
 	get ncurses-dev									# for building tmux
-	get bison										# for building tmux
+	get bison										    # for building tmux
 	get pkg-config									# for building tmux
-	bash "$path"/modules/tmux.sh					# install tmux
+	bash "$path"/modules/tmux.sh		# install tmux
 }
 
 function go() { : Go install.
-	bash "$path"/modules/go.sh						# installs go
+	bash "$path"/modules/go.sh						  # installs go
 }
 
 function go_tools() { : Go tools install.
@@ -114,7 +115,7 @@ function go_tools() { : Go tools install.
 }
 
 function wireguard() { Wireguard VPN install.
-	get wireguard									# fast, modern, secure VPN tunnel
+	get wireguard									          # fast, modern, secure VPN tunnel
 }
 
 function mullvad() { : Mullvad VPN install.
@@ -130,20 +131,20 @@ function docker() { : Docker & Docker Compose install.
 }
 
 function r3_tools() { : Installs reversing tools.
-	get gdb											# installs GDB
-	get gdbserver									# installs gdbserver
-	bash "$path"/modules/GDBplugins.sh				# installs gdb plugins
-	bash "$path"/modules/udis86.sh					# installs udis86
-	get python3										# pwntools requirements
-	get python3-pip									# '
-	get python3-dev									# '
-	get git											# '
-	get libssl-dev									# '
-	get libffi-dev									# '
-	get build-essential								# '
-	python3 -m pip install --upgrade pip			# '
+	get gdb											                # installs GDB
+	get gdbserver									              # installs gdbserver
+	bash "$path"/modules/GDBplugins.sh				  # installs gdb plugins
+	bash "$path"/modules/udis86.sh					    # installs udis86
+	get python3										              # pwntools requirements
+	get python3-pip									            # '
+	get python3-dev									            # '
+	get git											                # '
+	get libssl-dev									            # '
+	get libffi-dev									            # '
+	get build-essential							            # '
+	python3 -m pip install --upgrade pip			  # '
 	python3 -m pip install --upgrade pwntools		# install pwntools
-	get ipython3									# installs i3
+	get ipython3									              # installs i3
 
 	#-- hyper terminal install --#
 
@@ -162,7 +163,7 @@ function r3_tools() { : Installs reversing tools.
 
 function sublime_text() { : Sublime Text install.
 	get apt-transport-https
-	bash "$path"/modules/subl.sh					# sublime text install
+	bash "$path"/modules/subl.sh					  # sublime text install
 }
 
 function keepassxc() {	: KeePassXC Password Manager install.
