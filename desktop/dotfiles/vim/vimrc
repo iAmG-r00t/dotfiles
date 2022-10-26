@@ -39,6 +39,7 @@ set directory="~/.vim/tmp//"           " where to store swap files
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
 
+set mouse=n                 " enable mouse scroll
 set modifiable              " enable modifications in vim
 set ff=unix                 " set line endings to Unix Style
 set autoindent
