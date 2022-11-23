@@ -92,6 +92,7 @@ ta() {
 }
 
 if [ -f /etc/bash_completion.d/tmux-attach ]; then
+  # shellcheck source=/dev/null
   source /etc/bash_completion.d/tmux-attach
 fi
 
@@ -114,6 +115,7 @@ alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
 alias gdb='gdb -q "$@"'
 
 # Git shortcuts
+alias git="LC_ALL=C git"
 alias status="git status"
 #shellcheck disable=SC2142
 alias commit="git commit -m \$1"
