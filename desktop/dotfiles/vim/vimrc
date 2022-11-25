@@ -19,6 +19,15 @@ if has('autocmd')
   filetype plugin indent on
 endif
 
+autocmd FileType *.vimrc set formatoptions-=cro
+autocmd Filetype yaml set cursorcolumn
+autocmd Filetype yml set cursorcolumn
+autocmd Filetype python set cursorcolumn
+autocmd Filetype *.c,*.cpp set cursorcolumn
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufRead *.txt set filetype=text
+autocmd BufNewFile,BufRead *.text set filetype=text
+
 " ....   ......
 " Swap & Backup files location to ~/.vim/tmp
 " ....   ......
@@ -27,9 +36,10 @@ if !isdirectory($HOME."/.vim/tmp")
   silent! execute "!mkdir ~/.vim/tmp"
 endif
 "
-set directory="~/.vim/tmp//"           " where to store swap files
+set directory=~/.vim/tmp            " where to store swap files
+set backupdir=~/.vim/tmp            " where to store backups
+set undodir=~/.vim/tmp              " where to store undofiles
 "set backup                            " Turn on backup option
-"set backupdir="~/.vim/tmp//"          " where to store backups
 "set writebackup                       " make backup first
 "set backupcopy=yes                    " overwrite original back up
 "
@@ -39,10 +49,14 @@ set directory="~/.vim/tmp//"           " where to store swap files
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
 
+set formatoptions-=cro      " Disable auto comments
+set textwidth=150           " New line after 150 characters
+set undofile                " persistent undo
+set relativenumber          " enable number
 set mouse=n                 " enable mouse scroll
 set modifiable              " enable modifications in vim
 set ff=unix                 " set line endings to Unix Style
-set autoindent
+set autoindent              " auto-indent for code blocks
 set encoding=utf-8          " enable unicode
 set wrap                    " enable soft wrap
 set linebreak               " make it not wrap in the middle of a word
@@ -59,7 +73,7 @@ set ttimeout                " time out for key codes
 set ttimeoutlen=100         " wait up to 100ms after Esc for special key
 
 " Wildmenu will ignore files with these extensions.
-set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx,*.sw[pno],.*.bak,.*.tmp
 
 " Netrw Configs
 "
@@ -105,9 +119,11 @@ set hlsearch      " Use highlighting when doing a search.
 
 " Spacing Settings
 "
-set shiftwidth=2  " Set shift width to 2 spaces.
-set tabstop=2     " Set tab width to 2 columns.
+set shiftwidth=4  " Set shift width to 4 spaces.
+set tabstop=4     " Set tab width to 4 columns.
+set shiftround    " Use multiples of 4 for indents.
 set expandtab     " Use space characters instead of tabs.
+set smarttab      " Backspace to remove space-indents
 
 " Coursor Settings
 "
@@ -228,7 +244,7 @@ endif
 " find a way to escape and run below command
 "silent! let term = system('ps -p $(ps -p $$ -o ppid=) -o args | grep -o Hyper')
 
-" doesn't work inside tmux
+" doesn't work inside tmux, but you can change Hyper to tmux
 if $TERM_PROGRAM != 'Hyper'
   set background=dark
   " set contrast
